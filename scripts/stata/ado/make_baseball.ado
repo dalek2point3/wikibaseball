@@ -4,6 +4,13 @@ make_hof
 
 make_allstar
 
+make_master
+
+
+end
+
+// This makes master
+program make_master
 
 insheet using ${lahman}Master.csv, clear
 
@@ -12,8 +19,16 @@ merge 1:1 playerid using ${lahman}hof, keep(match) nogen
 // there are players who were hall of fame, but not all star
 merge 1:1 playerid using ${lahman}allstar, keep(match master)
 
+gen debutyear = substr(debut, 1,4)
+gen finalyear = substr(finalgame, 1,4)
+
+keep playerid birthyear debutyear finalyear deathyear name* everinducted *hof* numallstar firstallstar
+
+save ${lahman}bb_master, replace
 
 end
+
+
 
 // This Makes Hall of Fame
 program make_hof
