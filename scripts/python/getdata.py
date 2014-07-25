@@ -11,13 +11,21 @@ __copyright__   = "MIT License"
 
 root = "/mnt/nfs6/wikipedia.proj/wikibaseball/"
 
-def get_lahman():
+def get_sport(sport):
 
     global root
 
-    url = "http://seanlahman.com/files/database/lahman-csv_2014-02-14.zip"
-    path = root + "rawdata/lahman/"
-    saveas = "lahman.zip"
+    utils.logmessage("Getting: " + sport, "getdata", 1)
+
+    if sport == "baseball":
+        url = "http://seanlahman.com/files/database/lahman-csv_2014-02-14.zip"
+        path = root + "rawdata/lahman/"
+        saveas = "lahman.zip"
+
+    if sport == "basketball":
+        url = "http://www.databasebasketball.com/databasebasketball_2009_v1.zip"
+        path = root + "rawdata/basketball/"
+        saveas = "basketball.zip"
 
     # download file
     utils.logmessage("Downloading zip file", "getdata", 1)
@@ -29,6 +37,10 @@ def get_lahman():
 
     pass
 
+def get_basketball():
+    pass
+
+
 def get_playerrevs():
     pass
 
@@ -36,7 +48,10 @@ def get_traffic():
     pass
 
 def main():
-    get_lahman()
+
+    get_sport("baseball")
+    get_sport("basketball")
+
     pass
 
 if __name__ == "__main__":
