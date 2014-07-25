@@ -8,6 +8,8 @@ from time import gmtime, strftime
 __author__      = "dalek2point3"
 __copyright__   = "MIT License"
 
+root = "/mnt/nfs6/wikipedia.proj/wikibaseball/"
+
 def download_file(url, filename):
     f = urllib2.urlopen(url)
     data  = f.readlines()
@@ -25,13 +27,18 @@ def unzip(source_filename, dest_dir):
 
 def logmessage(message, logname, printscreen):
     
-    time = datetime.datetime.now()
+    global root
+    time = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+    path = root + "scripts/python/logs/"
 
     if(printscreen):
-        print message
+        print time + ": " + message
         print "------------"
 
-    with open(logname, 'a') as mylog:
-        mylog.write()
+    with open(path + logname + ".log", 'a') as mylog:
+        mylog.write(time + "\n")
         mylog.write(message + "\n")
+        mylog.write("-------------------------\n\n")
+
+
 

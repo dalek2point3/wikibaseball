@@ -9,13 +9,23 @@ from subprocess import call
 __author__      = "dalek2point3"
 __copyright__   = "MIT License"
 
+root = "/mnt/nfs6/wikipedia.proj/wikibaseball/"
+
 def get_lahman():
 
+    global root
+
     url = "http://seanlahman.com/files/database/lahman-csv_2014-02-14.zip"
-    path = "/mnt/nfs6/wikipedia.proj/wikibaseball/rawdata/lahman/"
+    path = root + "rawdata/lahman/"
     saveas = "lahman.zip"
-    # utils.download_file(url, path+saveas)
+
+    # download file
+    utils.logmessage("Downloading zip file", "getdata", 1)
+    utils.download_file(url, path+saveas)
+
+    # unzip file
     utils.unzip(path+saveas, path)
+    utils.logmessage("Unzipping file", "getdata", 1)
 
     pass
 
