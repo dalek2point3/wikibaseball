@@ -4,12 +4,29 @@ make_hof
 
 make_allstar
 
+make_match
+
 make_master
 
 
 end
 
-// This makes master
+// This makes baseball data for MT
+program make_mt
+
+use ${lahman}bb_master, clear
+
+gen displayname = namefirst + " " + namelast + " " + namegiven
+gen searchname = namefirst + "+" + namelast + "+" + namegiven + " baseball"
+
+gen link = "http://en.wikipedia.org/w/index.php?title=Special%3ASearch&profile=default&search=" + searchname + "&fulltext=Search"
+
+outsheet playerid displayname link using ${stash}mt_input_bb.csv, replace comma
+
+end
+
+
+// This makes master baseball dataset
 program make_master
 
 insheet using ${lahman}Master.csv, clear
@@ -24,11 +41,31 @@ gen finalyear = substr(finalgame, 1,4)
 
 keep playerid birthyear debutyear finalyear deathyear name* everinducted *hof* numallstar firstallstar
 
+destring, replace
+
+gen playername = namefirst + " " + namelast
+
+// this deletes and old player that we dont care about anyway
+bysort playername: drop if _n > 1
+
+// generate file for amazon to get me data on
+drop if debutyear < 1940
+drop if debutyear > 2000
+
 save ${lahman}bb_master, replace
 
 end
 
 
+program make_match
+
+insheet using ${rawdata}match_wiki.csv, clear names
+keep if sport == "Baseball"
+drop  if wikiname == "None"
+
+save ${rawdata}match_wiki, replace
+
+end
 
 // This Makes Hall of Fame
 program make_hof

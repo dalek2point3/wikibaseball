@@ -10,7 +10,7 @@ cd ${path}
 
 make_baseball
 
-
+insheet using ${rawdata}match_wiki.csv, clear
 
 
 
