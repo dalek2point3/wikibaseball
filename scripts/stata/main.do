@@ -18,5 +18,7 @@ append using ${basketball}bk_master
 gen isbaseball = (minutesrank!=.)
 save ${stash}bbk_master, replace
 
+outsheet wikihandle playerid using ${stash}wikilist.csv, replace
+
 // 2. 
 
