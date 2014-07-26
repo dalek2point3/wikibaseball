@@ -13,7 +13,10 @@ make_baseball
 
 make_basketball
 
+use ${lahman}bb_master, clear
+append using ${basketball}bk_master
+gen isbaseball = (minutesrank!=.)
+save ${stash}bbk_master, replace
 
-
-
+// 2. 
 

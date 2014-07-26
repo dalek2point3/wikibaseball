@@ -46,6 +46,9 @@ drop if minutesrank > 1000
 
 merge 1:1 playerid using ${basketball}mt_bk_output, nogen
 
+drop if birthyear == "NULL"
+destring, replace
+
 save ${basketball}bk_master, replace
 
 end
