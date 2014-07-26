@@ -2,6 +2,8 @@
 import urllib2
 import zipfile,os.path
 from time import gmtime, strftime
+from xml.dom import minidom
+import re
 
 """ This file contains useful functions for other programs """
 
@@ -39,6 +41,56 @@ def logmessage(message, logname, printscreen):
         mylog.write(time + "\n")
         mylog.write(message + "\n")
         mylog.write("-------------------------\n\n")
+
+def get_xml(title, rvstart):
+
+    baseurl = "http://en.wikipedia.org/w/api.php?action=query&prop=revisions"
+    rvlimit = "1"
+    rvprop = "timestamp|user|ids|size|content"
+    
+    url = baseurl + "&titles=" + title + "&rvstart=" + rvstart + "-01T00:00:00Z" + "&rvlimit=" + rvlimit + "&rvprop=" + rvprop + "&format=xml"
+    page = urllib2.urlopen(url)
+    return page
+
+def write_xml(fileh, filename):
+
+   global root
+   path = root + "rawdata/wiki/revdata/" + filename + ".xml"
+   print path
+   data = fileh.read()
+
+   with open(path, 'w') as f:
+       print "writing"
+       f.write(data)
+
+def parse_wikitext(wikitext):
+
+    wikitext = wikitext.lower()
+    text = len(wikitext)
+    img1 = len(re.findall("File\:",wikitext))
+    img2 = len(re.findall("\.jpg",wikitext)) + len(re.findall("\.png",wikitext)) 
+    img = max(img1, img2)
+
+    return [text, img]
+
+def parse_xml(filename):
+
+   global root
+   path = root + "rawdata/wiki/revdata/" + filename + ".xml"
+   print path
+
+   xml = minidom.parse(path)
+   revlist = xml.getElementsByTagName('rev') 
+
+   user = revlist[0].attributes['user'].value
+   revid = revlist[0].attributes['revid'].value
+   size = revlist[0].attributes['size'].value
+   content =  revlist[0].childNodes[0].nodeValue
+
+   return [user, revid, size, content]
+
+
+
 
 
 

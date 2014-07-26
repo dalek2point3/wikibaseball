@@ -37,20 +37,41 @@ def get_sport(sport):
 
     pass
 
-def get_basketball():
+def get_revs():
+
+    wikihandle = "Michael_Jordan"
+    date = "2013-12"
+    filename = wikihandle + "_" + date
+
+    data = utils.get_xml(wikihandle, date) 
+    utils.write_xml(data, filename)
+    
     pass
 
+def parse_revs():
+    
+    wikihandle = "Michael_Jordan"
+    date = "2013-12"
+    filename = wikihandle + "_" + date
 
-def get_playerrevs():
-    pass
+
+    [user, revid, size, content] = utils.parse_xml(filename)
+
+    # content = "[[foo]] [[API:Query|bar]] [http://www.example.com/ baz]"
+    #print user, revid, size
+    # print content
+    print utils.parse_wikitext(content)
+
 
 def get_traffic():
     pass
 
 def main():
 
-    get_sport("baseball")
-    get_sport("basketball")
+    # get_sport("baseball")
+    # get_sport("basketball")
+    # get_playerrevs()
+    parse_revs()
 
     pass
 
