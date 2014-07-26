@@ -54,13 +54,11 @@ def parse_revs():
     date = "2013-12"
     filename = wikihandle + "_" + date
 
-
     [user, revid, size, content] = utils.parse_xml(filename)
+    [text, img, bd] = utils.parse_wikitext(content)
 
-    # content = "[[foo]] [[API:Query|bar]] [http://www.example.com/ baz]"
-    #print user, revid, size
-    # print content
-    print utils.parse_wikitext(content)
+    data = [user, revid, size, text, img, bd]
+    print data
 
 
 def get_traffic():
@@ -77,5 +75,17 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+## overall structure
+
+# get_sport --> gets rawdata
+# stata processes and produces list of wikihandles and other associated data
+# input -> bbk_master (list of wikihandles)
+# get_revs --> gets yearly revs for each wikihandle
+# parse_revs and write data file
+
+
+
 
 

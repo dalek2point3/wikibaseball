@@ -67,11 +67,16 @@ def parse_wikitext(wikitext):
 
     wikitext = wikitext.lower()
     text = len(wikitext)
-    img1 = len(re.findall("File\:",wikitext))
-    img2 = len(re.findall("\.jpg",wikitext)) + len(re.findall("\.png",wikitext)) 
-    img = max(img1, img2)
 
-    return [text, img]
+    formats = ['jpg','jpeg','gif','svg','tiff']
+    img = 0
+
+    for format in formats:
+        img = img + len(re.findall(format,wikitext))
+
+    bd = len(re.findall('baseball digest',wikitext)) + len(re.findall('books.google.com',wikitext))
+
+    return [text, img, bd]
 
 def parse_xml(filename):
 
