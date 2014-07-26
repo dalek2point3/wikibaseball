@@ -48,7 +48,7 @@ def get_xml(title, rvstart):
     rvlimit = "1"
     rvprop = "timestamp|user|ids|size|content"
     
-    url = baseurl + "&titles=" + title + "&rvstart=" + rvstart + "-01T00:00:00Z" + "&rvlimit=" + rvlimit + "&rvprop=" + rvprop + "&format=xml"
+    url = baseurl + "&titles=" + title + "&rvstart=" + str(rvstart) + "-12-01T00:00:00Z" + "&rvlimit=" + rvlimit + "&rvprop=" + rvprop + "&format=xml"
     page = urllib2.urlopen(url)
     return page
 
@@ -56,11 +56,9 @@ def write_xml(fileh, filename):
 
    global root
    path = root + "rawdata/wiki/revdata/" + filename + ".xml"
-   print path
    data = fileh.read()
 
    with open(path, 'w') as f:
-       print "writing"
        f.write(data)
 
 def parse_wikitext(wikitext):
@@ -78,24 +76,43 @@ def parse_wikitext(wikitext):
 
     return [text, img, bd]
 
+def get_players(filename="wikilist.csv"):
+    global root
+    filename = root + "rawdata/stash/" + filename 
+    wikihandles = []
+    with open(filename) as f:
+        for line in f:
+            tokens = line.strip().split("\t")
+            wikihandles.append(tokens[0])
+
+    return wikihandles
+
 def parse_xml(filename):
 
    global root
    path = root + "rawdata/wiki/revdata/" + filename + ".xml"
-   print path
 
    xml = minidom.parse(path)
    revlist = xml.getElementsByTagName('rev') 
 
-   user = revlist[0].attributes['user'].value
-   revid = revlist[0].attributes['revid'].value
-   size = revlist[0].attributes['size'].value
-   content =  revlist[0].childNodes[0].nodeValue
+   try:
+       user = revlist[0].attributes['user'].value
+   except IndexError:
+       user = "NA"
+
+   try:
+       revid = revlist[0].attributes['revid'].value
+   except IndexError:
+       revid = "NA"
+
+   try:
+       size = revlist[0].attributes['size'].value
+   except IndexError:
+       size = "NA"
+
+   try:
+       content =  revlist[0].childNodes[0].nodeValue
+   except IndexError: 
+       content = ""
 
    return [user, revid, size, content]
-
-
-
-
-
-

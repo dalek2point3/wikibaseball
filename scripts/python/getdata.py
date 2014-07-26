@@ -2,7 +2,7 @@
 import utils
 import zipfile
 from subprocess import call
-
+from time import sleep
 
 """ This file downloads all relevant data for this project """
 
@@ -37,28 +37,31 @@ def get_sport(sport):
 
     pass
 
-def get_revs():
+def get_revs(wikihandles, years):
 
-    wikihandle = "Michael_Jordan"
-    date = "2013-12"
-    filename = wikihandle + "_" + date
+    for wikihandle in wikihandles:
+        for year in years:
+            filename = wikihandle + "_" + str(year)
 
-    data = utils.get_xml(wikihandle, date) 
-    utils.write_xml(data, filename)
+            data = utils.get_xml(wikihandle, year) 
+            utils.write_xml(data, filename)
+
+            utils.logmessage("Getting: " + filename, "getdata", 1)
+
+        sleep(0.01)
+
+def parse_revs(wikihandles, years):
     
-    pass
+    # wikihandle = "Michael_Jordan"
+    # date = "2013-12"
 
-def parse_revs():
-    
-    wikihandle = "Michael_Jordan"
-    date = "2013-12"
-    filename = wikihandle + "_" + date
-
-    [user, revid, size, content] = utils.parse_xml(filename)
-    [text, img, bd] = utils.parse_wikitext(content)
-
-    data = [user, revid, size, text, img, bd]
-    print data
+    for wikihandle in wikihandles:
+        for year in years:
+            filename = wikihandle + "_" + str(year)
+            [user, revid, size, content] = utils.parse_xml(filename)
+            [text, img, bd] = utils.parse_wikitext(content)
+            data = [wikihandle, year, user, revid, size, text, img, bd]
+            print "\t".join([unicode(x).encode('utf8') for x in data])
 
 
 def get_traffic():
@@ -69,7 +72,20 @@ def main():
     # get_sport("baseball")
     # get_sport("basketball")
     # get_playerrevs()
-    parse_revs()
+
+        
+    # print len(wikihandles)
+
+    # parse_revs()
+
+    wikihandles = utils.get_players()
+    years = [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
+
+    # wikihandles = ["Michael_Jordan","Mahmoud_Abdul-Rauf"]
+    # years = [2012]
+
+    # get_revs(wikihandles, years)
+    parse_revs(wikihandles, years)
 
     pass
 
