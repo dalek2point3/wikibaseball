@@ -108,6 +108,7 @@ gen wikihandle = subinstr(answer, "http://en.wikipedia.org/wiki/","",.)
 keep inputp inputdisp wikihandle
 
 gen tmp = word(inputd,1) + "_" + word(inputd,2)
+list tmp wiki if tmp != wikihandle
 
 fix_errors
 
@@ -141,6 +142,13 @@ replace wikihandle = tmp if tmp == "Danny_Jackson"
 replace wikihandle = tmp if tmp == "Davey_Lopes"
 replace wikihandle = tmp if tmp == "Del_Rice"
 replace wikihandle = tmp if tmp == "Juan_Pizarro"
+
+replace wikihandle = "Andy_Van_Slyke" if tmp == "Andy_Van"
+replace wikihandle = tmp if tmp == "Fred_Gladding"
+replace wikihandle = tmp if tmp == "Todd_Zeile"
+replace wikihandle = tmp if tmp == "Walker_Cooper"
+replace wikihandle = tmp if tmp == "Carlos_May"
+replace wikihandle = tmp if tmp == "Roberto_Alomar"
 
 end
 

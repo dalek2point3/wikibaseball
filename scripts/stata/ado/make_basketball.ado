@@ -47,6 +47,8 @@ drop if minutesrank > 1000
 merge 1:1 playerid using ${basketball}mt_bk_output, nogen
 
 drop if birthyear == "NULL"
+replace playerid = lower(playerid)
+
 destring, replace
 
 save ${basketball}bk_master, replace
@@ -127,6 +129,7 @@ replace wiki = "Norm_Van_Lier" if inputd == "Norm Vanlier"
 replace wiki = "Danny_Vranes" if inputd == "Danny Vranes"
 replace wiki = "Dick_Barnett" if inputd == "Dick Barnett"
 replace wiki = "Walt_Wesley" if inputd == "Walt Wesley"
+replace wiki = "Trooper_Washington" if inputd == "Trooper Washington"
 
 end
 
