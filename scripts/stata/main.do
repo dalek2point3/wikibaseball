@@ -8,9 +8,12 @@ declare_global
 
 cd ${path}
 
+// 1. Produce Baseball / Basketball datasets
 make_baseball
 
-insheet using ${rawdata}match_wiki.csv, clear
+make_basketball
+
+
 
 
 
