@@ -39,8 +39,12 @@ meanline text Text(Basketball) 0
 meanline bd Citations(Baseball) 1
 meanline bd Citations(Basketball) 0
 
-// 3. Baseline Digit Regression
+// 3. Baseline Digit & Copyright Regressions
 reg_digit
+
+reg_copy
+
+// 4. DDD regressions
 
 
 
