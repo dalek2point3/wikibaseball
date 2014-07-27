@@ -12,5 +12,6 @@ global stash "/mnt/nfs6/wikipedia.proj/wikibaseball/rawdata/stash/"
 
 global tables "/mnt/nfs6/wikipedia.proj/wikibaseball/scripts/stata/tables/"
 
+global fe "year"
 
 end
