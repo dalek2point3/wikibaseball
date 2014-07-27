@@ -51,10 +51,10 @@ def get_revs(wikihandles, years):
         sleep(0.01)
 
 def parse_revs(wikihandles, years):
-    
-    # wikihandle = "Michael_Jordan"
-    # date = "2013-12"
 
+    # wikihandles = ["Hank_Aaron"]
+    # years = [2011]
+    
     for wikihandle in wikihandles:
         for year in years:
             filename = wikihandle + "_" + str(year)
@@ -63,8 +63,16 @@ def parse_revs(wikihandles, years):
             data = [wikihandle, year, user, revid, size, text, img, bd]
             print "\t".join([unicode(x).encode('utf8') for x in data])
 
+def get_traffic(wikihandles, years):
 
-def get_traffic():
+    #wikihandles = ["Michael_Jordan","Mahmoud_Abdul-Rauf"]
+    #years = [2012]
+
+    for wikihandle in wikihandles:
+        utils.logmessage("Downloading traffic for: " + wikihandle,"getdata", 1)
+        for year in years:
+            utils.get_traf(wikihandle, year)
+
     pass
 
 def main():
@@ -86,6 +94,8 @@ def main():
 
     # get_revs(wikihandles, years)
     parse_revs(wikihandles, years)
+
+    # get_traffic(wikihandles, years)
 
     pass
 
