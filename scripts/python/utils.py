@@ -66,7 +66,7 @@ def parse_wikitext(wikitext):
     wikitext = wikitext.lower()
     text = len(wikitext)
 
-    formats = ['jpg','jpeg','gif','svg','tiff']
+    formats = ['jpg','jpeg','gif','svg','tiff','png']
     img = 0
 
     for format in formats:
@@ -116,3 +116,23 @@ def parse_xml(filename):
        content = ""
 
    return [user, revid, size, content]
+
+def get_traf(playername, year):
+
+    global root
+    path = root + "rawdata/wiki/traf/"
+
+    for month in range(1,13):
+        month = "%0.2d" % (month) 
+        somedate = str(year)+str(month)
+        filename = path + playername+"_"+somedate+'.json'
+
+        if os.path.exists(filename):
+            pass
+        else:
+            query = "http://stats.grok.se/json/en/" + somedate +"/"+playername
+            page = urllib2.urlopen(query)
+            jsondata = open(filename,'w+')
+            jsondata.write(page.read())
+            jsondata.close()
+
