@@ -17,7 +17,9 @@ foreach x in img text bd {
 }
 
 drop if debut < 1944 | debut > 1984
-egen sstt = group(isbaseball treat year)
+
+gen decade = round(debut, 10)
+egen dy = group(decade year)
 
 save ${stash}master, replace
 

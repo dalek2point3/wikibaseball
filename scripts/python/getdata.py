@@ -93,9 +93,9 @@ def main():
     # years = [2012]
 
     # get_revs(wikihandles, years)
-    parse_revs(wikihandles, years)
+    # parse_revs(wikihandles, years)
 
-    # get_traffic(wikihandles, years)
+    get_traffic(wikihandles, years)
 
     pass
 
