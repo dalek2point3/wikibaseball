@@ -72,7 +72,10 @@ def parse_wikitext(wikitext):
     for format in formats:
         img = img + len(re.findall(format,wikitext))
 
-    bd = len(re.findall('baseball digest',wikitext)) + len(re.findall('books.google.com',wikitext))
+    # bd = len(re.findall('baseball digest',wikitext)) + len(re.findall('books.google.com',wikitext))
+    bd = len(re.findall('baseball digest',wikitext)) + len(re.findall('baseball+digest',wikitext)) 
+    # bd = len(re.findall('baseball digest',wikitext))
+    # bd = 0
 
     return [text, img, bd]
 
