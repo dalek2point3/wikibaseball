@@ -89,8 +89,8 @@ def main():
 
     # Setup vars
 
-    # wikihandles = utils.get_players()
-    # years = [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
+    wikihandles = utils.get_players()
+    years = [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
 
     # wikihandles = ["Manny_Trillo"]
     # years = [2012]
@@ -109,7 +109,7 @@ def main():
     # get_traffic(wikihandles, years)
 
     # Step 5: Parse traffic data
-    # parse_traffic(wikihandles, years)
+    parse_traffic(wikihandles, years)
 
     pass
 
