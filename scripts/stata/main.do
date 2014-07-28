@@ -18,7 +18,7 @@ append using ${basketball}bk_master
 gen isbaseball = (minutesrank==.)
 save ${stash}bbk_master, replace
 
-outsheet wikihandle playerid using ${stash}wikilist.csv, replace nonames noquote
+** outsheet wikihandle playerid using ${stash}wikilist.csv, replace nonames noquote
 
 // 1b. Merge data
 make_merge
@@ -41,10 +41,21 @@ meanline bd Citations(Basketball) 0
 
 // 3. Baseline Digit & Copyright Regressions
 reg_digit
+reg_digit ln
 
 reg_copy
+reg_copy ln
 
 // 4. DDD regressions
+reg_ddd
+reg_ddd ln
+
+// 5. Killer Pictures
+program drop _all
+killer_pic
+
+
+
 
 
 

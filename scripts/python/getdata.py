@@ -78,10 +78,12 @@ def get_traffic(wikihandles, years):
 def parse_traffic(wikihandles, years):
     
     for wikihandle in wikihandles:
-        utils.logmessage("Parsing traffic for: " + wikihandle,"getdata", 1)
+        utils.logmessage("Parsing traffic for: " + wikihandle,"getdata", 0)
         for year in years:
             traf = utils.parse_traf(wikihandle, year)
-            print traf + [wikihandle.encode('utf8'), year]
+            data = traf + [wikihandle, year]
+            print "\t".join([unicode(x).encode('utf8') for x in data])
+
     pass
 
 
