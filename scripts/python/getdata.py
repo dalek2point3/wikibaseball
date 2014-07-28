@@ -75,27 +75,41 @@ def get_traffic(wikihandles, years):
 
     pass
 
+def parse_traffic(wikihandles, years):
+    
+    for wikihandle in wikihandles:
+        utils.logmessage("Parsing traffic for: " + wikihandle,"getdata", 1)
+        for year in years:
+            traf = utils.parse_traf(wikihandle, year)
+            print traf + [wikihandle.encode('utf8'), year]
+    pass
+
+
 def main():
 
-    # get_sport("baseball")
-    # get_sport("basketball")
-    # get_playerrevs()
+    # Setup vars
 
-        
-    # print len(wikihandles)
+    # wikihandles = utils.get_players()
+    # years = [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
 
-    # parse_revs()
-
-    wikihandles = utils.get_players()
-    years = [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
-
-    # wikihandles = ["Michael_Jordan","Mahmoud_Abdul-Rauf"]
+    # wikihandles = ["Manny_Trillo"]
     # years = [2012]
 
+    # Step 1: Download zip data
+    # get_sport("baseball")
+    # get_sport("basketball")
+
+    # Step 2: Read wiki list and download revision files, one for each year
     # get_revs(wikihandles, years)
+
+    # Step 3 : Parse each revision file
     # parse_revs(wikihandles, years)
 
-    get_traffic(wikihandles, years)
+    # Step 4: Get traffic data
+    # get_traffic(wikihandles, years)
+
+    # Step 5: Parse traffic data
+    # parse_traffic(wikihandles, years)
 
     pass
 

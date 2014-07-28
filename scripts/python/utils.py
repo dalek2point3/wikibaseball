@@ -4,6 +4,7 @@ import zipfile,os.path
 from time import gmtime, strftime
 from xml.dom import minidom
 import re
+import json
 
 """ This file contains useful functions for other programs """
 
@@ -138,4 +139,40 @@ def get_traf(playername, year):
             jsondata = open(filename,'w+')
             jsondata.write(page.read())
             jsondata.close()
+
+
+def parse_traf(playername, year):
+
+    global root
+    path = root + "rawdata/wiki/traf/"
+    traf = []
+
+    for month in range(1,13):
+
+        month = "%0.2d" % (month) 
+        somedate = str(year)+str(month)
+        filename = path + playername+"_"+somedate+'.json'
+
+        jsondata = open(filename,'r')
+        jsonobj = json.load(jsondata)
+        daily_views = jsonobj['daily_views']
+
+        count = 0
+        total = 0
+
+        for day, views in daily_views.iteritems():
+            total = views + total
+            count = count + 1
+
+        if count !=0:
+            avgtraf = total/float(count)
+            avgtraf = "%.3f" % avgtraf
+        else:
+            avgtraf = 0
+
+        traf.append(avgtraf)
+
+    return traf
+
+
 
