@@ -8,6 +8,10 @@ local isb `3'
 
 local time year
 
+if "`var'" == "traf"{
+    drop if year < 2008
+}
+
 drop if isbaseball != `isb'
 
 collapse (mean) mean=`var' (semean) se=`var' , by(`time' treat)

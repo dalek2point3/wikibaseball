@@ -6,16 +6,16 @@ renamevar
 
 merge m:1 wikihandle using ${stash}bbk_master, nogen
 
+merge 1:1 wikihandle year using ${stash}traf, nogen
+
 egen id = group(wikihandle)
 xtset id year
 
 gen post = (year>2008)
 
-
-
 gen treat = (debutyear < 1964)
 
-foreach x in img text bd {
+foreach x in img text bd traf{
     gen ln`x' = ln(`x'+1)
 }
 

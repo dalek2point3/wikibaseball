@@ -13,6 +13,8 @@ make_baseball
 
 make_basketball
 
+make_traf
+
 use ${lahman}bb_master, clear
 append using ${basketball}bk_master
 gen isbaseball = (minutesrank==.)
@@ -23,6 +25,11 @@ save ${stash}bbk_master, replace
 // 1b. Merge data
 make_merge
 
+/*use ${stash}master, clear
+keep if year == 2008 | year == 2013
+save, replace
+*/
+    
 /////////// ANALYSIS //////////////////
 
 // 1. Summary Stats
@@ -38,6 +45,9 @@ meanline text Text(Basketball) 0
 
 meanline bd Citations(Baseball) 1
 meanline bd Citations(Basketball) 0
+
+meanline traf Traffic(Baseball) 1
+meanline traf Traffic(Basketball) 0
 
 // 3. Baseline Digit & Copyright Regressions
 reg_digit
