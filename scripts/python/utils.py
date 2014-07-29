@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 import urllib2
 import zipfile,os.path
-from time import gmtime, strftime
+from time import gmtime, strftime, time
 from xml.dom import minidom
 import re
 import json
+import time
+import requests
 
 """ This file contains useful functions for other programs """
 
@@ -174,5 +176,48 @@ def parse_traf(playername, year):
 
     return traf
 
+def get_revlist(title):
 
+    global root
+    path = root + "rawdata/wiki/revlist/"
 
+    lang = "en"
+    url = "http://%s.wikipedia.org/w/api.php" % (lang)
+    filename = path + title + ".csv"
+    count = 0
+
+    params = {
+      "format": "json",
+      "action": "query",
+      "titles": title,
+      "prop": "revisions",
+      "rvprop": "user|userid|timestamp|size",
+      "rvlimit": "max",
+      "redirects": "",
+      "continue": ""
+    }
+
+    if os.path.exists(filename):
+        pass
+
+    while True:
+
+      r = requests.get(url, params=params).json()
+      pages = r["query"]["pages"]
+
+      with open(filename, "a") as f:
+          for page in pages:
+              rows = []
+              revisions = r["query"]["pages"][page]["revisions"]
+              for rev in revisions:
+                  data = [rev["timestamp"], rev["userid"],rev["user"],rev["size"], title]
+                  line = "\t".join([unicode(x).encode('utf8') for x in data]) + "\n"
+                  f.write(line)
+                  count += 1
+
+          if "continue" in r:
+              params.update(r["continue"])
+          else:
+              break
+
+    return count

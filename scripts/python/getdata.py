@@ -86,15 +86,22 @@ def parse_traffic(wikihandles, years):
 
     pass
 
+def get_revs(wikihandles):
+
+    for wikihandle in wikihandles:
+        flag = utils.get_revlist(wikihandle)
+        utils.logmessage("got "+str(flag)+" rows for " + wikihandle, "getdata", 1)
+    pass
+
 
 def main():
 
     # Setup vars
 
     wikihandles = utils.get_players()
-    years = [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
+    # years = [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
 
-    # wikihandles = ["Manny_Trillo"]
+    # wikihandles = ["Joe_Wolf", "Michael_Jordan"]
     # years = [2012]
 
     # Step 1: Download zip data
@@ -111,13 +118,17 @@ def main():
     # get_traffic(wikihandles, years)
 
     # Step 5: Parse traffic data
-    parse_traffic(wikihandles, years)
+    # parse_traffic(wikihandles, years)
+
+    # Step 6: Get revision history data
+    # get_revlist(wikihandles, years)
+
+    get_revs(wikihandles)
 
     pass
 
 if __name__ == "__main__":
     main()
-
 
 ## overall structure
 
