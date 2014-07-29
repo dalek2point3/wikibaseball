@@ -121,9 +121,7 @@ def main():
     # parse_traffic(wikihandles, years)
 
     # Step 6: Get revision history data
-    # get_revlist(wikihandles, years)
-
-    get_revs(wikihandles)
+    # get_revs(wikihandles)
 
     pass
 

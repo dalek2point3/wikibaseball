@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import urllib2
+import urllib2, urllib
 import zipfile,os.path
 from time import gmtime, strftime, time
 from xml.dom import minidom
@@ -7,6 +7,7 @@ import re
 import json
 import time
 import requests
+
 
 """ This file contains useful functions for other programs """
 
@@ -189,7 +190,7 @@ def get_revlist(title):
     params = {
       "format": "json",
       "action": "query",
-      "titles": title,
+      "titles": urllib.unquote(title),
       "prop": "revisions",
       "rvprop": "user|userid|timestamp|size",
       "rvlimit": "max",
@@ -198,26 +199,32 @@ def get_revlist(title):
     }
 
     if os.path.exists(filename):
+        print "passed " +  filename
         pass
 
-    while True:
+    else:
+        while True:
 
-      r = requests.get(url, params=params).json()
-      pages = r["query"]["pages"]
+            r = requests.get(url, params=params).json()
 
-      with open(filename, "a") as f:
-          for page in pages:
-              rows = []
-              revisions = r["query"]["pages"][page]["revisions"]
-              for rev in revisions:
-                  data = [rev["timestamp"], rev["userid"],rev["user"],rev["size"], title]
-                  line = "\t".join([unicode(x).encode('utf8') for x in data]) + "\n"
-                  f.write(line)
-                  count += 1
+            pages = r["query"]["pages"]
+            
+            with open(filename, "a") as f:
+                for page in pages:
+                    rows = []
+                    revisions = r["query"]["pages"][page]["revisions"]
+                    for rev in revisions:
+                        try:
+                            data = [rev["timestamp"], rev["userid"],rev["user"],rev["size"], title]
+                        except KeyError:
+                            break
+                        line = "\t".join([unicode(x).encode('utf8') for x in data]) + "\n"
+                        f.write(line)
+                        count += 1
 
-          if "continue" in r:
-              params.update(r["continue"])
-          else:
-              break
+            if "continue" in r:
+                params.update(r["continue"])
+            else:
+                break
 
     return count
