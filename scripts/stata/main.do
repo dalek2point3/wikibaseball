@@ -15,6 +15,8 @@ make_basketball
 
 make_traf
 
+make_rev
+
 use ${lahman}bb_master, clear
 append using ${basketball}bk_master
 gen isbaseball = (minutesrank==.)

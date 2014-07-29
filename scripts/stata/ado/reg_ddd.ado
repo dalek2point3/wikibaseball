@@ -4,6 +4,8 @@ local ln `1'
 
 use ${stash}master, clear
 
+fvset base 2013 year
+
 local int 1.treat#1.post#1.isbaseball
 local x1 1.treat#1.post
 local x2 1.isbaseball#1.post

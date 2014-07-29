@@ -4,6 +4,7 @@ local ln `1'
 
 use ${stash}master, clear
 
+fvset base 2013 year
 keep if isbaseball == 1
 
 est clear
