@@ -94,6 +94,40 @@ def get_revs(wikihandles):
     pass
 
 
+def geocode():
+
+    filename = "/mnt/nfs6/wikipedia.proj/wikibaseball/rawdata/stash/ip.csv"
+    outfilename = "/mnt/nfs6/wikipedia.proj/wikibaseball/rawdata/stash/ip_geo.csv"
+    
+    output = []
+    count = 0
+
+    with open(filename) as f:
+        for line in f:
+            items = line.strip().split("\t")
+            ip = items[1].strip('"')
+
+            count += 1
+            data = utils.geocode_ip(ip)
+
+            if data[0] != "NA":
+                output.append(data)
+                utils.logmessage(str(count) + " Got: " + str(ip) + " " + data[4], "getdata", 1)
+            else:
+                utils.logmessage(str(count) + " Failed: " + str(ip) + "", "getdata", 1)
+
+
+            
+    with open(outfilename, "a") as f:
+        for row in output:
+            line = "\t".join([unicode(x).encode('utf8') for x in row]) + "\n"
+            f.write(line)
+
+            
+    # utils.geocode_ip()
+
+    pass
+
 def main():
 
     # Setup vars
@@ -122,6 +156,8 @@ def main():
 
     # Step 6: Get revision history data
     # get_revs(wikihandles)
+
+    geocode()
 
     pass
 

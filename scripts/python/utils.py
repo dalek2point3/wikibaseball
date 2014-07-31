@@ -7,7 +7,7 @@ import re
 import json
 import time
 import requests
-
+from ipinfodb import API
 
 """ This file contains useful functions for other programs """
 
@@ -228,3 +228,22 @@ def get_revlist(title):
                 break
 
     return count
+
+def geocode_ip(ip):
+
+    KEY = '7ca913d39b8b4f4e82c222e35372c450966e8187e61d32b7a664e385a7b39e05'
+    IP = '209.85.195.83'
+    IP = str(ip)
+
+    ipinfodb_api = API(KEY)
+    data_dict = ipinfodb_api.GetCity(IP)
+    
+    if data_dict['statusCode'] == "OK":
+        data = [data_dict['countryCode'], data_dict['cityName'],  data_dict['zipCode'], data_dict['longitude'], data_dict['countryName'], data_dict['latitude'], data_dict['timeZone'], data_dict['ipAddress'], data_dict['regionName']]
+    else:
+        data = ["NA"]
+
+    # data_dict = ipinfodb_api.GetCountry(IP)
+    # print data_dict
+
+    return data
