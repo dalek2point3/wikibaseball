@@ -27,7 +27,6 @@ save ${stash}bbk_master, replace
 // 1b. Merge data
 make_merge
 
-
 /*use ${stash}master, clear
 keep if year == 2008 | year == 2013
 save, replace
@@ -72,7 +71,8 @@ reg_copy ln
 reg_ddd
 reg_ddd ln
 
-// 5. User regressions
+// 5. IVreg
+ivest
 
 
 // 6. Killer Pictures
