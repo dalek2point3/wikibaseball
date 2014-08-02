@@ -17,7 +17,8 @@ gen post = (year>2008)
 
 gen treat = (debutyear < 1964)
 
-local outvars "img text bd traf numuser numrev numregusers numnew_wiki numnewreg_wiki numnew_page numnewreg_page numserious18 numserious39 numserious112 numserious324 numserious791 avgsize numcountry numregion numtimezone numnewregion numnewregion_wiki"
+local outcomes "img text bd traf numrev numuser numregusers numnew_wiki numnewreg_wiki numnewreg_page numserious1 numserious3 numserious21 numserious278 numserious1851 avgsize numcountry numregion numtimezone numnewregion numnewregion_wiki"
+
 
 foreach x in `outvars'{
     gen ln`x' = ln(`x'+1)

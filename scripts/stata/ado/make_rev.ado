@@ -20,7 +20,7 @@ tsset unitid year
 
 tsfill, full
 
-local outcomes "numrev numuser numregusers numnew_wiki numnewreg_wiki numnewreg_page numserious18 numserious39 numserious112 numserious324 numserious791 totsize avgsize numcountry numregion numtimezone numnewregion numnewregion_wiki"
+local outcomes "numrev numuser numregusers numnew_wiki numnewreg_wiki numnewreg_page numserious1 numserious3 numserious21 numserious278 numserious1851 avgsize numcountry numregion numtimezone numnewregion numnewregion_wiki"
 
 local covars "wikihandle"
 
@@ -56,9 +56,6 @@ bysort wikihandle year user: gen tmp=(_n==1)
 bysort wikihandle year: egen numuser = total(tmp)
 drop tmp
 
-// total size
-bysort wikihandle year: egen totsize = total(size)
-
 // avg size
 bysort wikihandle year: egen avgsize = mean(size)
 
@@ -80,9 +77,19 @@ bysort wikihandle year: egen numnewreg_page = total((tstamp==first_pageedit)*isr
 drop first_*
 
 // serious users
-local levels "18 39 112 324 791"
+// number of edits before BD import
+gen tmp = (year > 2008)
+bysort user tmp: gen tmp2 = _N
+replace tmp2 = 0 if tmp == 1
+bysort user: egen userrev = max(tmp2)
+drop tmp tmp2
+
+bysort user: gen tag=(_n==1)
+_pctile userrev if year<2008, p(10 25 50 75 90)
+
+local levels "1 3 21 278 1851"
 foreach x in `levels'{
-    bysort wikihandle year: egen numserious`x' = total((numrev>`x'))
+    bysort wikihandle year: egen numserious`x' = total((userrev>`x'))
 }
 
 // geography of users
@@ -107,7 +114,7 @@ bysort wikihandle year: egen numnewregion_wiki = total(tmp)
 drop tmp
 
 
-keep num* totsize avgsize wikihandle year
+keep num* avgsize wikihandle year
 
 bysort wikihandle year: drop if _n > 1
 
