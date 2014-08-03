@@ -51,7 +51,22 @@ if "`isbaseball'" == "1"{
    local yt = "Mean value / page"
  }
 
-graph twoway (connected estimate year, msize(small) lpattern(dash) lcolor(edkblue) lwidth(thin)) (line max year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line min year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line xaxis year, lwidth(vthin) lcolor(gs8)), xtitle("") ytitle("`yt'") xlabel(2005(1)2013) legend(off) title("`vartitle' Players")
+
+if "`var'" == "img" {
+    local scale "yscale(range(-0.3 0.8)) ylabel(-0.2 (0.2) 0.8)"
+}
+
+if "`var'" == "text" {
+    local scale "yscale(range(0 3000)) ylabel(0 (500) 3000)"
+}
+
+if "`var'" == "traf" {
+    drop if year == 2013
+    local scale "yscale(range(-100 50)) ylabel(-100 (25) 50)"
+}
+
+
+graph twoway (connected estimate year, msize(small) lpattern(dash) lcolor(edkblue) lwidth(thin)) (line max year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line min year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line xaxis year, lwidth(vthin) lcolor(gs8)), xtitle("") ytitle("`yt'") xlabel(2005(1)2013) legend(off) title("`vartitle' Players") `scale'
 
 ** ylabel(-0.2 (0.2) 0.8)
 
