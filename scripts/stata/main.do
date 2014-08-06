@@ -39,6 +39,8 @@ save ${stash}master2, replace
 summary
 
 // 2. Digitization
+program drop _all
+
 reg_all digit
 
 // 3. Copy DD
@@ -49,16 +51,17 @@ reg_ddd
 
 // 5. Traffic
 
-// 5a. DD regressions
+// 5. DD regressions
 reg_traf
 
 // 5b. IV
 ivest
 
+// FIGURES
 
+// 1. figure
 
-// 2. Meanline Charts
-program drop _all
+// 2. Mean charts
 meanline img Images(Baseball) 1
 meanline img Images(Basketball) 0
 
@@ -67,32 +70,6 @@ meanline text Text(Basketball) 0
 
 meanline bd Citations(Baseball) 1
 meanline bd Citations(Basketball) 0
-
-meanline traf Traffic(Baseball) 1
-meanline traf Traffic(Basketball) 0
-
-meanline numuser Users(Baseball) 1
-meanline numuser Users(Basketball) 0
-
-meanline numrev Revisions(Baseball) 1
-meanline numrev Revisions(Basketball) 
-
-meanline avgsize Size(Baseball) 1
-meanline avgsize Size(Basketball) 0
-
-// 3. Baseline Digit & Copyright Regressions
-reg_digit ln
-
-reg_copy
-reg_copy ln
-
-// 4. DDD regressions
-reg_ddd
-reg_ddd ln
-
-// 5. IVreg
-
-
 
 // 6. Killer Pictures
 program drop _all
