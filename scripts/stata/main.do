@@ -72,8 +72,8 @@ meanline bd Citations(Baseball) 1
 meanline bd Citations(Basketball) 0
 
 // 6. Killer Pictures
-program drop _all
-killer_pic
+killer_pic2 1
+killer_pic2 0
 
 // 7. Time dummies picture
 ddpic img 1
@@ -82,12 +82,13 @@ ddpic img 0
 ddpic text 1
 ddpic text 0
 
-ddpic traf 1
-ddpic traf 0
-
 ddpic bd 1
 ddpic bd 0
 
+ddpic traf 1
+ddpic traf 0
+
+// 8. Scatterplot
 
 
 
