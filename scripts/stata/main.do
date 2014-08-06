@@ -27,15 +27,31 @@ save ${stash}bbk_master, replace
 // 1b. Merge data
 make_merge
 
-/*use ${stash}master, clear
+//1c. Make limited data
+use ${stash}master, clear
 keep if year == 2008 | year == 2013
-save, replace
-*/
+save ${stash}master2, replace
+
     
 /////////// ANALYSIS //////////////////
 
 // 1. Summary Stats
 summary
+
+// 2. Digitization
+reg_all digit
+
+// 3. Copy DD
+reg_all copy
+
+// 4. Copy DDD
+reg_ddd
+
+// 5. Traffic
+reg_traf
+
+ivest
+
 
 // 2. Meanline Charts
 program drop _all
@@ -61,7 +77,6 @@ meanline avgsize Size(Baseball) 1
 meanline avgsize Size(Basketball) 0
 
 // 3. Baseline Digit & Copyright Regressions
-reg_digit
 reg_digit ln
 
 reg_copy
@@ -72,7 +87,6 @@ reg_ddd
 reg_ddd ln
 
 // 5. IVreg
-ivest
 
 
 

@@ -1,4 +1,4 @@
-program reg_digit
+program reg_all
 
 local mode `1'
 local ln `2'
@@ -9,7 +9,7 @@ esttab using "${tables}`mode'.tex", ${top} posthead("\midrule \vspace{5mm} \unde
 
 make_data `mode'
 run_reg `ln'img
-esttab using "${tables}`mode'.tex",  ${middle} posthead("\midrule \vspace{5mm} \underline{\textbf{Panel B : Images}}\\") 
+esttab using "${tables}`mode'.tex",  ${middle} posthead("\midrule \vspace{5mm} \underline{\textbf{Panel B : Images}}\\")
 
 make_data `mode'
 run_reg `ln'text
@@ -17,6 +17,15 @@ esttab using "${tables}`mode'.tex",   ${end} posthead("\midrule \vspace{5mm} \un
 
 end
 
+
+program save_mean
+
+local var `1'
+qui tabstat `var', save
+matrix stats=r(StatTotal)
+global meanvar=round(stats[1,1],0.01)
+
+end
 
 program make_data
 
@@ -42,18 +51,24 @@ est clear
 local x `1'
 
 eststo: qui xtreg `x' 1.tvar#1.post, fe cluster(id)
+
+save_mean `x'
 qui estadd local fixed "Yes"
 qui estadd local yearfe "No"
+qui estadd local mean "${meanvar}"
 
 eststo: qui xtreg `x' 1.tvar#1.post i.${fe}, fe cluster(id)
 qui estadd local fixed "Yes"
 qui estadd local yearfe "Yes"
+qui estadd local mean "${meanvar}"
 
 keep if year==2008 | year==2013
 
 eststo: qui xtreg `x' 1.tvar#1.post i.${fe}, fe cluster(id)
+save_mean `x'
 qui estadd local fixed "Yes"
 qui estadd local yearfe "Yes"
+qui estadd local mean "${meanvar}"
 
 end
 
