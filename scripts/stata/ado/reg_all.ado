@@ -77,37 +77,3 @@ qui estadd local yearfe "Yes"
 qui estadd local mean "${meanvar}"
 
 end
-
-program run_robust
-
-est clear
-local x `1'
-
-save_mean `x'
-
-// a) log model
-eststo: qui xtreg ln`x' 1.tvar#1.post i.${fe}, fe cluster(id)
-qui estadd local fixed "Yes"
-qui estadd local yearfe "Yes"
-
-// b) no overlap
-gen overlap = !((debut > 1963) | (final < 1964))
-eststo: qui xtreg `x' 1.tvar#1.post i.${fe} if overlap==0, fe cluster(id)
-qui estadd local fixed "Yes"
-qui estadd local yearfe "Yes"
-
-// c) alternate definition
-gen treat2 = (firstallstar < 1964) & (firsta != .)
-replace tvar = treat2
-eststo: qui xtreg `x' 1.tvar#1.post i.${fe} if overlap==0, fe cluster(id)
-qui estadd local fixed "Yes"
-qui estadd local yearfe "Yes"
-
-// d) remove v. famous players
-eststo: qui xtreg ln`x' 1.tvar#1.post i.${fe} if numa<10, fe cluster(id)
-qui estadd local fixed "Yes"
-qui estadd local yearfe "Yes"
-
-end
-
-

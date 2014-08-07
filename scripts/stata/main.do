@@ -89,7 +89,11 @@ ddpic traf 1
 ddpic traf 0
 
 // 8. Scatterplot
+traf_scatter
 
+// APPENDIX
+program drop _all
+reg_robust copy
 
 
 
