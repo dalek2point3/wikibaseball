@@ -68,7 +68,7 @@ def write_xml(fileh, filename):
 def parse_wikitext(wikitext):
 
     wikitext = wikitext.lower()
-    text = len(wikitext)
+    text = len(wikitext.split())
 
     formats = ['jpg','jpeg','gif','svg','tiff','png']
     img = 0
