@@ -9,13 +9,12 @@ estpost tabstat img text bd traf debut treat, s(mean sd median min max n) column
 
 esttab using "${tables}summary.tex", cells ("mean(fmt(2) label(Mean)) sd(label(SD)) p50(label(Median)) min(fmt(0) label(Min)) max(fmt(0) label(Max)) count(fmt(0) label(N))" ) coeflabels("Mean" "SD" "Median" "Min" "Max" "N") replace nonum noobs booktabs width(\hsize) alignment(rrrrrr) varwidth(30) label
 
-
 end
 
 program labelvar
 
 label variable img "\emph{Number of Images}"
-label variable text "\emph{Words of Text}"
+label variable text "\emph{Characters of Text}"
 label variable bd "\emph{Number of Citations to Baseball Digest}"
 label variable traf "\emph{Average Monthly Traffic}"
 
