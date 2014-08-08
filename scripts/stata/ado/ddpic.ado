@@ -42,12 +42,18 @@ drop if year < 2005
 qui gen xaxis = 0
 
 if "`isbaseball'" == "0"{
-   local vartitle = "Basketball"
+   local vartitle = "Basketball Players"
    local yt = ""
  }
 
+if "`isbaseball'" == "0" & "`var'" == "bd"{
+   local vartitle = "Basketball Players (No Citations, see note below)"
+   local yt = ""
+ }
+
+
 if "`isbaseball'" == "1"{
-   local vartitle = "Baseball"
+   local vartitle = "Baseball Players"
    local yt = "Mean value / page"
  }
 
@@ -66,7 +72,7 @@ if "`var'" == "traf" {
 }
 
 
-graph twoway (connected estimate year, msize(small) lpattern(dash) lcolor(edkblue) lwidth(thin)) (line max year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line min year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line xaxis year, lwidth(vthin) lcolor(gs8)), xtitle("") ytitle("`yt'") xlabel(2005(1)2013) legend(off) title("`vartitle' Players") `scale'
+graph twoway (connected estimate year, msize(small) lpattern(dash) lcolor(edkblue) lwidth(thin)) (line max year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line min year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line xaxis year, lwidth(vthin) lcolor(gs8)), xtitle("") ytitle("`yt'") xlabel(2005(1)2013) legend(off) title("`vartitle'") `scale'
 
 ** ylabel(-0.2 (0.2) 0.8)
 
