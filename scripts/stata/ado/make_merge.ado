@@ -1,6 +1,6 @@
 program make_merge
 
-insheet using ${stash}tmp.csv, clear
+insheet using ${stash}tmp_word.csv, clear
 
 renamevar
 
