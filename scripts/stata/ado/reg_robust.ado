@@ -13,12 +13,12 @@ esttab using "${tables}`ln'`mode'_robust.tex", ${top} posthead("\midrule \underl
 make_data `mode'
 run_robust `ln'img
 **local meanline "\vspace{5mm} ($\mu$=$meanvar)\\"
-esttab using "${tables}`ln'`mode'_robust.tex",  ${middle} posthead("\midrule \vspace{5mm} \underline{\textbf{Panel B : Images}}\hphantom{ons}`meanline'") width(120\%)
+esttab using "${tables}`ln'`mode'_robust.tex",  ${middle} posthead("\midrule \vspace{5mm} \underline{\textbf{Panel B : Images}}\hphantom{ons}`meanline'")
 
 make_data `mode'
 run_robust `ln'text
 **local meanline "\vspace{5mm} ($\mu$=$meanvar)\\"
-esttab using "${tables}`ln'`mode'_robust.tex",   ${end} posthead("\midrule \vspace{5mm} \underline{\textbf{Panel C : Text}}\hphantom{ations}`meanline'")  width(120\%)
+esttab using "${tables}`ln'`mode'_robust.tex",   ${end} posthead("\midrule \vspace{5mm} \underline{\textbf{Panel C : Text}}\hphantom{ations}`meanline'")
 
 end
 
