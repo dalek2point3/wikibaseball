@@ -22,7 +22,7 @@ if "`var'" == "img" {
 }
 
 if "`var'" == "text" {
-    local scale "yscale(range(0 20000)) ylabel(0 (5000) 20000)"
+    local scale "yscale(range(0 3000)) ylabel(0 (1000) 3000)"
 }
 
 if "`var'" == "bd" {

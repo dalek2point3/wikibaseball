@@ -63,7 +63,7 @@ if "`var'" == "img" {
 }
 
 if "`var'" == "text" {
-    local scale "yscale(range(-3500 3000)) ylabel(-3000 (1000) 3000)"
+    local scale "yscale(range(-350 300)) ylabel(-300 (100) 300)"
 }
 
 if "`var'" == "traf" {
