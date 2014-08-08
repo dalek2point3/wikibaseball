@@ -42,11 +42,14 @@ fvset base 2013 year
 
 if "`mode'" == "digit" {
     gen tvar = isbaseball
+    table_set "baseball X post"
+
 }
 
 if "`mode'" == "copy" {
     drop if isbaseball == 0
     gen tvar = treat
+    table_set "out-of-copy X post"
 }
 
 end
