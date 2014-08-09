@@ -28,6 +28,7 @@ make_merge
 /////////// ANALYSIS //////////////////
 
 // 1. Summary Stats
+program drop _all
 summary
 
 // 2. Digitization
