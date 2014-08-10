@@ -21,12 +21,15 @@ insheet using ${lahman}Master.csv, clear
 merge 1:1 playerid using ${lahman}hof, keep(match) nogen
 
 // there are players who were hall of fame, but not all star
-merge 1:1 playerid using ${lahman}allstar, keep(match master)
+merge 1:1 playerid using ${lahman}allstar, keep(match master) nogen
+
+// appearances
+merge 1:1 playerid using ${lahman}appearances, keep(match master) 
 
 gen debutyear = substr(debut, 1,4)
 gen finalyear = substr(finalgame, 1,4)
 
-keep playerid birthyear debutyear finalyear deathyear name* everinducted *hof* numallstar firstallstar
+keep playerid birthyear debutyear finalyear deathyear name* everinducted *hof* numallstar firstallstar gp
 
 destring, replace
 
@@ -86,6 +89,18 @@ bysort playerid: gen firstallstar = yearid[1]
 bysort playerid: drop if _n > 1
 keep playerid numallstar firstallstar
 save ${lahman}allstar, replace
+
+end
+
+program make_appearance
+
+insheet using ${lahman}Appearances.csv, clear
+
+bysort playerid: egen gp = total(g_all)
+bysort playerid: drop if _n > 1
+keep playerid gp
+
+save ${lahman}appearances, replace
 
 end
 
