@@ -3,6 +3,8 @@ program reg_all
 local mode `1'
 local ln `2'
 
+di "running `mode' and `ln'"
+
 make_data `mode'
 run_reg `ln'bd
 local symbol "$\bar{y}$="
@@ -64,16 +66,14 @@ local x `1'
 
 save_mean `x'
 
-eststo: qui reg `x' 1.tvar#1.post i.${fe}, cluster(id)
+eststo: qui reg `x' 1.tvar 1.tvar#1.post i.${fe}, cluster(id)
 
 qui estadd local fixed "No"
 qui estadd local yearfe "Yes"
-qui estadd local mean "${meanvar}"
 
-eststo: qui reg `x' 1.tvar#1.post i.quality i.${fe}, cluster(id)
+eststo: qui reg `x' 1.tvar 1.tvar#1.post i.quality i.${fe}, cluster(id)
 qui estadd local fixed "Controls"
 qui estadd local yearfe "Yes"
-qui estadd local mean "${meanvar}"
 
 **keep if year==2008 | year==2013
 

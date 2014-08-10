@@ -28,10 +28,13 @@ make_merge
 /////////// ANALYSIS //////////////////
 
 // 1. Summary Stats
-program drop _all
 summary
 
+t_test 1
+t_test 0
+
 // 2. Digitization
+program drop _all
 reg_all digit
 
 // 3. Copy DD
@@ -54,6 +57,7 @@ ivest
 meanline img Images(Baseball) 1
 meanline img Images(Basketball) 0
 
+program drop _all
 meanline text Text(Baseball) 1
 meanline text Text(Basketball) 0
 
@@ -78,6 +82,15 @@ ddpic text 0
 traf_scatter
 
 // APPENDIX
+reg_all digit ln
+
+reg_all copy ln
+
+reg_ddd ln
+
+reg_traf ln
+
+program drop _all
 reg_robust copy
 
 
