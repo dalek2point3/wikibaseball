@@ -14,7 +14,7 @@ end
 program labelvar
 
 label variable img "\emph{Number of Images}"
-label variable text "\emph{Characters of Text}"
+label variable text "\emph{Number of Words of Text}"
 label variable bd "\emph{Number of Citations to Baseball Digest}"
 label variable traf "\emph{Average Monthly Traffic}"
 
