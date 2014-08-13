@@ -5,7 +5,7 @@ use ${stash}master, clear
 drop if isbaseball == 0
 keep if (year == 2008) | (year == 2013)
  
-keep playername debut year img traf everinducted treat id
+keep playername debut year img traf everinducted treat id numallstar
 
 reshape wide img traf, i(playername) j(year)
 
@@ -33,6 +33,5 @@ tw (scatter difftraf diffimg if debut<1964, msymbol(x) mcolor(navy)) (lfit difft
 
 graph export "${tables}traf_scatter_2.eps", replace
 shell epstopdf "${tables}traf_scatter_2.eps"
-
 
 end
