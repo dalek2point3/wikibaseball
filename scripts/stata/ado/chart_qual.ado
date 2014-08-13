@@ -2,11 +2,11 @@ program chart_qual
 
 use ${stash}master, clear
 
-local isbaseball `1'
-local isbaseball "1"
+local var `1'
+local isbaseball `2'
 
-local var img
-keep if isbaseball == `isb'
+keep if isbaseball == `isbaseball'
+
 
 gen tvar = treat
 
@@ -17,17 +17,26 @@ qui parmest, label list(parm estimate min* max* p) saving(${stash}pars_tmp, repl
 clear
 use ${stash}pars_tmp, clear
 
-keep if regexm(parm, "[0-9].*tvar.*post.*quality") == 1
+keep if regexm(parm, "[0-9].*tvar.*post.*quality") == 1 | parm == "1.tvar#1.post"
+
 drop if estimate == 0
 
 gen quality = regexs(1) if regexm(parm, ".*post.*\#([0-9]+)\.quality")
+replace quality = "1" if quality == ""
+
+replace estimate = estimate + estimate[1] if _n > 1
+replace max90 = max90 + estimate[1] if _n > 1
+replace min90 = min90 + estimate[1] if _n > 1
+
 list quality estimate max min
 
-
-gen xaxis = 0
 destring quality, replace
 
-graph twoway (bar estimate quality, msize(small) lpattern(solid) lcolor(edkblue) lwidth(thin) barwidth(0.08)) (rcap min max quality) (line xaxis quality), legend(off) title("") xtitle("")
+label define qualitylabel 1 "Top 25 pctile" 2 "25-50 pctile" 3 "50-75 pctile" 4 "Bottom 25 pctile"
+
+label values quality qualitylabel
+
+graph twoway (scatter estimate quality) (rcap min max quality), legend(off) title("") xtitle("") xscale(r(0 5)) yline(0, lcolor(gs10)) xlabel(1 "Top 25 pctile" 2 "25-50 pctile" 3 "50-75 pctile" 4 "Bottom 25 pctile")
 
 graph export "${tables}quality_`var'_`isbaseball'.eps", replace
 
