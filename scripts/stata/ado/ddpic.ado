@@ -21,7 +21,7 @@ drop if isbaseball != `isbaseball'
 
 qui xtreg `var' 1.treat##b2008.year, fe vce(robust)
 
-qui parmest, label list(parm estimate min* max* p) saving(${stash}mypars, replace)
+qui parmest, label list(parm estimate min* max* p) saving(${stash}mypars, replace) level(90)
 
 end
 
