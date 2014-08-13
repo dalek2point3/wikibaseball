@@ -52,7 +52,8 @@ end
 program genqual
 
 gen quality = .
-_pctile numallstar, p(33.333, 66.667 90)
+**_pctile numallstar, p(33.333, 66.667 90)
+_pctile numallstar, p(25, 50, 75)
 
 replace qual = 1 if numallstar <= `r(r1)' & isb == 1
 replace qual = 2 if numallstar > `r(r1)'  & numall <=`r(r2)' & isb == 1
