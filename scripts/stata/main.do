@@ -23,6 +23,7 @@ gen isbaseball = (minutesrank==.)
 save ${stash}bbk_master, replace
 
 // 1b. Merge data
+
 make_merge
 
 /////////// ANALYSIS //////////////////
@@ -80,6 +81,13 @@ ddpic text 0
 
 // 8. Scatterplot
 traf_scatter
+
+// 9. Quality-wise impacts
+chart_qual img 1
+chart_qual traf 1
+chart_qual text 1
+chart_qual bd 1
+
 
 // APPENDIX
 reg_all digit ln
