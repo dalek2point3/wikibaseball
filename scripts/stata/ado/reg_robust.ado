@@ -64,9 +64,9 @@ save_mean `x'
 replace bd = (bd>0)
 
 // a) log model
-eststo: qui xtreg ln`x' 1.tvar#1.post i.${fe}, fe cluster(id)
-qui estadd local fixed "Yes"
-qui estadd local yearfe "Yes"
+**eststo: qui xtreg ln`x' 1.tvar#1.post i.${fe}, fe cluster(id)
+**qui estadd local fixed "Yes"
+**qui estadd local yearfe "Yes"
 
 // b) no overlap
 gen overlap = !((debut > 1963) | (final < 1964))
