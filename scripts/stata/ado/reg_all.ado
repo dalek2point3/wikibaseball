@@ -66,20 +66,20 @@ local x `1'
 
 save_mean `x'
 
-eststo: qui reg `x' 1.tvar 1.tvar#1.post i.${fe}, cluster(id)
+eststo: qui reg `x' 1.tvar 1.tvar#1.post i.quality, cluster(id)
 
-qui estadd local fixed "No"
-qui estadd local yearfe "Yes"
-
-eststo: qui reg `x' 1.tvar 1.tvar#1.post i.quality i.${fe}, cluster(id)
 qui estadd local fixed "Controls"
-qui estadd local yearfe "Yes"
+qui estadd local yearfe "None"
+
+eststo: qui xtreg `x' 1.tvar#1.post i.${fe}, cluster(id) fe
+qui estadd local fixed "Yes"
+qui estadd local yearfe "Year"
 
 **keep if year==2008 | year==2013
 
-eststo: qui xtreg `x' 1.tvar#1.post i.${fe}, fe cluster(id)
+eststo: qui xtreg `x' 1.tvar#1.post i.qy, fe cluster(id)
 qui estadd local fixed "Yes"
-qui estadd local yearfe "Yes"
+qui estadd local yearfe "Quality X Year"
 qui estadd local mean "${meanvar}"
 
 end
