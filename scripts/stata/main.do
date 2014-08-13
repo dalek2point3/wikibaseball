@@ -88,7 +88,6 @@ chart_qual traf 1
 chart_qual text 1
 chart_qual bd 1
 
-
 // APPENDIX
 reg_all digit ln
 
