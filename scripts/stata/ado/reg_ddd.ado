@@ -13,9 +13,9 @@ local x2 1.isbaseball#1.post
 est clear
 foreach x in `ln'bd `ln'img `ln'text{
 
-    eststo: qui xtreg `x' `int' `x1' `x2' i.qy, fe cluster(id)
+    eststo: qui xtreg `x' `int' `x1' `x2' i.$fe, fe cluster(id)
     qui estadd local fixed "Yes"
-    qui estadd local sstt "Quality X Year"
+    qui estadd local sstt "Year"
 
 }
 
