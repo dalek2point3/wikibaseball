@@ -43,8 +43,8 @@ estadd local covar "Player FE"
 estadd local yearfe "Yes" : firstcontrolimg
 estadd local yearfe "Yes" 
 
-local note1 "Standard errors clustered at player level are reported"
-local note2 "* p $<$ 0.10, ** p $<$ 0.05, *** p $<$ 0.01"
+**local note1 "Standard errors clustered at player level are reported"
+**local note2 "* p $<$ 0.10, ** p $<$ 0.05, *** p $<$ 0.01"
 
 esttab est1 est2 firstimg firstc* est3 est4 using ${tables}mechanism.tex, drop(_cons `controls' *ytmp*) se stats(covar yearfe N r2 FStat,labels("Controls" "Year FE" "N" "adj. \$R^2\$" "F-Stat")) label replace mgroups("OLS" "First Stage" "IV Estimates", pattern(1 0 1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) booktabs  addnote("`note1'" "`note2'") nonotes star(+ 0.15 * 0.10 ** 0.05 *** 0.01)
 
