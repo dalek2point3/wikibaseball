@@ -99,10 +99,3 @@ reg_traf ln
 
 program drop _all
 reg_robust copy
-
-
-
-
-
-
-
