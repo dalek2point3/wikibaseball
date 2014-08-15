@@ -63,6 +63,7 @@ local x `1'
 save_mean `x'
 replace bd = (bd>0)
 
+// TODO: add later
 // a) log model
 **eststo: qui xtreg ln`x' 1.tvar#1.post i.${fe}, fe cluster(id)
 **qui estadd local fixed "Yes"
