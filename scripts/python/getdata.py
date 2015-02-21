@@ -142,7 +142,7 @@ def main():
     # get_sport("basketball")
 
     # Step 2: Read wiki list and download revision files, one for each year
-    # get_revs(wikihandles, years)
+    # get_revs(wikihandles)
 
     # Step 3 : Parse each revision file
     # parse_revs(wikihandles, years)
@@ -160,10 +160,17 @@ def main():
 
     # extra stuff for revisions
 
-    # Step 7: Get additional data for citations
+    # Step 7: Get additional data for citations only from content pages
     
     # 7.1 get filenames from kimono data
     urls = utils.get_handles(filename="kimono_data.csv")
+    
+    #7.2 get revlist for these filehandles
+    get_revs(urls)
+
+    # 7.3 for each url, get revdata
+
+    # TODO: deal with images
 
     # get_revs(wikihandles)
 
