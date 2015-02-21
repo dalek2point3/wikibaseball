@@ -51,15 +51,16 @@ def get_xml(title, rvstart):
     baseurl = "http://en.wikipedia.org/w/api.php?action=query&prop=revisions"
     rvlimit = "1"
     rvprop = "timestamp|user|ids|size|content"
-    
     url = baseurl + "&titles=" + title + "&rvstart=" + str(rvstart) + "-12-01T00:00:00Z" + "&rvlimit=" + rvlimit + "&rvprop=" + rvprop + "&format=xml"
     page = urllib2.urlopen(url)
+
     return page
 
 def write_xml(fileh, filename):
 
    global root
    path = root + "rawdata/wiki/revdata/" + filename + ".xml"
+
    data = fileh.read()
 
    with open(path, 'w') as f:
@@ -78,10 +79,19 @@ def parse_wikitext(wikitext):
 
     # bd = len(re.findall('baseball digest',wikitext)) + len(re.findall('books.google.com',wikitext))
     bd = len(re.findall('baseball digest',wikitext)) + len(re.findall('baseball+digest',wikitext)) 
-    # bd = len(re.findall('baseball digest',wikitext))
-    # bd = 0
-
+    
     return [text, img, bd]
+
+def get_citelines(wikitext):
+
+    lines = ["NA"]
+    wikitext = wikitext.lower()
+    if len(re.findall('baseball digest',wikitext)) > 0:
+        for line in wikitext.split("\n"):
+            if len(re.findall('baseball digest',line)) > 0:
+                lines.append(line.strip(' \t\n\r'))
+
+    return lines
 
 def get_handles(filename="wikilist.csv"):
     global root
