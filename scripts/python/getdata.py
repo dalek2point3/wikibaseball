@@ -122,7 +122,6 @@ def geocode():
         for row in output:
             line = "\t".join([unicode(x).encode('utf8') for x in row]) + "\n"
             f.write(line)
-
             
     # utils.geocode_ip()
 
@@ -132,13 +131,13 @@ def main():
 
     # Setup vars
 
-    wikihandles = utils.get_players()
+   #  wikihandles = utils.get_handles()
     # years = [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
 
     # wikihandles = ["Joe_Wolf", "Michael_Jordan"]
     # years = [2012]
 
-    # Step 1: Download zip data
+    # Step 1: Download zip data from the interwebs
     # get_sport("baseball")
     # get_sport("basketball")
 
@@ -157,7 +156,17 @@ def main():
     # Step 6: Get revision history data
     # get_revs(wikihandles)
 
-    geocode()
+    # extra-- never used: geocode()
+
+    # extra stuff for revisions
+
+    # Step 7: Get additional data for citations
+    
+    # 7.1 get filenames from kimono data
+    urls = utils.get_handles(filename="kimono_data.csv")
+
+    # get_revs(wikihandles)
+
 
     pass
 
@@ -172,7 +181,7 @@ if __name__ == "__main__":
 # get_revs --> gets yearly revs for each wikihandle
 # parse_revs and write data file
 
-
+# for revisions: get citation data
 
 
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#get_pl!/usr/bin/env python
 import urllib2, urllib
 import zipfile,os.path
 from time import gmtime, strftime, time
@@ -83,7 +83,7 @@ def parse_wikitext(wikitext):
 
     return [text, img, bd]
 
-def get_players(filename="wikilist.csv"):
+def get_handles(filename="wikilist.csv"):
     global root
     filename = root + "rawdata/stash/" + filename 
     wikihandles = []
