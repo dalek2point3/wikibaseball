@@ -187,22 +187,10 @@ def main():
     # 7.2 for each url, get revdata
     # get_revs(urls, years)
 
-    # urls = ["Chico_Carrasquel", "Charlie_Finley","2007_Philadelphia_Phillies_season", "Jess_Dobernic", "Fresco_Thompson"]
-    # years = [2010,2011, 2012, 2013]
-    
     # 7.3 parse revs and split citations to a file. then manually tag each citation and use in stata
     get_bdcites(urls, years)
 
     # TODO: deal with images
-
-    # get_revs(wikihandles)
-
-    ## NOT NEEDED!
-    #7.2 get revlist for these filehandles
-    # get_revlist_all(urls)
-
-    
-
     pass
 
 if __name__ == "__main__":
