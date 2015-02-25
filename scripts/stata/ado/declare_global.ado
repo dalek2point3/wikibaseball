@@ -14,6 +14,8 @@ global tables "/mnt/nfs6/wikipedia.proj/wikibaseball/scripts/stata/tables/"
 
 global revlist "/mnt/nfs6/wikipedia.proj/wikibaseball/rawdata/wiki/revlist/"
 
+global cite "/mnt/nfs6/wikipedia.proj/wikibaseball/rawdata/wiki/cite/"
+
 global fe "year"
 
 end
