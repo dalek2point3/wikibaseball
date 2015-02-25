@@ -18,6 +18,9 @@ merge m:1 citeid using ${rawdata}cites_text
 drop if fulltext!="NA" & _m < 3
 drop _merge
 
+drop if year == "Punchball"
+destring year, replace
+
 save ${stash}citelines_text, replace
 
 end

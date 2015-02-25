@@ -6,38 +6,113 @@ make_textcite
 
 make_imgcite
 
+// makepanel
+make_panel
 
+end
+
+
+program make_panel
+
+// append both datasets
 use ${stash}citelines_text, clear
-
-bysort citeid: drop if _n > 1
+keep wikih citeyear year 
+drop if citeyear == .
+sort wikih citeyear year
+bysort wikih citeyear: drop if _n > 1
+// this keeps the first year of every added citation
 
 append using ${stash}citelines_img
 
-keep wikihandle citeyear titlehref
+drop if citeyear < 1944 | citeyear > 1984
 
-keep if citeyear > 1943 & citeyear < 1985
+gen isimg = (titlehref != "")
+
+// copy each observation till 2013
+egen citetextid = group(wikihandle citeyear) if wikihandle != ""
+egen citeimgid = group(titlehref) if wikihandle == ""
+gen citeid = max(citetextid,1000*citeimgid)
+
+keep citeid isimg year citeyear
+
+// carryforward citatation to all following years
+tsset citeid year
+tsfill, full
+bysort citeid: carryforward citeyear isimg, replace
+drop if citeyear == .
+
+// create outcomes
+bysort citeyear year: gen numcites = _N
+bysort citeyear year: egen numimg = total(isimg)
+bysort citeyear year: egen numtext = total(!isimg)
+
+bysort citeyear year: drop if _n > 1
+keep citeyear year num*
+
+tsset citeyear year
+tsfill, full
+
+foreach x in cites img text{
+    replace num`x' = 0 if num`x'==.
+}
 
 
+gen treat = citeyear < 1964
+gen post = year > 2008
+
+save ${stash}citelines, replace
 
 end
 
 
 program make_imgcite
+
+// this gets the add date
+get_adddate
+
 insheet using ${cite}kimono_images.csv, clear
 gen citeyear = regexs(1) if regexm(description, ".*([1-2][0-9][0-9][0-9]) issue.*")==1
 destring citeyear, replace
 manualinput
 
-insheet using ${cite}pageinfo_kimono.csv,clear nonames
-drop if v2 == "Date/Time"
-
-
+merge 1:m titlehref using ${stash}pageinfo_kimono, keep(match master) nogen
+keep titlehref citeyear year
+    
 save ${stash}citelines_img, replace
 
 // this gives ${stash}citelines_text
 
 
 end
+
+
+program get_adddate
+
+insheet using ${cite}pageinfo_kimono.csv,clear nonames
+drop if v2 == "Date/Time"
+drop in 1
+// sometimes the url is displaced. ugly hack.
+replace v7 = v6 if v7 == ""
+
+split v2, parse(",") gen(tmp)
+
+gen date_add = date(tmp2,"DMY")
+format date_add %td
+
+rename v7 titlehref
+bysort titlehref: drop if _n > 1
+
+replace titlehref = subinstr(titlehref, "commons", "en",1)
+replace titlehref = subinstr(titlehref, "wikimedia", "wikipedia",1)
+
+drop tmp* v*
+gen year = year(date_add)
+destring year, replace    
+save ${stash}pageinfo_kimono, replace
+
+
+end
+
 
 program manualinput
 
