@@ -89,7 +89,10 @@ def get_citelines(wikitext):
     if len(re.findall('baseball digest',wikitext)) > 0:
         for line in wikitext.split("\n"):
             if len(re.findall('baseball digest',line)) > 0:
-                lines.append(line.strip(' \t\n\r'))
+                line = line.encode('ascii', 'ignore')
+                line = line.replace('"', '')
+                line = line.strip(' \t\n\r,')
+                lines.append(line)
 
     return lines
 

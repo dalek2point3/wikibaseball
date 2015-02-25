@@ -136,7 +136,6 @@ def geocode():
                 utils.logmessage(str(count) + " Failed: " + str(ip) + "", "getdata", 1)
 
 
-            
     with open(outfilename, "a") as f:
         for row in output:
             line = "\t".join([unicode(x).encode('utf8') for x in row]) + "\n"
