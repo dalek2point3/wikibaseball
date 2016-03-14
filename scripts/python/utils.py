@@ -1,4 +1,4 @@
-#get_pl!/usr/bin/env python
+#!/usr/bin/env python
 import urllib2, urllib
 import zipfile,os.path
 from time import gmtime, strftime, time
@@ -6,7 +6,7 @@ from xml.dom import minidom
 import re
 import json
 import time
-import requests
+# import requests
 from ipinfodb import API
 
 """ This file contains useful functions for other programs """
@@ -82,13 +82,13 @@ def parse_wikitext(wikitext):
     
     return [text, img, bd]
 
-def get_citelines(wikitext):
+def get_citelines(wikitext, phrase='baseball digest'):
 
     lines = ["NA"]
     wikitext = wikitext.lower()
     if len(re.findall('baseball digest',wikitext)) > 0:
         for line in wikitext.split("\n"):
-            if len(re.findall('baseball digest',line)) > 0:
+            if len(re.findall(phrase,line)) > 0:
                 line = line.encode('ascii', 'ignore')
                 line = line.replace('"', '')
                 line = line.strip(' \t\n\r,')

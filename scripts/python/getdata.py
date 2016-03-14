@@ -70,13 +70,13 @@ def parse_revs(wikihandles, years):
             data = [wikihandle, year, user, revid, size, text, img, bd]
             print "\t".join([unicode(x).encode('utf8') for x in data])
             
-def get_bdcites(wikihandles, years):
+def get_bdcites(wikihandles, years, phrase='baseball digest'):
 
     for wikihandle in wikihandles:
         for year in years:
             filename = wikihandle + "_" + str(year)
             [user, revid, size, content] = utils.parse_xml(filename)
-            for line in utils.get_citelines(content):
+            for line in utils.get_citelines(content, phrase):
                 data = [line, wikihandle, year]
                 print "\t".join([unicode(x).encode('utf8') for x in data])
     
@@ -149,11 +149,11 @@ def main():
 
     # Setup vars
 
-    #  wikihandles = utils.get_handles()
-    years = [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
+    # wikihandles = utils.get_handles()
+    # years = [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
 
     # wikihandles = ["Joe_Wolf", "Michael_Jordan"]
-    # years = [2012]
+    # years = [2011, 2012]
 
     # Step 1: Download zip data from the interwebs
     # get_sport("baseball")
@@ -181,13 +181,17 @@ def main():
     # Step 7: Get additional data for citations only from content pages
     
     # 7.1 get filenames from kimono data
-    urls = utils.get_handles(filename="kimono_data.csv")
+    # urls = utils.get_handles(filename="kimono_data.csv")
+    # urls = utils.get_handles()
+    #for x in urls:
+    #    print x
     
     # 7.2 for each url, get revdata
     # get_revs(urls, years)
 
     # 7.3 parse revs and split citations to a file. then manually tag each citation and use in stata
-    get_bdcites(urls, years)
+    # get_bdcites(urls, years, 'baseball digest')
+    # get_bdcites(urls, years, 'baseball+digest')
 
     # TODO: deal with images
     pass
