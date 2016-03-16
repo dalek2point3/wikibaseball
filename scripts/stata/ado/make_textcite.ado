@@ -2,7 +2,7 @@ program make_textcite
 
 process_raw
 
-make_cite_text_master
+make_cite
 
 merge_data
 
@@ -12,14 +12,8 @@ program merge_data
 
 use ${stash}citelines_raw, clear
 
-merge m:1 citeid using ${rawdata}cites_text
-
-// for some 400 unique citations could not detect year, drop
-drop if fulltext!="NA" & _m < 3
-drop _merge
-
-drop if year == "Punchball"
-destring year, replace
+// this will drop about 332 citations for which years could not be identified
+merge m:1 citeid using ${stash}cite_raw, keep(match) nogen
 
 save ${stash}citelines_text, replace
 
@@ -28,104 +22,110 @@ end
 
 program process_raw
 
-insheet using ${cite}citelines.csv, clear
+// the python script searches for 4 phrases, and output is stored in separate files
+// phrases are 'baseball digest', 'baseballdigest', 'baseball_digest', 'baseball%20digest'
 
-replace v1 = v1 + " " + v2 if v4 != .
-replace v2 = v3 if v4 != .
-tostring v4, replace
-//replace v3 = string(v4) if v4 != .
-drop v4
+foreach x in "" "_percent" "_nospace" "_plus"{
+    insheet using ${cite}searchcites`x'.csv, clear
+    di "----------"
+    di "now processing `x'"
+    capture confirm variable v4
+    if !_rc {
+        di "deleting v4"
+        tostring v4, replace
+        replace v1 = v1 + " " + v2 if v4 !="."
+        replace v2 = v3 if v4!="."
+        replace v3 = v4 if v4!="."
+        drop v4
+    }
+    rename v1 citetext
+    rename v2 wikihandle
+    rename v3 year
+    destring year, replace
+    save ${stash}tmpcite`x', replace
+}
 
-rename v1 fulltext
-rename v2 wikihandle
-rename v3 year
+use ${stash}tmpcite, clear
+foreach x in "_percent" "_nospace" "_plus"{
+    append using ${stash}tmpcite`x'
+}
 
-// gen id
-egen citeid = group(fulltext)
+//drop if citetext == "NA"
+bysort citetext: gen tmp = (_n==1)
+bysort tmp: gen tmp2 = _n
+bysort citetext: egen citeid = max(tmp*tmp2)
 
-drop if wikihandle == "Baseball_Digest"
+//bysort wikihandle year citetext: drop if _n > 1
 
 save ${stash}citelines_raw, replace
 
 end
 
-program make_cite_text_master
+
+// This program takes the citations file and pulls out the citeyear for each unique citation
+program make_cite
 
 use ${stash}citelines_raw, clear
 
-drop if fulltext == "NA"
-
-// give BD bolding effect
-gen bdpos = strpos(fulltext, "baseball digest")
-gen text = substr(fulltext, bdpos-60, bdpos+60)
-
-replace text = subinstr(text, "baseball digest", "<b>baseball digest</b>",.)
-replace text = subinstr(text, ",","",.)
-replace fulltext = subinstr(fulltext, "baseball digest", "<b>baseball digest</b>",.)
-replace fulltext = subinstr(fulltext, ",", "",.)
-
-
-// drop duplicate citations
-bysort fulltext: drop if _n > 1
-
+drop if citetext == "NA"
+bysort citetext: drop if _n > 1
 
 foreach x in "|" ">" "=" "'" "]" "[" " "{
-    replace text = subinstr(text,"`x' ","`x'",.)
-    replace text = subinstr(text," `x'","`x'",.)
+    replace citetext = subinstr(citetext,"`x' ","`x'",.)
+    replace citetext = subinstr(citetext," `x'","`x'",.)
 }
+replace citetext = subinstr(citetext, ",","",.)
 
+gen done = 0
+
+// this loop looks for variables depending on their direct assigmnet
+// for example, date=xxx, issue = yyy etc
 foreach x in date issue volume year{
     di "doing `x'"
     di "---------------"
-    gen `x'var = regexs(1) if regexm(text, ".*\|`x'=([a-z 0-9\-\.]*)\|.*")==1
-    replace `x'var = regexs(1) if regexm(text, ".*\|`x'=([0-9\-]*).*")==1 & datevar == ""
+    gen `x'var = regexs(1) if regexm(citetext, ".*\|`x'=([a-z 0-9\-\.]*)\|.*")==1
+    replace `x'var = regexs(1) if regexm(citetext, ".*\|`x'=([0-9\-]*).*")==1 & datevar == ""
 
-    replace `x'var = regexs(1) if regexm(text, ".*\|`x'=([a-z\-a-z]+ [0-9]+)\|.*")==1
-    replace `x'var = regexs(1) if regexm(text, ".*\|`x'=([a-z]*-[a-z]*\[\[[0-9]+\]\])\|.*")==1
+    replace `x'var = regexs(1) if regexm(citetext, ".*\|`x'=([a-z\-a-z]+ [0-9]+)\|.*")==1
+    replace `x'var = regexs(1) if regexm(citetext, ".*\|`x'=([a-z]*-[a-z]*\[\[[0-9]+\]\])\|.*")==1
+    replace done = max(done,1) if `x'var != ""
 }
 
+makerefvar
 
-gen refvar = regexs(1) if regexm(text, ".*>([a-z]* [1-2][0-9][0-9][0-9]) vol.*")==1
-replace refvar = regexs(1) if regexm(text, ".*>([a-z]* [1-2][0-9][0-9][0-9]) issn*")==1 & refvar == ""
+// manually get citation data and store in manual_cites
+// outsheet using ${stash}cite_for_manual-mar14-2016.txt if done==0, replace
 
-makesimpleref
+// insheet using ${stash}cite_for_manual-mar14-2016-complete.txt, clear
+// keep citeid manual_date
+// save ${stash}manual_cites, replace
 
-//// date var
+merge 1:1 citeid using ${stash}manual_cites, nogen
 
-gen done = 0
-gen num = 0
-foreach x in date volume issue yearvar refvar simplerefvar{
-    replace done = max(done, `x'!="")
-    replace num = num + 1 if `x' != ""
-}
-
-drop if done == 0
-save ${filedata}cite_tmp, replace
+save ${stash}citelines_raw_tmp, replace
 
 getdatevar
 
-save ${rawdata}cites_text, replace
-
+save ${stash}cite_raw, replace
 
 end
 
-
 program getdatevar
 
-use ${filedata}cite_tmp, replace
-
+use ${stash}citelines_raw_tmp, clear
 
 // extract years from each var
 gen year1 = regexs(1) if regexm(datevar, ".*([1-2][0-9][0-9][0-9]).*")==1
 gen year2 = regexs(1) if regexm(yearvar, ".*([1-2][0-9][0-9][0-9]).*")==1
 gen year3 = regexs(1) if regexm(refvar, ".*([1-2][0-9][0-9][0-9]).*")==1
-gen year4 = regexs(1) if regexm(simplerefvar, ".*([1-2][0-9][0-9][0-9]).*")==1
-gen year5 = regexs(1) if regexm(issue, ".*([1-2][0-9][0-9][0-9]).*")==1
+gen year4 = regexs(1) if regexm(issue, ".*([1-2][0-9][0-9][0-9]).*")==1
+gen year5 = regexs(1) if regexm(manual_date, ".*([1-2][0-9][0-9][0-9]).*")==1
 
 destring year1 year2 year3 year4 year5, replace
 
 gen cnt = (year1!=.)+(year2!=.)+(year3!=.)+(year4!=.)+(year5!=.)
 
+// drop obs for which we have no year data
 drop if cnt == 0 & vol == ""
 
 // find years that dont agree
@@ -150,6 +150,31 @@ makevolyear
 replace citeyear = volyear if citeyear == . & volyear > 0
 
 keep citeid citeyear
+
+end
+
+program makerefvar
+
+local phrase "baseball digest"
+gen refvar=regexs(1) if regexm(citetext, "`phrase' ([a-z]* [1-2][0-9][0-9][0-9]) vol.*")==1
+
+replace citetext = subinstr(citetext, "]","",.)
+replace citetext = subinstr(citetext, "[","",.)
+replace citetext = subinstr(citetext, "'","",.)
+
+replace refvar=regexs(1) if regexm(citetext, "`phrase'\ ([a-z]* [1-2][0-9][0-9][0-9])")==1 & refvar == ""
+
+replace refvar=regexs(1) if regexm(citetext, "`phrase'([a-z]* [1-2][0-9][0-9][0-9])")==1 & refvar == ""
+
+replace refvar=regexs(1) if regexm(citetext, "`phrase'\(([a-z]* [1-2][0-9][0-9][0-9])")==1 & refvar == ""
+
+replace refvar=regexs(1) if regexm(citetext, "`phrase' article\ ([a-z]* [1-2][0-9][0-9][0-9])")==1 & refvar == ""
+
+replace refvar=regexs(1) if regexm(citetext, "`phrase'([a-z]*[1-2][0-9][0-9][0-9])")==1 & refvar == ""
+
+replace refvar=regexs(1) if regexm(citetext, "\|date=([a-z0-9\-].*).*\|publisher=baseball digest")==1 & refvar == ""
+
+replace done = max(done,1) if refvar != ""
 
 end
 
@@ -183,37 +208,6 @@ foreach x in 1 2 3 4 5{
     replace disagree = 1 if year`x'!=year`y'& cnt > 1 & year`x' !=0 & year`y'!=0
 }
 
-
-end
-
-
-program makesimpleref
-
-gen simplerefvar = ""
-replace simplerefvar = regexs(1) if regexm(text, ".*>\]\]''([a-z]+ [1-2][0-9][0-9][0-9]).*")==1 & simplerefvar == ""
-
-replace simplerefvar = regexs(1) if regexm(text, ".*>''([a-z]+ [1-2][0-9][0-9][0-9]).*")==1 & simplerefvar == ""
-
-replace simplerefvar = regexs(1) if regexm(text, ".*>''([a-z]+[1-2][0-9][0-9][0-9]).*")==1 & simplerefvar == ""
-
-replace simpleref = regexs(1) if regexm(text, ".*b>([a-z]+ [0-9]+).*")==1 & simpleref == ""
-
-replace simplerefvar = regexs(1) if regexm(text, ".*>\]\]''([a-z]+[1-2][0-9][0-9][0-9]).*")==1 & simplerefvar == ""
-
-replace simplerefvar = regexs(1) if regexm(text, ".*>article ([a-z]+ [1-2][0-9][0-9][0-9]).*")==1 & simplerefvar == ""
-
-replace simplerefvar = regexs(1) if regexm(text, ".*>daily \- ([a-z]+ [1-2][0-9][0-9][0-9]).*")==1 & simplerefvar == ""
-
-replace simplerefvar = regexs(1) if regexm(text, ".*>daily[ ]+([a-z]+ [1-2][0-9][0-9][0-9]).*")==1 & simplerefvar == ""
-
-
-replace simplerefvar = regexs(1) if regexm(text, ".*>\]\]([a-z]+ [1-2][0-9][0-9][0-9]).*")==1 & simplerefvar == ""
-
-replace simplerefvar = regexs(1) if regexm(text, ".*>''\(([a-z]+ [1-2][0-9][0-9][0-9]).*")==1 & simplerefvar == ""
-
-replace simplerefvar = regexs(1) if regexm(text, ".*>''.*([a-z]+ [1-2][0-9][0-9][0-9]).*")==1 & simplerefvar == ""
-
-replace simplerefvar = regexs(1) if regexm(text, ".*digest</b>([a-z \.]+ [1-2][0-9][0-9][0-9]).*")==1 & simplerefvar == ""
 
 end
 

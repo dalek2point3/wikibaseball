@@ -23,12 +23,10 @@ gen isbaseball = (minutesrank==.)
 save ${stash}bbk_master, replace
 
 // 1b. Merge data
-
 make_merge
 
-
 // 2 citation data
-
+make_cite
 
 /////////// ANALYSIS //////////////////
 
@@ -51,7 +49,7 @@ reg_ddd
 // 5. DD regressions -- Traf
 reg_traf
 
-// 5b. IV == Traf
+// 6. IV == Traf
 ivest
 
 // FIGURES
