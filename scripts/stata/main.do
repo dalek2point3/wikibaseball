@@ -90,6 +90,19 @@ chart_qual traf 1
 chart_qual text 1
 chart_qual bd 1
 
+// NEW CITE TABLES AND FIGURES
+
+// 1. killer picture
+cite_killer_pic
+
+// 2. DD timeline
+cite_ddpic img
+cite_ddpic text
+cite_ddpic cites
+
+// 3. main regression table
+program drop cite_reg
+cite_reg
 
 // APPENDIX
 reg_all digit ln
