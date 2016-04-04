@@ -60,6 +60,7 @@ foreach x in cites img text{
 gen treat = citeyear < 1964
 gen post = year > 2008
 
+drop if year == 2013
 save ${stash}citelines, replace
 
 end

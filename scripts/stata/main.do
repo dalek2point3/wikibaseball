@@ -56,6 +56,9 @@ ivest
 
 // 1. figure
 
+// 2. Mean digitization
+mean_digit
+
 // 2. Mean charts
 meanline img Images(Baseball) 1
 meanline img Images(Basketball) 0
