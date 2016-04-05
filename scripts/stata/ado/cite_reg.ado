@@ -42,7 +42,7 @@ program make_data
 use ${stash}citelines, clear
 fvset base 2013 year
 gen tvar = treat
-table_set "out-of-copy X post"
+table_set "out-of-copy X post" "Issue-Year"
 
 gen five = round((citeyear-1945)/5)
 egen five_year = group(five year)
@@ -56,9 +56,9 @@ local x `1'
 
 save_mean `x'
 
-eststo: qui reg `x' 1.tvar#1.post, cluster(citeyear)
-qui estadd local fixed "No"
-qui estadd local yearfe "No"
+//eststo: qui reg `x' 1.tvar#1.post, cluster(citeyear)
+//qui estadd local fixed "No"
+//qui estadd local yearfe "No"
 
 eststo: qui reg `x' 1.tvar#1.post i.${fe}, cluster(citeyear)
 qui estadd local fixed "No"
@@ -67,6 +67,12 @@ qui estadd local yearfe "Year"
 eststo: qui xtreg `x' 1.tvar#1.post i.${fe}, cluster(citeyear) fe
 qui estadd local fixed "Yes"
 qui estadd local yearfe "Year"
+
+gen ln`x'=ln(`x'+1)
+eststo: qui xtreg ln`x' 1.tvar#1.post i.${fe}, cluster(citeyear) fe
+qui estadd local fixed "Yes"
+qui estadd local yearfe "Year"
+
 
 /*eststo: qui xtreg `x' 1.tvar#1.post i.five_year, cluster(citeyear) fe
 qui estadd local fixed "Controls"
