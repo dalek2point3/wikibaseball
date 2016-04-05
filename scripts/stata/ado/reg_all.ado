@@ -43,7 +43,7 @@ program make_data
 local mode `1'
 
 use ${stash}master, clear
-fvset base 2013 year
+fvset base 2012 year
 
 if "`mode'" == "digit" {
     gen tvar = isbaseball
@@ -54,7 +54,8 @@ if "`mode'" == "digit" {
 if "`mode'" == "copy" {
     drop if isbaseball == 0
     gen tvar = treat
-    table_set "out-of-copy X post"
+    table_set "out-of-copy X post" "Player-Page"
+    di "set table"
 }
 
 end
@@ -70,15 +71,21 @@ eststo: qui xtreg `x' 1.tvar#1.post i.${fe}, cluster(id) fe
 qui estadd local fixed "Yes"
 qui estadd local yearfe "Year"
 
-eststo: qui xtreg `x' 1.tvar#1.post i.dy, cluster(id) fe
-qui estadd local fixed "Controls"
-qui estadd local yearfe "Decade X Year"
+//eststo: qui xtreg `x' 1.tvar#1.post i.dy, cluster(id) fe
+//qui estadd local fixed "Controls"
+//qui estadd local yearfe "Decade X Year"
 
 **keep if year==2008 | year==2013
 
 eststo: qui xtreg `x' 1.tvar#1.post i.qy, fe cluster(id)
 qui estadd local fixed "Yes"
 qui estadd local yearfe "Quality X Year"
+qui estadd local mean "${meanvar}"
+
+//gen ln`x'=ln(`x'+1)
+eststo: qui xtreg ln`x' 1.tvar#1.post i.${fe}, fe cluster(id)
+qui estadd local fixed "Yes"
+qui estadd local yearfe "Year"
 qui estadd local mean "${meanvar}"
 
 end
