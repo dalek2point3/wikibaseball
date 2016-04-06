@@ -16,7 +16,14 @@ destring year, replace
 
 qui gen xaxis = 0
 
-graph twoway (connected estimate year, msize(small) lpattern(dash) lcolor(edkblue) lwidth(thin)) (line max year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line min year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line xaxis year, lwidth(vthin) lcolor(gs8)), xtitle("") ytitle("") xlabel(2005(1)2013) legend(off) title("") `scale'
+if "`var'" == "img"{
+    local x = "Citations for Image Reuse"
+}
+else if "`var'" == "text" {
+    local x = "Citations in Text"
+}
+
+graph twoway (connected estimate year, msize(small) lpattern(dash) lcolor(edkblue) lwidth(thin)) (line max year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line min year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line xaxis year, lwidth(vthin) lcolor(gs8)), title("`x'") xtitle("") ytitle("Avg. Citations") xlabel(2005(1)2012) legend(off) yscale(range(0(5)15)) ylabel(0(5)15)
 
 graph export "${tables}cite_timeline_`var'.eps", replace
 shell epstopdf  "${tables}cite_timeline_`var'.eps"

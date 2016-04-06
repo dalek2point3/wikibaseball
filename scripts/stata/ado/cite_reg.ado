@@ -40,7 +40,7 @@ end
 program make_data
 
 use ${stash}citelines, clear
-fvset base 2013 year
+fvset base 2012 year
 gen tvar = treat
 table_set "out-of-copy X post" "Issue-Year"
 
