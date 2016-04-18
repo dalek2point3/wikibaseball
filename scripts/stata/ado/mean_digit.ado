@@ -23,5 +23,4 @@ foreach x in cite img text{
     shell epstopdf ${tables}mean_connected_`x'.eps
 }
 
-
 end

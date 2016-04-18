@@ -3,14 +3,15 @@ program killer_pic2
 use ${stash}master, clear
 
 local decay 0.999
-local mode `1'
+local var `1'
+local mode `2'
 
 keep if isbaseball == `mode'
-keep id isbaseball debut year img finalyear
+keep id isbaseball debut year `var' finalyear
 
-reshape wide img, i(id) j(year)
+reshape wide `var', i(id) j(year)
 
-gen diff = img2013 - img2008
+gen diff = `var'2012 - `var'2008
 gen percent = (1964 - debut) / (finaly - debut)
 replace percent = 1 if percent <= 0
 replace percent = 1 if percent >= 1
@@ -39,7 +40,7 @@ tw (bar meandiff debutyear if debutyear < 1964, barwidth(0.75) color(gs2)) (bar 
 
 legend(label(1 "`nocopyright' (Before 1964)") label(2 "`incopyright' (After 1964)")) legend(order(1 2))*/
 
-graph export "${tables}killerpic2_`mode'.eps", replace
-shell epstopdf "${tables}killerpic2_`mode'.eps" 
+graph export "${tables}killerpic2_`mode'_`var'.eps", replace
+shell epstopdf "${tables}killerpic2_`mode'_`var'.eps" 
 
 end

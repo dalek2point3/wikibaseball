@@ -44,6 +44,7 @@ local mode `1'
 
 use ${stash}master, clear
 fvset base 2012 year
+merge m:1 year isbaseball using ${stash}gtrends, keep(match) nogen
 
 if "`mode'" == "digit" {
     gen tvar = isbaseball
@@ -70,6 +71,7 @@ save_mean `x'
 eststo: qui xtreg `x' 1.tvar#1.post i.${fe}, cluster(id) fe
 qui estadd local fixed "Yes"
 qui estadd local yearfe "Year"
+qui estadd local gtrends "Yes"
 
 //eststo: qui xtreg `x' 1.tvar#1.post i.dy, cluster(id) fe
 //qui estadd local fixed "Controls"

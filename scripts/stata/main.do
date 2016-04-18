@@ -30,34 +30,107 @@ make_cite
 
 /////////// ANALYSIS //////////////////
 
-// 1. Summary Stats
+// 1. Summary Stats (Sample A and B)
 summary
 
-t_test 1
-t_test 0
+// 2. T Test
+t_test
 
-// 2. Digitization
-program drop _all
-reg_all digit
+// 3. Impact of copyright using Sample A
+cite_reg
 
-// 3. Copy DD
+// 4. Impact of copyright using Sample B
 reg_all copy
 
-// 4. Copy DDD
-reg_ddd
-
-// 5. DD regressions -- Traf
+// 5. Traffic Sample B
 reg_traf
 
-// 6. IV == Traf
-ivest
+// 6. Falsification
+//reg_false
 
 // FIGURES
 
 // 1. figure
 
-// 2. Mean digitization
+// 2. Mean digitization (Sample A)
 mean_digit
+
+// 3. Killer chart (Sample A)
+cite_killer_pic
+
+// 4. DD chart (Sample A)
+cite_ddpic cites
+cite_ddpic img
+cite_ddpic text
+
+// 5. Killer Pic (B) and Time varying (B)
+killer_pic2 img 1
+killer_pic2 traf 1
+ddpic img 1
+
+// 6. Scatterplot
+traf_scatter
+
+// 7. Quality-wise impacts
+chart_qual img 1
+chart_qual traf 1
+chart_qual text 1
+chart_qual bd 1
+
+// APPENDIX
+
+//1. Redo with basketball + digit + copy (Sample B)
+reg_ddd_appendix
+
+// 2. Leads and Lags Regression (Sample A)
+ddpic_table
+
+// 3. alternate years
+
+//syntax: reg_alternate endyear startyear postyear (Sample A and B)
+// placebo
+reg_alternate 2009 2004 2007
+
+// 4. this shortens the panel length
+reg_alternate 2011 2005 2009
+reg_alternate 2010 2006 2009
+
+// 5. alternate specs
+reg_robust copy
+
+
+
+
+// APPENDIX
+reg_all digit ln
+
+reg_all copy ln
+
+reg_ddd ln
+
+reg_traf ln
+
+program drop _all
+
+///////////////////////
+////////
+// OLD re-organize
+
+// 2. Digitization
+program drop _all
+reg_all digit
+
+
+// 3. Copy DD
+
+
+// 4. Copy DDD
+reg_ddd
+
+// 5. DD regressions -- Traf
+
+// 6. IV == Traf
+ivest
 
 // 2. Mean charts
 meanline img Images(Baseball) 1
@@ -71,7 +144,7 @@ meanline bd Citations(Baseball) 1
 meanline bd Citations(Basketball) 0
 
 // 6. Killer Pictures
-killer_pic2 1
+
 killer_pic2 0
 
 // 7. Time dummies picture
@@ -84,14 +157,6 @@ ddpic img 0
 ddpic text 1
 ddpic text 0
 
-// 8. Scatterplot
-traf_scatter
-
-// 9. Quality-wise impacts
-chart_qual img 1
-chart_qual traf 1
-chart_qual text 1
-chart_qual bd 1
 
 // NEW CITE TABLES AND FIGURES
 
@@ -106,15 +171,3 @@ cite_ddpic cites
 // 3. main regression table
 program drop cite_reg
 cite_reg
-
-// APPENDIX
-reg_all digit ln
-
-reg_all copy ln
-
-reg_ddd ln
-
-reg_traf ln
-
-program drop _all
-reg_robust copy

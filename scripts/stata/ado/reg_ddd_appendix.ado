@@ -3,7 +3,8 @@ program reg_ddd_appendix
 local ln `1'
 
 use ${stash}master, clear
-drop if year == 2013
+
+//merge m:1 year isbaseball using ${stash}gtrends, keep(match) nogen
 
 fvset base 2012 year
 
@@ -19,6 +20,7 @@ foreach x in `ln'bd `ln'img `ln'text{
     qui estadd local fixed "Yes"
     qui estadd local sstt "Year"
 
+
 }
 
 foreach x in `ln'bd `ln'img `ln'text{
@@ -26,6 +28,7 @@ foreach x in `ln'bd `ln'img `ln'text{
     eststo: qui xtreg `x' `int' `x1' `x2' i.$fe, fe cluster(id)
     qui estadd local fixed "Yes"
     qui estadd local sstt "Year"
+
 
 }
 

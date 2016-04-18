@@ -32,6 +32,8 @@ gen decade = round(debut, 10)
 egen dy = group(decade year)
 egen qy = group(quality year)
 
+//drop if year < 2004
+drop if year == 2013
 save ${stash}master, replace
 
 end

@@ -5,10 +5,17 @@ local ln `2'
 
 local meanline "\vspace{5mm}\\"
 
+// define my own top
+local keepvar "1.tvar#1.post"
+local varname "\emph{out-of-copy X post}"
+local top "keep(`keepvar') star(+ 0.15 * 0.10 ** 0.05 *** 0.01) se ar2 nonotes coeflabels(`keepvar' "`varname'") booktabs order(`keepvar')  stats(, labels()) mtitles("(1)" "(2)" "(3)" "(4)" ) nonumbers nocons replace width(\hsize) postfoot(\end{tabular*} }) prefoot("") varwidth(50) eqlabels("") staraux"
+//mtitles ("No-Overlap" "Alt. Definition" "Drop Well-Known" "Alt. Depvar")
+
 make_data `mode'
 run_robust `ln'bd
 **local meanline "\vspace{5mm} ($\mu$=$meanvar)\\"
-esttab using "${tables}`ln'`mode'_robust.tex", ${top} posthead("\midrule \underline{\textbf{Panel A: Citations}} `meanline'")
+esttab using "${tables}`ln'`mode'_robust.tex", `top' posthead("\midrule \underline{\textbf{Panel A: Citations}} `meanline'") 
+
 
 make_data `mode'
 run_robust `ln'img
@@ -95,7 +102,7 @@ replace img=(img>0)
 replace text=size
 replace bd = (bd>0)
 
-eststo: qui xtreg `x' 1.tvar#1.post i.${fe}, fe cluster(id)
+eststo: xtreg `x' 1.tvar#1.post i.${fe}, fe cluster(id)
 qui estadd local fixed "Yes"
 qui estadd local yearfe "Yes"
 

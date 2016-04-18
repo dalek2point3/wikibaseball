@@ -6,7 +6,7 @@ use ${stash}citelines, clear
 
 labelcitevar
 
-estpost tabstat citeyear year numcites numimg numtext, s(mean sd median min max) columns(statistics)
+estpost tabstat citeyear year numcites numimg numtext treat post, s(mean sd median min max) columns(statistics)
 
 esttab using "${tables}summary_cite.tex", cells ("mean(fmt(2) label(Mean)) sd(label(SD)) p50(label(Median)) min(fmt(0) label(Min)) max(fmt(0) label(Max))" ) coeflabels("Mean" "SD" "Median" "Min" "Max") replace nonum noobs booktabs width(\hsize) alignment(rrrrrr) varwidth(30) label
 
@@ -19,7 +19,7 @@ use ${stash}master, clear
 labelvar
 drop if isbasket == 1
 
-estpost tabstat img text bd traf year post debut quality treat, s(mean sd median min max n) columns(statistics)
+estpost tabstat img text bd traf year debut quality treat post, s(mean sd median min max n) columns(statistics)
 
 esttab using "${tables}summary.tex", cells ("mean(fmt(2) label(Mean)) sd(label(SD)) p50(label(Median)) min(fmt(0) label(Min)) max(fmt(0) label(Max)) count(fmt(0) label(N))" ) coeflabels("Mean" "SD" "Median" "Min" "Max" "N") replace nonum noobs booktabs width(\hsize) alignment(rrrrrr) varwidth(30) label
 
@@ -27,11 +27,13 @@ end
 
 program labelcitevar
 
+label variable treat "\emph{1(Out-of-Copy)}"
+label variable post "\emph{1(Year$>$2008)}"
 label variable citeyear "\emph{Year of Issue Publication (Issue-Year)}"
 label variable year "\emph{Calendar Year (Year)}"
 label variable numcites "\emph{Total Citations}"
-label variable numimg "\emph{Citations for Image Reuse}"
-label variable numtext "\emph{Citations in Text}"
+label variable numimg "\emph{Image Citations}"
+label variable numtext "\emph{Text Citations}"
 
 end
 
