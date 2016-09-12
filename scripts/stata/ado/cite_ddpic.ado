@@ -23,10 +23,18 @@ else if "`var'" == "text" {
     local x = "Citations in Text"
 }
 
-graph twoway (connected estimate year, msize(small) lpattern(dash) lcolor(edkblue) lwidth(thin)) (line max year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line min year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line xaxis year, lwidth(vthin) lcolor(gs8)), title("`x'") xtitle("") ytitle("Avg. Citations") xlabel(2005(1)2012) legend(off) yscale(range(0(5)15)) ylabel(0(5)15)
+// graph twoway (connected estimate year, msize(small) lpattern(dash) lcolor(edkblue) lwidth(thin)) (line max year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line min year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line xaxis year, lwidth(vthin) lcolor(gs8)), title("`x'") xtitle("") ytitle("Avg. Citations") xlabel(2005(1)2012) legend(off) yscale(range(0(5)15)) ylabel(0(5)15)
+
+graph twoway (scatter estimate year) (rcap max min year, lcolor(navy)), legend(off) title("") xtitle("Wikipedia-Year") ytitle("") yscale(r(0 16)) ylabel(0(5)15) xline(2008, lcolor(gs10)) yline(0, lcolor(gs10))
 
 graph export "${tables}cite_timeline_`var'.eps", replace
 shell epstopdf  "${tables}cite_timeline_`var'.eps"
+
+//              , msize(small) lpattern(dash) lcolor(edkblue) lwidth(thin)) (line max year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line min year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line xaxis year, lwidth(vthin) lcolor(gs8)), title("`x'") xtitle("") ytitle("Avg. Citations") xlabel(2005(1)2012) legend(off) yscale(range(0(5)15)) ylabel(0(5)15)
+
+//graph twoway (scatter estimate quality) (rcap min max quality), legend(off) title("") xtitle("") xscale(r(0 5)) yline(0, lcolor(gs10)) xlabel(1 "Top 25 pctile" 2 "25-50 pctile" 3 "50-75 pctile" 4 "Bottom 25 pctile")
+
+
 
 end
 
