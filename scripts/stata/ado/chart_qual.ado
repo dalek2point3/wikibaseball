@@ -1,46 +1,61 @@
 program chart_qual
 
-use ${stash}master, clear
-
 local var `1'
-local isbaseball `2'
 
-keep if isbaseball == `isbaseball'
-
-
+use ${stash}master, clear
+keep if isbaseball == 1
+keep if year > 2003
 gen tvar = treat
-
 xtreg `var' tvar##post##quality i.$fe, vce(robust) fe level(90)
 
-qui parmest, label list(parm estimate min* max* p) saving(${stash}pars_tmp, replace) level(90)
+make_q
 
-clear
-use ${stash}pars_tmp, clear
+make_chart `var'
 
-keep if regexm(parm, "[0-9].*tvar.*post.*quality") == 1 | parm == "1.tvar#1.post"
+end
 
-drop if estimate == 0
 
-gen quality = regexs(1) if regexm(parm, ".*post.*\#([0-9]+)\.quality")
-replace quality = "1" if quality == ""
+program make_q
 
-replace estimate = estimate + estimate[1] if _n > 1
-replace max90 = max90 + estimate[1] if _n > 1
-replace min90 = min90 + estimate[1] if _n > 1
+gen estimate = .
+gen q = .
+gen min=.
+gen max=.
+foreach x in 1 2 3 4{
+    replace q = `x' if _n == `x'
+}
 
-list quality estimate max min
+lincom 1.tvar#1.post, level(90)
+replace estimate = `r(estimate)' if q == 1
+replace min = r(estimate) + invnorm(0.05)*r(se) if q == 1
+replace max = r(estimate) + invnorm(0.95)*r(se) if q == 1
 
-destring quality, replace
+foreach x in 2 3 4{
+    lincom 1.tvar#1.post#`x'.quality+1.tvar#1.post, level(90)
+    replace estimate = `r(estimate)' if q == `x'
+    replace min = r(estimate) + invnorm(0.05)*r(se) if q == `x'
+    replace max = r(estimate) + invnorm(0.95)*r(se) if q == `x'
+}
+
+keep q estimate max min
+rename q quality
+keep if _n < 5
+
+end
+
+program make_chart
+
+local var `1'
 
 label define qualitylabel 1 "Top 25 pctile" 2 "25-50 pctile" 3 "50-75 pctile" 4 "Bottom 25 pctile"
 
 label values quality qualitylabel
 
-graph twoway (scatter estimate quality) (rcap min max quality), legend(off) title("") xtitle("") xscale(r(0 5)) yline(0, lcolor(gs10)) xlabel(1 "Top 25 pctile" 2 "25-50 pctile" 3 "50-75 pctile" 4 "Bottom 25 pctile")
+graph twoway (scatter estimate quality) (rcap min max quality, lcolor(navy)), legend(off) title("") xtitle("") xscale(r(0 5)) yline(0, lcolor(gs10)) xlabel(1 "Top 25 pctile" 2 "25-50 pctile" 3 "50-75 pctile" 4 "Bottom 25 pctile")
 
-graph export "${tables}quality_`var'_`isbaseball'.eps", replace
+graph export "${tables}quality_`var'.eps", replace
 
-shell epstopdf  "${tables}quality_`var'_`isbaseball'.eps"
+shell epstopdf  "${tables}quality_`var'.eps"
 
 end
 

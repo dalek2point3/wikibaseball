@@ -37,23 +37,23 @@ esttab using "${tables}ttest_baseball.tex", wide nonumber cells("mu_1(fmt(a3)) m
 end
 
 
+
 program labelcitevar
 
-label variable citeyear "\emph{Year of Issue Publication (Issue-Year)}"
-label variable year "\emph{Calendar Year (Year)}"
+label variable citeyear "\emph{Publication-Year}"
+label variable year "\emph{Wikipedia-Year}"
 label variable numcites "\emph{Total Citations}"
-label variable numimg "\emph{Citations for Image Reuse}"
-label variable numtext "\emph{Citations in Text}"
+label variable numimg "\emph{Image Citations}"
+label variable numtext "\emph{Text Citations}"
 
 end
 
 
 program labelvar
 
-
-label variable img "\emph{Number of Images}"
-label variable text "\emph{Number of Words of Text}"
-label variable bd "\emph{Number of Citations to Baseball Digest}"
-label variable traf "\emph{Average Monthly Traffic}"
+label variable img "\emph{Total Images}"
+label variable text "\emph{Total Text}"
+label variable bd "\emph{Total Citations}"
+label variable traf "\emph{Average Traffic}"
 
 end

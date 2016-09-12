@@ -9,7 +9,17 @@ estadd local fixed "Yes"
 estadd local sstt "Year"
 }
 
-esttab  using "${tables}`ln'leads-lags.tex", drop(1o.treat _cons 2008b.year 1o.treat#2008b.year 2004.year 1.treat#2004.year ) coeflabels(2005.year "\$Digitization_{-3}\$" 2006.year "\$Digitization_{-2}\$" 2007.year "\$Digitization_{-1}\$" 2009.year "\$Digitization_{+1}\$" 2010.year "\$Digitization_{+2}\$" 2011.year "\$Digitization_{+3}\$" 2012.year "\$Digitization_{+4}\$" 1.treat#2005.year "\$Digitization_{-3}\$ x out-of-copy"  1.treat#2006.year "\$Digitization_{-2}\$ x out-of-copy"  1.treat#2007.year "\$Digitization_{-1}\$ x out-of-copy"  1.treat#2009.year "\$Digitization_{+1}\$ x out-of-copy"  1.treat#2010.year "\$Digitization_{+2}\$ x out-of-copy"  1.treat#2011.year "\$Digitization_{+3}\$ x out-of-copy" 1.treat#2012.year "\$Digitization_{+4}\$ x out-of-copy") se ar2 nonotes star(+ 0.15 * 0.10 ** 0.05 *** 0.01) mtitles( "Citations" "Images" "Text") replace booktabs s(fixed sstt r2_a N, label("Player FE" "Time FE" "adj. \$R^2\$" N )) width(\hsize) staraux b(3) subs("_" "_")
+use ${stash}master, clear
+fvset base 2009 year
+drop if year < 2004 | year > 2012
+
+foreach x in bd img text{
+qui eststo: xtreg `x' 1.treat##b2008.year, fe vce(robust)
+estadd local fixed "Yes"
+estadd local sstt "Year"
+}
+
+esttab  using "${tables}`ln'leads-lags.tex", drop(1o.treat _cons 2008b.year 1o.treat#2008b.year 2004.year 1.treat#2004.year ) coeflabels(2005.year "\$Digitization_{-3}\$" 2006.year "\$Digitization_{-2}\$" 2007.year "\$Digitization_{-1}\$" 2009.year "\$Digitization_{+1}\$" 2010.year "\$Digitization_{+2}\$" 2011.year "\$Digitization_{+3}\$" 2012.year "\$Digitization_{+4}\$" 1.treat#2005.year "\$Digitization_{-3}\$ x out-of-copy"  1.treat#2006.year "\$Digitization_{-2}\$ x out-of-copy"  1.treat#2007.year "\$Digitization_{-1}\$ x out-of-copy"  1.treat#2009.year "\$Digitization_{+1}\$ x out-of-copy"  1.treat#2010.year "\$Digitization_{+2}\$ x out-of-copy"  1.treat#2011.year "\$Digitization_{+3}\$ x out-of-copy" 1.treat#2012.year "\$Digitization_{+4}\$ x out-of-copy") se ar2 nonotes star(+ 0.15 * 0.10 ** 0.05 *** 0.01) replace booktabs s(fixed sstt r2_a N, label("Player FE" "Time FE" "adj. \$R^2\$" N)) width(\hsize) staraux b(3) subs("_" "_") nonum mgroups("Sample A" "Sample B", pattern(1 0 0 1 0 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) mtitles("Citations" "Images" "Text" "Citations" "Images" "Text")
 
 end
 

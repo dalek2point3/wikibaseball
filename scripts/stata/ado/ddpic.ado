@@ -18,6 +18,7 @@ local var `1'
 local isbaseball `2'
 
 drop if isbaseball != `isbaseball'
+drop if year < 2004
 
 qui xtreg `var' 1.treat##b2008.year, fe vce(robust)
 
@@ -37,7 +38,7 @@ keep if regexm(parm, "1.*treat#20[0-9][0-9].*") == 1
 gen year = regexs(1) if regexm(parm, ".*#(20[0-9][0-9])b?\..*")
 destring year, replace
 
-drop if year < 2005
+drop if year < 2004
 
 qui gen xaxis = 0
 
@@ -72,9 +73,12 @@ if "`var'" == "traf" {
 }
 
 
-graph twoway (connected estimate year, msize(small) lpattern(dash) lcolor(edkblue) lwidth(thin)) (line max year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line min year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line xaxis year, lwidth(vthin) lcolor(gs8)), xtitle("") ytitle("`yt'") xlabel(2005(1)2013) legend(off) title("`vartitle'") `scale'
+// graph twoway (connected estimate year, msize(small) lpattern(dash) lcolor(edkblue) lwidth(thin)) (line max year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line min year, lwidth(vthin) lpattern(-) lcolor(gs8)) (line xaxis year, lwidth(vthin) lcolor(gs8)), xtitle("") ytitle("`yt'") xlabel(2005(1)2013) legend(off) title("") `scale'
 
 ** ylabel(-0.2 (0.2) 0.8)
+drop if year == 2008
+graph twoway (scatter estimate year) (rcap max min year,lcolor(navy)), legend(off) title("") xtitle("Wikipedia-Year") ytitle("") yscale(r(-0.2 0.4)) ylabel(-0.1(0.1)0.4) xline(2008, lcolor(gs10)) yline(0, lcolor(gs10))
+
 
 graph export "${tables}timeline_`var'_`isbaseball'.eps", replace
 shell epstopdf  "${tables}timeline_`var'_`isbaseball'.eps"

@@ -34,6 +34,7 @@ egen qy = group(quality year)
 
 //drop if year < 2004
 drop if year == 2013
+replace text = text/1000
 save ${stash}master, replace
 
 end

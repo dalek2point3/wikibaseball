@@ -2,26 +2,25 @@ program reg_all
 
 local mode `1'
 local ln `2'
+local symbol "$\bar{y}$="
+local box "\makebox[13em][l]{\underline{\textbf{"
 
 di "running `mode' and `ln'"
 
-make_data `mode'
-run_reg `ln'bd
-local symbol "$\bar{y}$="
-local meanline "\vspace{5mm} (`symbol'$meanvar)"
-local box "\makebox[13em][l]{\underline{\textbf{"
-
-esttab using "${tables}`ln'`mode'.tex", ${top} posthead("\midrule `box'Panel A: Citations}} `meanline'}\\") 
+/* make_data `mode' */
+/* run_reg `ln'bd */
+/* local meanline "\vspace{5mm} (`symbol'$meanvar)" */
+/* esttab using "${tables}`ln'`mode'.tex", ${top} posthead("\midrule `box'Panel A: Citations}} `meanline'}\\")  */
 
 make_data `mode'
 run_reg `ln'img
 local meanline "\vspace{5mm} (`symbol'$meanvar)"
-esttab using "${tables}`ln'`mode'.tex",  ${middle} posthead("\midrule \vspace{5mm} `box'Panel B : Images}}`meanline'}\\")
+esttab using "${tables}`ln'`mode'.tex",  ${top} posthead("\midrule \vspace{5mm} `box'Panel A : Images}}`meanline'}\\")
 
 make_data `mode'
 run_reg `ln'text
 local meanline "\vspace{5mm} (`symbol'$meanvar)"
-esttab using "${tables}`ln'`mode'.tex",   ${end} posthead("\midrule \vspace{5mm} `box'Panel C : Text}}`meanline'}\\")
+esttab using "${tables}`ln'`mode'.tex",   ${end} posthead("\midrule \vspace{5mm} `box'Panel B : Text}}`meanline'}\\")
 
 end
 

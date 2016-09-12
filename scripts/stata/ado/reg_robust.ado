@@ -47,7 +47,8 @@ program make_data
 local mode `1'
 
 use ${stash}master, clear
-fvset base 2013 year
+fvset base 2012 year
+drop if year < 2004
 
 if "`mode'" == "digit" {
     gen tvar = isbaseball
@@ -74,26 +75,26 @@ replace bd = (bd>0)
 // a) log model
 **eststo: qui xtreg ln`x' 1.tvar#1.post i.${fe}, fe cluster(id)
 **qui estadd local fixed "Yes"
-**qui estadd local yearfe "Yes"
+**qui estadd local yearfe "Year"
 
 // b) no overlap
 gen overlap = !((debut > 1963) | (final < 1964))
 eststo: qui xtreg `x' 1.tvar#1.post i.${fe} if overlap==0, fe cluster(id)
 qui estadd local fixed "Yes"
-qui estadd local yearfe "Yes"
+qui estadd local yearfe "Year"
 
 // c) alternate definition
 gen treat2 = (firstallstar < 1964) & (firsta != .)
 replace tvar = treat2
 eststo: qui xtreg `x' 1.tvar#1.post i.${fe}, fe cluster(id)
 qui estadd local fixed "Yes"
-qui estadd local yearfe "Yes"
+qui estadd local yearfe "Year"
 
 // d) remove v. famous players
 replace tvar = treat
 eststo: qui xtreg `x' 1.tvar#1.post i.${fe} if numa<15, fe cluster(id)
 qui estadd local fixed "Yes"
-qui estadd local yearfe "Yes"
+qui estadd local yearfe "Year"
 
 // e) alternate definitions
 preserve
@@ -104,7 +105,7 @@ replace bd = (bd>0)
 
 eststo: xtreg `x' 1.tvar#1.post i.${fe}, fe cluster(id)
 qui estadd local fixed "Yes"
-qui estadd local yearfe "Yes"
+qui estadd local yearfe "Year"
 
 restore
 
