@@ -150,7 +150,7 @@ def main():
     # Setup vars
 
     # wikihandles = utils.get_handles()
-    # years = [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
+    years = [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
 
     # wikihandles = ["Joe_Wolf", "Michael_Jordan"]
     # years = [2011, 2012]
@@ -181,10 +181,7 @@ def main():
     # Step 7: Get additional data for citations only from content pages
     
     # 7.1 get filenames from kimono data
-    # urls = utils.get_handles(filename="kimono_data.csv")
-    # urls = utils.get_handles()
-    #for x in urls:
-    #    print x
+    urls = utils.get_handles(filename="search_list_bd.csv")
     
     # 7.2 for each url, get revdata
     # get_revs(urls, years)
@@ -192,6 +189,8 @@ def main():
     # 7.3 parse revs and split citations to a file. then manually tag each citation and use in stata
     # get_bdcites(urls, years, 'baseball digest')
     # get_bdcites(urls, years, 'baseball+digest')
+    # get_bdcites(urls, years, 'baseballdigest')
+    get_bdcites(urls, years, 'baseball%20digest')
 
     # TODO: deal with images
     pass
