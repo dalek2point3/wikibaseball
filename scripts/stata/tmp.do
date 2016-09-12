@@ -41,25 +41,62 @@ Figures:
 5. hetero effects
     
 */
+use ${stash}citelines, clear
+
+bysort citeyear: egen numimg2008 = max(numimg*(year==2008))
+tabstat numimg2008, by(treat)
+
 use ${stash}master, clear
 
 drop if isbaseball == 0
+drop if year < 2004
+
+
 
 bysort playerid: egen img2008 = max(img*(year==2008))
+gen hadpic = img2008 > 0
+
 bysort playerid: gen tag=_n==1
+
+tabstat img2008, by(treat)
+
+xtreg img 1.post#1.treat i.year, fe vce(cluster playerid)
+
+xtreg img 1.post#1.treat##1.hadpic i.year, fe vce(cluster playerid)
+
+xtreg img 1.post#1.treat##i.img2008 i.year, fe vce(cluster playerid)
+
+est clear
+eststo: xtreg img 1.post#1.treat i.year if hadpic==0, fe vce(cluster playerid)
+eststo: xtreg img 1.post#1.treat i.year if hadpic==1, fe vce(cluster playerid)
+eststo: xtreg lnimg 1.post#1.treat i.year if hadpic==0, fe vce(cluster playerid)
+eststo: xtreg lnimg 1.post#1.treat i.year if hadpic==1, fe vce(cluster playerid)
+
+esttab, keep(1.post#1.treat) p star
+
+xtreg lnimg 1.post#1.treat##i.img2008 i.year, fe vce(cluster playerid)
+
+
+gen lnimg
 
 codebook img2008 if tag == 1
 
 gen qt = 0
 replace qt = 1 if img2008 > 0 & qt < 1
 replace qt = 2 if img2008 > 1 & qt < 2
-replace qt = 3 if img2008 > 2 < 3
+replace qt = 3 if img2008 > 2 & qt < 3
+tab qt if tag == 1
 
 gen total = img + text
+
+destring size, ignore("NA") replace 
+xtreg size 1.post#1.treat i.year, fe vce(cluster playerid)
 
 xtreg img 1.post#1.treat i.year, fe vce(cluster playerid)
 
 xtreg img 1.post#1.treat##i.qt i.year, fe vce(cluster playerid)
+
+xtreg bd 1.post#1.treat##i.qt i.year, fe vce(cluster playerid)
 
 
 

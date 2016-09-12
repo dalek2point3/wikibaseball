@@ -36,47 +36,44 @@ summary
 // 2. T Test
 t_test
 
-// 3. Impact of copyright using Sample A
-cite_reg
+// 3. Impact of copyright DD (Sample A and B)
+reg_dd_combined numcite bd 2004 2012 2009
 
-// 4. Impact of copyright using Sample B
-reg_all copy
-
-// 5. Traffic Sample B
+// 4. Traffic Sample B
 reg_traf
 
-// 6. Falsification
-//reg_false
+// 5. Hetero combined (A and B)
+reg_dd_compare numimg numtext
 
+
+//////////////////////////////
 // FIGURES
-
-// 1. figure
+//////////////////////////////
+    
+// 1. schematic figure
 
 // 2. Mean digitization (Sample A)
 mean_digit
 
-// 3. Killer chart (Sample A)
+// 3. DD chart (Sample A and B for cites)
+cite_ddpic cites
+ddpic bd 1
+
+// 4. Killer chart (Sample A)
 cite_killer_pic
 
-// 4. DD chart (Sample A)
-cite_ddpic cites
+// 5. Killer pic (Sample A) -- for images and text
+cite_killer_pic
+
+// 6. DD Pic (Sample A)
 cite_ddpic img
 cite_ddpic text
 
-// 5. Killer Pic (B) and Time varying (B)
-killer_pic2 img 1
-killer_pic2 traf 1
-ddpic img 1
-
-// 6. Scatterplot
-traf_scatter
-
 // 7. Quality-wise impacts
-chart_qual img 1
-chart_qual traf 1
-chart_qual text 1
-chart_qual bd 1
+chart_qual img
+chart_qual traf 
 
+/////////////////////////////////
 // APPENDIX
 
 //1. Redo with basketball + digit + copy (Sample B)
@@ -86,18 +83,48 @@ reg_ddd_appendix
 ddpic_table
 
 // 3. alternate years
-
-//syntax: reg_alternate endyear startyear postyear (Sample A and B)
-// placebo
-reg_alternate 2009 2004 2007
+reg_dd_combined numcite bd 2004 2009 2007
 
 // 4. this shortens the panel length
-reg_alternate 2011 2005 2009
-reg_alternate 2010 2006 2009
+reg_dd_combined numcite bd 2005 2011 2009
+reg_dd_combined numcite bd 2006 2010 2009
 
 // 5. alternate specs
 reg_robust copy
 
+
+
+
+///////////////////////
+////////
+// OLD re-organize -- these are tables no longer in the main paper
+
+//reg_alternate 2011 2005 2009
+//reg_alternate 2010 2006 2009
+
+
+//syntax: reg_alternate endyear startyear postyear (Sample A and B)
+// placebo
+//reg_alternate 2009 2004 2007
+
+
+
+//cite_reg
+//reg_all copy
+//reg_all_combined
+
+// 3. Impact of copyright using Sample A
+
+// 4. Impact of copyright using Sample B
+
+
+// 6. Falsification
+//reg_false
+
+
+
+// Fig 1. Hall of fame traffic
+traf_scatter
 
 
 
@@ -110,11 +137,15 @@ reg_ddd ln
 
 reg_traf ln
 
-program drop _all
 
-///////////////////////
-////////
-// OLD re-organize
+// 5. Killer Pic (B) and Time varying (B)
+//killer_pic2 img 1
+//killer_pic2 traf 1
+//killer_pic2 bd 1
+//killer_pic2 text 1
+//ddpic img 1
+
+
 
 // 2. Digitization
 program drop _all
