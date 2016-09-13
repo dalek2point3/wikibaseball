@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // make dataset for basketball players (used only in appendix)
 
 program make_basketball
@@ -37,6 +38,67 @@ outsheet playerid displayname link using ${stash}mt_input_bk.csv, replace comma
 end
 
 // 2. make career minutes data
+=======
+program make_basketball
+make_mt
+
+make_careermins
+
+read_mt
+
+make_master
+
+//make_mt
+
+
+end
+
+
+////////////////////////
+// This makes master baseball dataset
+program make_master
+
+insheet using ${basketball}players.csv, clear
+
+replace college = college + ", " + birthdate if v12 != ""
+replace birthdate = v12 if v12 != ""
+drop v12
+
+merge 1:1 ilkid using ${stash}bk_tmp, keep(match) nogen
+
+gen birthyear = substr(birthdate,1,4)
+rename firstseason debutyear
+rename lastseason lastyear
+
+rename ilkid playerid
+
+keep playerid firstname lastname debutyear lastyear birthyear minutesrank minutes gp asts pts reb 
+
+rename firstname namefirst
+rename lastname namelast
+
+gen playername = namefirst + " " + namelast
+
+// generate file for amazon to get me data on
+drop if debutyear < 1940
+drop if debutyear > 1990
+
+drop if minutesrank > 1000
+
+merge 1:1 playerid using ${basketball}mt_bk_output, nogen
+
+drop if birthyear == "NULL"
+replace playerid = lower(playerid)
+
+destring, replace
+
+save ${basketball}bk_master, replace
+
+end
+
+////////////////////////
+/// MAKE CAREER MINS
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 program make_careermins
 
 insheet using ${basketball}player_career.csv, clear
@@ -59,9 +121,17 @@ save ${stash}bk_tmp, replace
 
 end
 
+<<<<<<< HEAD
 //// MT section
 
 // 3. manually processed data
+=======
+
+
+//// MT section
+
+
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 program read_mt
 
 insheet using ${basketball}mt_bk_output.csv, clear
@@ -79,6 +149,7 @@ save ${basketball}mt_bk_output, replace
 
 end
 
+<<<<<<< HEAD
 // 4. make basketball master file
 program make_master
 
@@ -123,6 +194,8 @@ end
 
 
 // helper program
+=======
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 program fix_errors
 
 replace wiki = tmp if inputd == "Slater Martin"
@@ -154,3 +227,20 @@ replace wiki = "Walt_Wesley" if inputd == "Walt Wesley"
 replace wiki = "Trooper_Washington" if inputd == "Trooper Washington"
 
 end
+<<<<<<< HEAD
+=======
+
+// This makes baseball data for MT
+program make_mt
+
+use ${basketball}bk_master, clear
+
+gen displayname = namefirst + " " + namelast 
+gen searchname = namefirst + "+" + namelast + "+" + " basketball"
+
+gen link = "http://en.wikipedia.org/w/index.php?title=Special%3ASearch&profile=default&search=" + searchname + "&fulltext=Search"
+
+outsheet playerid displayname link using ${stash}mt_input_bk.csv, replace comma
+
+end
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5

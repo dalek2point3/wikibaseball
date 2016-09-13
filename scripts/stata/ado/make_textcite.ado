@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // this program counts citations in the wikitext of wikipedia pages for each publication-year
 program make_textcite
 
@@ -9,10 +10,19 @@ make_cite
 
 // Step 3. Merges raw citelines with text citation data
 // final output is list of citations with publication-year and citation-year
+=======
+program make_textcite
+
+process_raw
+
+make_cite
+
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 merge_data
 
 end
 
+<<<<<<< HEAD
 //////////////////////////////
 // Programs Library Follows //
 //////////////////////////////
@@ -22,6 +32,24 @@ end
 
 program process_raw
 
+=======
+program merge_data
+
+use ${stash}citelines_raw, clear
+
+// this will drop about 332 citations for which years could not be identified
+merge m:1 citeid using ${stash}cite_raw, keep(match) nogen
+
+save ${stash}citelines_text, replace
+
+end
+
+
+program process_raw
+
+// the python script searches for 4 phrases, and output is stored in separate files
+// phrases are 'baseball digest', 'baseballdigest', 'baseball_digest', 'baseball%20digest'
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 
 foreach x in "" "_percent" "_nospace" "_plus"{
     insheet using ${cite}searchcites`x'.csv, clear
@@ -48,32 +76,54 @@ foreach x in "_percent" "_nospace" "_plus"{
     append using ${stash}tmpcite`x'
 }
 
+<<<<<<< HEAD
+=======
+//drop if citetext == "NA"
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 bysort citetext: gen tmp = (_n==1)
 bysort tmp: gen tmp2 = _n
 bysort citetext: egen citeid = max(tmp*tmp2)
 
+<<<<<<< HEAD
+=======
+//bysort wikihandle year citetext: drop if _n > 1
+
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 save ${stash}citelines_raw, replace
 
 end
 
+<<<<<<< HEAD
 // Step 2. 
+=======
+
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 // This program takes the citations file and pulls out the citeyear for each unique citation
 program make_cite
 
 use ${stash}citelines_raw, clear
 
+<<<<<<< HEAD
 // keep only lines with unique citetext
 drop if citetext == "NA"
 bysort citetext: drop if _n > 1
 
 // remove redundant characters
+=======
+drop if citetext == "NA"
+bysort citetext: drop if _n > 1
+
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 foreach x in "|" ">" "=" "'" "]" "[" " "{
     replace citetext = subinstr(citetext,"`x' ","`x'",.)
     replace citetext = subinstr(citetext," `x'","`x'",.)
 }
 replace citetext = subinstr(citetext, ",","",.)
 
+<<<<<<< HEAD
 // done if a flag that keeps track of whether year is detected in citetext
+=======
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 gen done = 0
 
 // this loop looks for variables depending on their direct assigmnet
@@ -89,6 +139,7 @@ foreach x in date issue volume year{
     replace done = max(done,1) if `x'var != ""
 }
 
+<<<<<<< HEAD
 // gets "refvar" which is also a month, year phrase using various reg expressions
 makerefvar
 
@@ -99,23 +150,37 @@ makerefvar
 // process these data by hand and input what the data is
 
 // step 2: insheet and store output of manual process
+=======
+makerefvar
+
+// manually get citation data and store in manual_cites
+// outsheet using ${stash}cite_for_manual-mar14-2016.txt if done==0, replace
+
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 // insheet using ${stash}cite_for_manual-mar14-2016-complete.txt, clear
 // keep citeid manual_date
 // save ${stash}manual_cites, replace
 
+<<<<<<< HEAD
 // step 3. merge manually added cites
+=======
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 merge 1:1 citeid using ${stash}manual_cites, nogen
 
 save ${stash}citelines_raw_tmp, replace
 
+<<<<<<< HEAD
 // given the free citation text, make the date variable
 // this results in a simple 2 col dataset -- citationid and citeyear
+=======
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 getdatevar
 
 save ${stash}cite_raw, replace
 
 end
 
+<<<<<<< HEAD
 // Step 3.
 program merge_data
 
@@ -135,6 +200,8 @@ end
 // helper program 1
 // this gets 5 different types of datavars from the text for the citation year
 
+=======
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 program getdatevar
 
 use ${stash}citelines_raw_tmp, clear
@@ -170,7 +237,10 @@ foreach x in 1 2 3 4 5{
     replace citeyear = min(year`x', year`y') if year`x'!=0 & year`y'!=0 & disagree == 1
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 makevolyear
 
 replace citeyear = volyear if citeyear == . & volyear > 0
@@ -179,9 +249,12 @@ keep citeid citeyear
 
 end
 
+<<<<<<< HEAD
 // helper program 2
 // extract citation year of type volume year
 
+=======
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 program makerefvar
 
 local phrase "baseball digest"
@@ -207,8 +280,12 @@ replace done = max(done,1) if refvar != ""
 
 end
 
+<<<<<<< HEAD
 // helper program 3
 // extract citation year of type volume year
+=======
+
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 program makevolyear
 
 gen volyear = 0
@@ -221,8 +298,12 @@ drop if volyear > 2010
 
 end
 
+<<<<<<< HEAD
 // helper program 4
 // decide if we disagree on citation year parsed
+=======
+
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 program makedisagree
 
 gen disagree = 0
@@ -239,6 +320,10 @@ foreach x in 1 2 3 4 5{
     replace disagree = 1 if year`x'!=year`y'& cnt > 1 & year`x' !=0 & year`y'!=0
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 end
 
 

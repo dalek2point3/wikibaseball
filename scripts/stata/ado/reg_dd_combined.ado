@@ -5,10 +5,22 @@ local var2 `2'
 local startyear `3'
 local endyear `4'
 local postyear `5'
+<<<<<<< HEAD
 
 local x1 1.treat#1.post
 
 // 1. Sample A diff-in-diff
+=======
+local randomize `6'
+
+//if `randomize' == 1{
+//    di "randomizing"
+//}
+di "this is `ln'"
+
+local x1 1.treat#1.post
+
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 est clear
 use ${stash}citelines, clear
 fvset base 2009 year
@@ -28,8 +40,11 @@ eststo: qui xtreg ln`var1' `x1' i.${fe}, cluster(citeyear) fe
 qui estadd local fixed "Yes"
 qui estadd local yearfe "Yes"
 
+<<<<<<< HEAD
 // 2. Sample B diff-in-diff
 
+=======
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 use ${stash}master, clear
 fvset base 2009 year
 drop if year<`startyear' | year > `endyear'
@@ -39,6 +54,7 @@ eststo: qui reg `var2' `x1' i.${fe} if isb==1, vce(robust)
 qui estadd local fixed "No"
 qui estadd local yearfe "Yes"
 
+<<<<<<< HEAD
 eststo: qui xtreg `var2' `x1' i.${fe} if isb==1, fe vce(cluster playerid)
 qui estadd local fixed "Yes"
 qui estadd local yearfe "Yes"
@@ -48,6 +64,26 @@ qui estadd local fixed "Yes"
 qui estadd local yearfe "Yes"
 
 // 3. Write table to Latex
+=======
+eststo: qui xtreg `var2' `x1' i.${fe} if isb==1, fe vce(robust)
+qui estadd local fixed "Yes"
+qui estadd local yearfe "Yes"
+
+//gen ln`var2'=ln(`var2'+1)
+eststo: qui xtreg ln`var2' `x1' i.${fe} if isb==1, fe vce(robust)
+qui estadd local fixed "Yes"
+qui estadd local yearfe "Yes"
+
+
+/* eststo: qui xtreg `ln'traf `int' `x1' `x2' i.$fe, fe vce(robust) */
+/* qui estadd local fixed "Yes" */
+/* qui estadd local yearfe "Yes" */
+
+
+/* eststo: qui xtreg `ln'traf `int' `x1' `x2' i.qy, fe vce(robust) */
+/* qui estadd local fixed "Quality X Year" */
+/* qui estadd local yearfe "Yes" */
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 
 esttab using "${tables}reg_dd_combined_`startyear'_`endyear'_`postyear'.tex", keep(`x1') se ar2 nonotes star(* 0.10 ** 0.05 *** 0.01) coeflabels(`x1' "\emph{out-of-copy X post}") order(`x1') replace booktabs s(fixed yearfe r2_a N, label("Unit of Obs. FE" "Year FE" "adj. \$R^2\$" N )) width(\hsize) staraux mgroups("Sample A" "Sample B", pattern(1 0 0 1 0 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) mtitles("Cites" "Cites" "Log-Cites" "Cites" "Cites" "Log-Cites") nonum
 

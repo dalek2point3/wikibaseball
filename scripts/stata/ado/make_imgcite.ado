@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // this program get image citations to different publication-years
 program make_imgcite
 
@@ -13,11 +14,24 @@ destring citeyear, replace
 manualinput
 
 // merge and keep relevant columns
+=======
+program make_imgcite
+
+// this gets the add date
+get_adddate
+
+insheet using ${cite}kimono_images.csv, clear
+gen citeyear = regexs(1) if regexm(description, ".*([1-2][0-9][0-9][0-9]) issue.*")==1
+destring citeyear, replace
+manualinput
+
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 merge 1:m titlehref using ${stash}pageinfo_kimono, keep(match master) nogen
 keep titlehref citeyear year
     
 save ${stash}citelines_img, replace
 
+<<<<<<< HEAD
 end
 
 //////////////////////////////
@@ -27,6 +41,16 @@ end
 program get_adddate
 
 // dataset contains list of images on Wikipedia relating to baseball digest
+=======
+// this gives ${stash}citelines_text
+
+
+end
+
+
+program get_adddate
+
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 insheet using ${cite}pageinfo_kimono.csv,clear nonames
 drop if v2 == "Date/Time"
 drop in 1
@@ -49,6 +73,10 @@ gen year = year(date_add)
 destring year, replace    
 save ${stash}pageinfo_kimono, replace
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 end
 
 

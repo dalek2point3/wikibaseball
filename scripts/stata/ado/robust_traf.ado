@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 // this program estimates impact of copyright on traffic in a cross-sectional framework
+=======
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 program robust_traf
 
 use ${stash}master, clear
@@ -13,8 +16,13 @@ keep playername debut year img traf everinducted treat id numallstar percent
 
 reshape wide img traf, i(playername) j(year)
 
+<<<<<<< HEAD
 gen diffimg = (img2012 - img2008)
 gen difftraf = (traf2012 - traf2008)
+=======
+gen diffimg = (img2013 - img2008)
+gen difftraf = (traf2013 - traf2008)
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 
 replace difftraf = 0 if difftraf < 0
 replace diffimg = 0 if diffimg < 0
@@ -38,6 +46,19 @@ esttab, keep(percent) p label
 
 esttab using "${tables}robust_traf.tex", se ar2 nonotes star(+ 0.15 * 0.10 ** 0.05 *** 0.01) replace booktabs width(\hsize) staraux label
 
+<<<<<<< HEAD
 end
 
+=======
+
+
+end
+
+bysort id: gen tag=_n==1
+
+scatter lnd percent || lfit lnd percent
+
+graph export "${tables}tmp.eps", replace
+shell epstopdf "${tables}tmp.eps"
+>>>>>>> 5cb8b96e4d01968e78d3274c1a7f003e6a5352f5
 
