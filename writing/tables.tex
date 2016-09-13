@@ -519,6 +519,39 @@ Standard errors clustered at player-level shown in parentheses.}
 \end{table}
 \end{center}
 
+
+\newpage
+
+%% IMG VS TEXT (SAMPLE B)
+
+%% Appendix TABLE 7 : DD Images vs. Text
+%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\begin{center}
+\begin{table}[!htbp]
+\caption{Differential Impact of 1964 Copyright Experiment on \\ Image vs. Text Citations (Sample B)}
+\vspace{5mm}
+\input{../tables/reg_dd_compare_sampleb.tex}
+
+\begin{quote}
+\vspace{5mm}
+
+\emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
+\newline
+Clustered standard errors shown in parentheses.}
+
+\vspace{5mm}
+
+\emph{Note:} This regression estimates the impact of the 1964 copyright exception on affecting the reuse of images and text from Baseball Digest before and after digitization in a differences-in-differences framework. The estimates presented use data from Sample B. \emph{post} refers to all Wikipedia-years after 2008, and \emph{out-of-copy} refers to $publication-year < 1964$. See text for specification, detailed data and variable descriptions.
+\end{quote}
+\label{tab:imgdd_sampleb}
+\end{table}
+\end{center}
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% ROBUST TRAF
 
 \begin{center}
@@ -548,27 +581,6 @@ Page-year level observations. Sample includes all baseball pages in 2012. The sp
 \end{center}
 
 
-%% SCATTER
-%%%%%%%% Fig A.1 Traffic
-
-%% \newpage
-%% \begin{figure}[!htbp]
-%% \begin{center}
-%% \caption{Change in Traffic vs. Images (Sample B)}
-%% \label{fig:scatterimgtraf}
-
-%% \vspace{5mm}
-%% \includegraphics[scale=0.80]{../tables/traf_scatter_1.pdf}\\
-%% \vspace{5mm}
-%% \includegraphics[scale=0.80]{../tables/traf_scatter_2.pdf}
-
-%% \end{center}
-%% \begin{quote}
-%% \begin{adjustwidth}{-2cm}{-2cm}
-%% \emph{Note:} This plot documents the relationship between the change in images for a given page before and after the digitization of Baseball Digest and associated change in traffic. Panel A, plots the data for all Hall-of-Fame players in the out-of-copyright group and each point is labeled with the player's last name. Panel B is a similar plot for all out-of-copyright baseball players. The correlation coefficient is about 0.659 for Hall of Fame players and 0.459 for the full sample. See text for more detailed data and variable descriptions.
-%% \end{adjustwidth}
-%% \end{quote}
-%% \end{figure}
 
 %%%%% NEXT APPENDIX
 
@@ -582,128 +594,4 @@ Page-year level observations. Sample includes all baseball pages in 2012. The sp
 
 
 \end{document}
-
-
-%%% backup stuff
-
-
-%% %%%%% COPY Table %%%%
-
-%% \begin{center}
-%% \begin{table}[!htbp]
-%% %\caption{Impact of Copyright on Baseball Digest Reuse }
-%% \caption{Difference-in-Difference Regressions Estimating Impact of 1964 Copyright Experiment on Wikipedia Pages (Sample B)}
-%% %\caption{Difference-in-Difference Regressions Estimating Impact of Google Books Digitization Event on Baseball Wikipedia Pages}
-%% \vspace{5mm}
-%% \input{../tables/copy.tex}
-%% \begin{quote}
-%% \vspace{5mm}
-
-%% \emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
-%% \newline
-%% Standard errors clustered at player-page-level shown in parentheses.}
-
-%% \vspace{5mm}
-
-%% \emph{Note:} This regression estimates the likelihood of citation on baseball player Wikipedia pages to Baseball Digest magazine for out-of-copyright players (debut before 1964) as compared to in-copyright players (debut on or after 1964), before and after the digitization of the magazine by Google Books.
-%% \vspace{5mm}
-
-%% Specification: $Y_{it} = \alpha + \beta_1 \times post_t \times out-of-copy_i + \gamma_i+ \delta_t + \epsilon_{it}$ where $\gamma_{i}$ and $\delta_{t}$ represents player-page and calendar-year fixed effects respectively for player-page $i$  and calendar-year $t$.  \emph{post}:0/1,=1 if year is greater than 2008 and \emph{out-of-copy}:0/1,=1 if player debut before 1964. All models include calendar year fixed effects. Columns (1) and (2) estimate OLS models, with column (2) also including player-page level fixed effects. Column (3) estimates Log-OLS models (i.e. the dependent variable is Log(Y+1)) with player-page and calendar-year fixed effects. See text for detailed data and variable descriptions.
-
-%% %\emph{Decade}, indicator variables for decade of player debut. \emph{Quality}, indicator variables for percentile rank of player in cohort based on sport-specific covariates.
-
-%% %%Column (1) includes \emph{controls}, proxying for a player's \emph{quality} rank based on sport-specific covariates.
-
-%% \end{quote}
-%% \label{tab:copy_b}
-%% \end{table}
-%% \end{center}
-
-
-%% %%%%% DDD Table %%%%
-
-%% \begin{center}
-%% \begin{table}[!htbp]
-%% \caption{DDD Regressions Estimating Impact of 1964 Copyright Experiment on Baseball Wikipedia Pages using Basketball Pages as 2nd set of Controls}
-%% \vspace{5mm}
-%% \input{../tables/ddd.tex}
-%% \begin{quote}
-%% \vspace{5mm}
-%% \emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
-%% \newline
-%% Standard errors clustered at player-level shown in parentheses.}
-%% \vspace{5mm}
-
-
-%% \emph{Note:} Page-year level observations for full sample. \emph{out-of-copy}: 0/1, =1 for players making debut before 1964. \emph{baseball}:0/1,  =1 for baseball players and =0 for basketball players. \emph{post}:0/1,=1 if year is greater than 2008. 
-
-%% Specification: $Y_{itg} = \alpha + \beta_1 \times out-of-copy_i \times post_t \times baseball_g + \beta_2 \times out-of-copy_i \times post_t + \beta_3 \times baseball_g \times post_t + \gamma_i + \delta_t + \epsilon_{igt}$
-
-%% for player $i$ in year $t$ and in sport $g$ where $\gamma_{i}$ and $\delta_t$ represents player and time fixed effects respectively.  All estimates are from ordinary-least-squares (OLS) models. See text for detailed data and variable descriptions.
-
-%% \end{quote}
-%% \label{tab:ddd}
-%% \end{table}
-%% \end{center}
-
-
-%% %%%%%%%%%%%%% IVREG
-%% \newpage
-%% \begin{center}
-%% \begin{table}[!htbp]
-
-%% \caption{Is an Increase in Images Associated With an Increase in Traffic?}
-%% \vspace{5mm}
-%% \begin{adjustwidth}{0.5cm}{}
-%% \input{../tables/mechanism.tex}
-%% \end{adjustwidth}
-
-%% \begin{quote}
-%% \emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
-%% \newline
-%% Standard errors clustered at player-level shown in parentheses.}
-%% \vspace{5mm}
-
-%% \emph{Note:} Page-year level observations for sample of baseball players. \emph{Images} measures number of images on player-page in a given year. 
-%% All estimates are from ordinary-least-squares (OLS) models. Specification for Columns (1) is $Y_{i} = \alpha + \beta_1 \cdot Images_{it} +\delta_t + \epsilon_{it}$, while Column (2) adds individual player dummies. 
-
-%% Columns (3-6) present results from IV estimation, with and without player fixed effects. See text for detailed data and variable descriptions.
-
-%% \end{quote}
-%% \label{tab:ivreg}
-%% \end{table}
-%% \end{center}
-
-
-%% OLD APPENDIXES
-
-%% \subsection{Appendix A1 : The 1964 Copyright Experiment}
-%% \label{sec:enclosure}
-
-%% Legal opinion about copyright law concerning periodicals (under the Copyright Act of 1909) from University of Pennsylvania Libraries is reproduced below for reference. See \url{http://onlinebooks.library.upenn.edu/cce/firstperiod.html} for more details.
-
-%% \begin{quotation}
-%% For works that received their copyright before 1978, a renewal had to be filed in the work's 28th year with the Library of Congress Copyright Office for its term of protection to be extended. The need for renewal was eliminated by the Copyright Renewal Act of 1992, but works that had already entered the public domain by non-renewal did not regain copyright protection. Therefore, works published before 1964 that were not renewed are in the public domain. With rare exception (such as very old works first published after 2002) no additional copyrights will expire (thus entering the public domain) until at least 2019 due to changes in the applicable laws.
-%% \end{quotation}
-
-%% The following screenshot is from a Wikipedia banner explaining the legal use of an image sourced from Baseball Digest.
-
-%% \begin{figure}[!htbp]
-%% \centering
-%% \includegraphics[scale = 0.3]{../tables/bd_copyrightcaption.png}
-%% \caption*{A screenshot from Wikipedia explaining copyright law pertaining to reuse of material from Baseball Digest}
-%% \label{fig:copyrightcaption}
-%% \end{figure}
-
-%% \newpage
-
-%% \subsection{Appendix A2 : Back-of-the-Envelope Welfare Calculation}
-%% \label{sec:envelope}
-
-%% This section outlines the methodology through which I arrive at my estimate of about \$372,920 annually for a lower bound on the loss to social welfare from copyright.
-
-%% In order to arrive at this estimate two pieces of data are needed: (a) the approximate value of a page-view to society and (b) estimated page-views lost due to copyright. For piece (a) I used \url{webindetail.com} which provides the estimated daily earnings of Wikipedia from potential advertising which would equal to \$2.2 million dollars daily for about 400 million daily page-views.\footnote{While Wikipedia does not accept advertising, \url{webindetail.com} arrives at this estimate based on a comparables analysis based on other similar websites with a comparable user base.} This translates into a value to Wikipedia of about \$0.0055 per page-view from advertising. For piece (b) results from this study suggest that for every missing image, a Wikipedia page receives about 88 fewer page-views per month (Table \ref{tab:ivreg}) and that pages have 0.315 fewer images on average (Table \ref{tab:ddd}) due to copyright. Therefore, a page affected by copyright is expected to lose about \$0.152 per month. For the set of 335 pages affected by copyright in this study. This translates into an annual loss of about \$612 or a net present value of about \$30,600.\footnote{discounted at a rate of 2\% per year over a perpetual life term} Assuming that about 5\% of all 4.1 million articles on Wikipedia are affected in a similar way, this translates into an annual loss of about \$372,920 or a net present value of about \$18.69 million. These estimates are economically significant for Wikipedia in the light of estimates of the economic value of Wikipedia itself which is about \$43.5 million per year \citep{greenstein_technology:_2013}. Further, these estimates represent only a lower bound on lost surplus because advertising rates capture only the valuation advertisers place on readers and do not calculate value to readers including value of derivative works of Wikipedia pages.
-
-%% \newpage
-
 
