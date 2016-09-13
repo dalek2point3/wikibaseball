@@ -10,31 +10,41 @@ merge m:1 wikihandle using ${stash}bbk_master, nogen
 
 merge 1:1 wikihandle year using ${stash}traf, nogen
 
+//xtset the data
 egen id = group(wikihandle)
 xtset id year
 
+// generate key DD vars
 gen post = (year>2008)
-
 gen treat = (debutyear < 1964)
 
+// general log-vals
 local outcomes "img text bd traf"
-
 foreach x in `outcomes'{
     gen ln`x' = ln(`x'+1)
 }
 
+// keep relevant sample
 drop if debut < 1944 | debut > 1984
 
 // generate quality quartiles
 genqual
 
+// generate timevarying controls
 gen decade = round(debut, 10)
 egen dy = group(decade year)
 egen qy = group(quality year)
 
-//drop if year < 2004
 drop if year == 2013
 replace text = text/1000
+
+// generate page age
+bysort playerid: gen tmp = (text>0)*year
+replace tmp = 2012 if tmp==0
+bysort playerid: egen page_create_yr = min(tmp)
+drop tmp
+
+gen age = year - page_create_yr
 
 keep wikihandle text img bd playerid ln* post treat quality qy debut traf year isbaseball id finalyear final firstall numa size playername everinducted
 
