@@ -6,7 +6,7 @@ program drop _all
 /////////// SET PARAMETERS //////////////////
 
 // enter path of the wikibaseball directory here
-local home "/mnt/nfs6/wikipedia.proj/wikibaseball/"
+local home "/home/nagaraj/Dropbox/research/wikibaseball/"
 
 qui adopath + "`home'scripts/stata/ado"
 declare_global `home'

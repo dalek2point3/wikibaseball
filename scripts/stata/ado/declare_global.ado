@@ -12,7 +12,7 @@ global rawdata "`home'rawdata/"
 
 global stash "`home'rawdata/stash/"
 
-global tables "`home'scripts/stata/tables/"
+global tables "`home'tables/"
 
 global cite "`home'rawdata/wiki/"
 
