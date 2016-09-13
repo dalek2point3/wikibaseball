@@ -1,0 +1,585 @@
+\documentclass[11pt]{article} 
+
+\usepackage[letterpaper,left=1in,right=1in,top=1.4in,bottom=1.5in]{geometry}
+
+% packages i use in essentially every document
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{booktabs}
+\usepackage{lipsum}
+\usepackage{lscape}
+\usepackage{dcolumn}
+\usepackage{amsmath}
+\usepackage{comment}
+
+\usepackage[utf8]{inputenc}
+
+%%\usepackage[center]{caption}
+\DeclareUnicodeCharacter{00A0}{ }
+
+\usepackage{fancyhdr}
+\usepackage{changepage}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+
+%% prevent images from floating
+\usepackage{placeins}
+
+% packages i use in many documents but leave off by default
+\usepackage{amsmath, amsthm, amssymb}
+%\usepackage{amsmath}
+% \usepackage{dcolumn}
+% \usepackage{endfloat}
+
+
+% import and customize urls (kjh does this as well, it seems)
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[breaklinks]{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=Blue, citecolor=Black, filecolor=Blue,
+    urlcolor=Blue, unicode=true}
+
+\usepackage[center, textfont={bf}, labelsep=period, format=hang]{caption}
+
+%\DeclareCaptionFormat{upper}{#1#2\uppercase{#3}\par}
+%\captionsetup{labelsep=period, format = upper, singlelinecheck = false, skip = 2pt,figurename=FIGURE}
+
+\setlength{\parindent}{0pt}
+\baselineskip 18.5pt
+%\setlength{\parskip}{4.5pt}
+\setlength{\parskip}{8pt}
+
+%\linespread{1.45}
+\linespread{1.2}
+
+\pdfminorversion 3
+
+
+% add bibliographic stuff 
+\usepackage[round]{natbib}
+\def\citepos#1{\citeauthor{#1}'s (\citeyear{#1})}
+\def\citespos#1{\citeauthor{#1}' (\citeyear{#1})}
+
+% import vc stuff after running `make vc`: \input{vc} \pagestyle{kjhgit}
+
+\begin{document}
+
+\setlength{\parskip}{4.5pt}
+
+\baselineskip 18.5pt
+
+\title{Does Copyright Affect Reuse?\\ Evidence from the Google Books Digitization Project}
+%\title{Does Copyright Limit Gains From Digitization?\\ Evidence from Google Books and Wikipedia}
+
+%%\footnote{I am thankful to Erik Brynjolfsson, Daniel Fehder, Jeff Furman, Shane Greenstein, Joshua Krieger, Matt Marx, Aruna Ranganathan, Fabian Waldinger, Pai-Ling Yin, participants of the Economic Sociology Working Group and MIT Economics Third Year Lunch and especially Pierre Azoulay, Scott Stern, Catherine Tucker and Heidi Williams for comments. All errors remain mine.}
+
+
+\author{Abhishek Nagaraj \footnote{MIT Sloan School of Management. E62-368, 100 Main Street, Cambridge, MA 02139. I am thankful to Erik Brynjolfsson, Daniel Fehder, Jeff Furman, Avi Goldfarb, Shane Greenstein, Joshua Krieger, Matt Marx, Aruna Ranganathan, Fabian Waldinger, Pai-Ling Yin, participants of the Economic Sociology Working Group and MIT Economics Third Year Lunch and especially Pierre Azoulay, Scott Stern, Catherine Tucker and Heidi Williams for comments. All errors remain mine.}
+\\         \texttt{nagaraj@mit.edu}   
+}
+
+%%\date{\today}
+\date{May 8, 2016}
+
+\maketitle
+\thispagestyle{empty}
+
+
+\begin{abstract}
+\normalsize
+While digitization projects like Google Books have dramatically increased access to information, this study examines how the ability to reuse digital information and diffuse knowledge to a wider audience critically depends on features of copyright law. I use the digitization of both copyrighted and non-copyrighted issues of \emph{Baseball Digest} by the Google Books Digitization Project to measure the impact of copyright on a prominent venue for reuse: Wikipedia. A specific feature of the 1909 Copyright Act, \emph{copyright renewal requirements} ensure that material published before 1964 is out of copyright, which allows for causal estimation of the impact of copyright on Wikipedia across this sharp cutoff. I find that digitization by Google Books increased the reuse of Baseball Digest on Wikipedia, but copyright hurt reuse by reducing citations to copyrighted issues by over 135\%. Copyright also had real impacts on readership -- affected pages had, on average, 20\% lower gains in internet traffic than pages unaffected by copyright. Finally, the impact of copyright on digitized material was highly uneven. Copyright mostly affected the reuse of images rather than text, and prevented reuse of information about less-popular players as compared to more popular ones. 
+
+
+%%I hypothesize and find that 
+%%Copyright mostly prevented the reuse of images rather than text, and copyright significantly hurt the quality of Wikipedia pages for less-popular baseball players compared to their more popular counterparts. 
+
+%%However, the negative impact of copyright on diffusion is more pronounced for images compared to text and becomes large only when costs of access to digital material are reduced through the Google Books project. %%The main contribution of this paper is to provide the first causal estimates of the impact of copyright on reuse, a key measurement for copyright policy. 
+\end{abstract}
+
+%% I exploit a specific feature of the 1909 Copyright Act, \emph{copyright renewal} requirement, which caused issues of one magazine \emph{Baseball Digest} published before 1964 to fall in the public domain, while issues published after 1964 retained their copyright for this exercise. Specifically, 
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\newpage
+\section{Introduction}
+
+The increasing digital representation of information has impacted a wide range of economic activities \citep{greenstein_digitization_2013}. Digitization has reduced the cost of storage, computation and transmission of information and enabled massive changes in the ways that creative producers build upon and reuse existing information  \citep{goldfarb_introduction_2014}. For example, the digitization of music has enabled new forms of production, remixing and reuse which has resulted in a new wave of innovation in the music industry \citep{waldfogel_digitization_2014}. Similarly, the digitization of ``prior art'' about traditional medicine has significantly affected new innovations in this area \citep{choudhury_ex-ante_2015}. 
+
+%Similarly, the availability of new digital maps of the earth's surface have led to a new wave of discoveries in the gold exploration industry \citep{nagaraj_private_2015}.
+
+%There remains significant potential for the wider diffusion of digital information to transform markets in the near future. 
+
+Despite its enormous potential, the digitization process is governed by intellectual property and copyright laws that were originally conceptualized for more traditional forms of content. Therefore, the question of whether and how copyright should be modified for the digital age has become a prominent topic of discussion in policy and legal circles \citep{merges_intellectual_2012}. Some firms have argued for strengthening of copyright protection given the difficulties in enforcing copyright on digital information \citep{anderson_new_2007}, while others have argued that the current copyright regime severely undermines reuse and, therefore, limits the economic potential of digitization \citep{samuelson_intellectual_1999, lessig_free_2004}. Despite the economic importance of these debates (for example, see Supreme Court case \emph{Authors Guild v. Google, Inc.}), there is little empirical evidence about whether and how copyright influences the diffusion and reuse of digital information. A recent essay describing gaps in the literature summarizes this problem quite succinctly ``[we understand little about] what would be the economic effects of various alternative copyright arrangements and proposals for its redesign'' \citep{greenstein_digitization_2013}.
+
+Theoretically, it is difficult to predict how copyright would affect the possible gains from the digitization process. According to IP prospect theory \citep{kitch_nature_1977}, broad and strong intellectual property is needed to spur reuse by facilitating the licensing and maintenance of information \citep{mazzoleni_economic_1998, gallini_intellectual_2002} in the face of digital piracy \citep{rob_piracy_2007}, while transaction cost theories predict that when digitization reduces costs of access, copyright could significantly hinder reuse \citep{lessig_free_2005, benkler_wealth_2006, zittrain_future_2009, lemley_ex_2004}. While diametrically opposed, the two theories are clear in their respective predictions: according  to  one  theory, copyright lubricates  the  market for ideas \citep{gans_product_2003} and needs to be strengthened in the face of digitization, while according to the other, digitization impedes the free diffusion of digital information and needs to be reigned-in. Further, given contradictory theoretical predictions, empirical research on the impact of copyright on reuse also faces significant challenges. First, it is difficult to cleanly measure the reuse and diffusion of digital information. Second, there exists little variation in copyright -- it often applies by default for over a hundred years. And finally, even when variation exists, comparing the reuse of out-of-copyright and in-copyright material is problematic because such variation is often correlated with the quality or recency of the underlying material. 
+
+%%While diametrically opposed, these two theories are clear in their respective predictions; according to one theory, copyright lubricates the digital market for ideas, and, according to the other, it impedes the free diffusion of digital information.
+
+%%Prospect theory \citep{kitch_nature_1977, hardin_tragedy_1968, landes_indefinitely_2002,liebowitz_seventeen_2004} holds that broad and strong intellectual property rights are useful, because they both incentivize the creation of new knowledge \citep{gans_remix_2014} and spur reuse by reducing contracting costs for the licensing of existing digital information by stimulating the maintenance of works already created (\cite{mazzoleni_economic_1998}, \cite{gallini_intellectual_2002}, \cite{gans_is_2010}, \cite{arora_markets_2001}). However, under a competing logic, copyright imposes transaction costs that prevent the exchange of information. These transaction costs are likely to be 
+
+%% Given contradictory theoretical predictions, systematic empirical analysis of the impact of copyright on reuse could help make progress on this question. Unfortunately, such analysis has largely been absent in the innovation and management literature on the topic, perhaps due to empirical challenges. Issues of data and measurement are central. Unlike scientific output which can be measured through patents and the publication record, the diffusion of cultural information is more informal and harder to track. When data can be located, copyright applies to all information by default and persists often for over a hundred years. This, makes it rather difficult to observe diffusion in the absence of copyright. Finally, even if these problems can be resolved, comparing reuse of copyrighted and non-copyrighted information is challenging because unobserved variables like the underlying quality of information are often correlated with reuse. Put another way, we do not know if information was reused because it was off-copyright or because it was inherently of higher quality. 
+
+
+%%Previous work in copyright has been largely theoretical and has focused on estimating the elasticity of new creative products with the strength of copyright protection (\cite{varian_copyright_2006}, \cite{watt_copyright_2006}). However, because digital  the creative process is cumulative in many markets (\cite{williams_intellectual_2013}, \cite{furman_climbing_2011}, \cite{scotchmer_standing_1991}), copyright may also affect reuse by changing the cost of reusing creative inputs in the production of new knowledge (\cite{li_dead_2012}, \cite{lerner_lost_2012}). This second impact is the focus of this study. 
+
+%% According to existing theory, whether copyright impedes or promotes the reuse of knowledge is unclear. 
+
+In this paper, I make empirical progress on the question of the impact of copyright on the reuse of digital information by exploiting a natural experiment that occurred during a marquee project in the history of the internet: the digitization of about 30 million works by Google Books. About 4 years after the project was underway, in December 2008, Google Books digitized all existing issues (i.e. every issue published between 1940 to 2008) of \emph{Baseball Digest}, a prominent baseball magazine, and made them available online to readers for free. The digitization of \emph{Baseball Digest} is particularly relevant for this study, because, due to an accidental failure to renew copyrights, issues of the magazine published before 1964 lapsed into the public domain. Consequently, pre-1964 \emph{Baseball Digest} issues can be freely reused, while those published after 1964 are copyrighted and their reuse, without permission is legally prohibited. At the same time, however, both pre-1964 and post-1964 issues of the magazine were digitized by Google Books and could be accessed and read online. By exploiting this idiosyncratic variation in copyright, this study sheds light on the broader question of how intellectual property could affect the potential benefits from digitization. In particular, I focus on the impact of copyright on affecting the reuse of magazine material on Wikipedia, a natural venue to investigate this question. Not only is Wikipedia the fifth most visited website on the internet (receiving about 10 billion page-views every month) as well as a common source of information about the history of baseball, it also stores all past versions of a given page, allowing the analyst to track how information changes in response to the Google Books digitization event and copyright. 
+
+To make things clearer, consider the example in Figure~\ref{fig:cover}. The example shows scanned pages from Google Books for two issues of \emph{Baseball Digest}. Panel (1) is about a feature on Felipe Alou published in 1963, rendering it ``out-of-copyright'', while Panel (2) is on Johnny Callison published in 1964, making it ``in-copyright.'' For these two players, Figure~\ref{fig:cover} depicts pages on Wikipedia as they appeared in December 2012. Neither of these two pages displayed the players' images before \emph{Baseball Digest} was digitized, but in 2012, while Alou's page had an image from Baseball Digest, Callison's page had no images at all. Despite being printed in two issues that were published around the same time, one image finds use in a broader context while the other seems lost among the pages of Baseball Digest. Further analysis shows that, over 51 new citations were made between 2008 and 2012 to issues of Baseball Digest published in 1963, while only 17 new citations were made to magazine issues published in 1964 in the same time period. Furthermore, at the page level, Felipe Alou's Wikipedia page in 2012 contained a citation to the 1963 issue of \emph{Baseball Digest}, and experienced about a 121\% increase in traffic since 2008 as compared to only a 23\% increase for Callison's page. While many alternative explanations (such as differences in player popularity) could account for the differences, the statistical analysis isolates the role of copyright in establishing these patterns.
+
+Specifically, I track Wikipedia citations to issues of Baseball Digest published between 1944 and 1984 before and after the Google Books project on Wikipedia (i.e. between 2004 and 2012). The unit of analysis is a ``publication-year,'' i.e. all issues of the magazine published in any given year between 1944 and 1984. Using these data, I estimate whether out-of-copyright magazine issues (publication-years 1944-1963), were disproportionately more likely to be cited on Wikipedia as compared to in-copyright issues (publication-years 1964-1984) after the Google Books digitization event in a differences-in-differences framework. This specification helps to isolate the causal impact of copyright on the reuse of Baseball Digest information after the launch of the digitization project. 
+
+Figure \ref{fig:overview} provides some simple descriptive statistics that foreshadow the core econometric results. Panel (1) plots total citations to all issues of Baseball Digest on Wikipedia between 2004-2012, while Panel (2) plots total citations separately for in-copyright and out-of-copyright publication-years. As Panel (1) indicates, after the digitization of Baseball Digest in late 2008, the average number of citations for all publication-years of the magazine between 1944-1984 increased dramatically, suggesting the large and positive impact of digitization on information reuse. However, when this increase is examined separately in Panel (2) for in-copyright and out-of-copyright publication-years, the gains from digitization are heavily concentrated for out-of-copyright issues. The econometric estimates indicate that citations to out-of-copyright publication-years increase by about 135\% as compared to citations to in-copyright publication-years after digitization, even after controlling for publication-year and calendar-year fixed effects. Combined, Figure \ref{fig:overview} and the econometric estimates convey the headline findings of the paper -- the digitization project greatly encouraged the reuse of Baseball Digest information on Wikipedia, but information from copyrighted issues was significantly less likely to be reused. 
+
+Having understood the impact of the copyright law at the publication-year level, I construct an additional sample at the Wikipedia player-page level (Sample B) which tracks Wikipedia pages for a set of about five hundred prominent baseball players who were active between 1944 and 1984. Using this sample I provide robustness for the baseline analysis and extend it in two different ways. First, I evaluate the impact of copyright on the value that Wikipedia pages deliver to end users, by incorporating data on user traffic to Wikipedia pages. If, despite the limited diffusion of information from in-copyright Baseball Digest issues, Wikipedia editors are able to create high-quality pages using information from alternate sources and attract similar levels of readership, then the welfare consequences of copyright on Wikipedia are likely to be less severe. However, my econometric estimates indicate that pages affected by copyright had on average 20\% lower gains in internet traffic, suggesting a permanent and significant loss to Wikipedia from the inability to reuse copyrighted information. 
+
+Second, I hypothesize and test the idea that while copyright lowers the overall level of reuse, its impact is more concentrated for certain types of information as compared to others. Building on the digitization and intellectual property literature, I argue that the impact of copyright on preventing reuse is most salient when the underlying information is harder to duplicate using alternate sources. Specifically, I hypothesize that the impact of copyright is most salient for the reuse of images rather than text because it is harder to duplicate visual information without violating copyright, while textual information is easily paraphrased. Similarly, I also hypothesize that copyright restrictions on digital information are most harmful for Wikipedia pages about players who are less well-known because information about them is harder to obtain from alternate sources. I test the heterogeneous impact of the 1964-copyright experiment on both these margins in a regression framework and find support for my hypotheses. These results highlight the important role of copyright law in affecting digitization by shaping the distribution of reuse for different types of information. 
+
+This research contributes to the literature on digitization \citep{goldfarb_effect_2012, miller_can_2011, waldfogel_digitization_2014} by evaluating the role of intellectual property law in influencing the economic impacts of digitization. I show, for the first time, how copyright law could severely curtail potential benefits of digitization in online contexts. I also add to research on the role of digitization in influencing the differences in outcomes between more and less established players in a market \citep{qian_counterfeiters:_2014, mortimer_supply_2012, zhang_intellectual_2014, nagaraj_private_2015, brynjolfsson_niches_2006}. Finally, I also contribute to the nascent empirical literature on copyright including some work in the legal domain estimating the impact of copyright in the publishing context \citep{heald_property_2007, heald_testing_2009, buccafusco_bad_2012}, work that studies the impact of copyright on prices \citep{li_dead_2012, reimers_effects_2013, mortimer_price_2007-2} and literature on copyright enforcement and piracy \citep{aguiar_digitization_2014, luo_copyright_2015-1, danaher_converting_2010}.
+
+The rest of the paper is organized as follows. Section \ref{sec:setting} describes the empirical setting including the \emph{Baseball Digest} experiment and data collection. Section \ref{sec:baseline} analyzes the overall impact of the \emph{Baseball Digest} copyright experiment, while Section \ref{sec:hetero} discusses distributional impacts. Finally, Section \ref{sec:discussion} concludes. 
+
+
+%%is also relevant. This paper adds to this literature by focusing on the causal impact of copyright on \emph{reuse}, by using micro-data on knowledge flows and by separately identifying the interaction between digitization and copyright. 
+
+%% The findings that there are heterogeneous impacts on players of different qualities are interesting and relate to a few past studies: a. Napster helped concert revenue of less popular singers more than the established singers (Mortimer et. al. 2014), b. counterfeiting has a larger advertisement effect for the brands that were less well-known at the time of infringement and newer brands that had less sub-brands (Qian 2014).
+
+%%In sum, I find that while digitization projects can help the broader diffusion of knowledge, copyright can have negative impacts on reuse. More broadly, this research shows how copyright policy can strongly influence the rate and direction of follow-on innovation on the internet. The present study joins the literature on digitization by pointing out the important role of intellectual property in influencing the impact of digital information on economic outcomes. Further, I also contribute more broadly, to the nascent empirical literature on copyright as well as related work on innovation, digitization and privacy. Of note is work in the legal literature on copyright that estimates the impact of copyright on availability and compares works produced before and after the US copyright cutoff date of 1923 \citep{heald_property_2007, heald_testing_2009, buccafusco_bad_2012}. Other work that studies the impact of copyright on prices and access in the market for historical books \citep{li_dead_2012, reimers_effects_2013} is also relevant. This paper adds to this literature by focusing on the causal impact of copyright on \emph{reuse}, by using micro-data on knowledge flows and by separately identifying the interaction between digitization and copyright. Finally, this paper contributes to a broader literature on knowledge flows (\cite{agrawal_gone_2006}, \cite{catalini_microgeography_2012}, \cite{singh_geographic_2013}) and the role of intellectual property (\cite{murray_formal_2007}, \cite{mowery_does_????}, \cite{hegde_tacit_2011}).
+
+%%This study is also related to the literature on privacy \citep{goldfarb_privacy_2011} which focuses on the role of informational frictions in digital markets. 
+
+
+%%Having examined the overall impact of the copyright policy, I then turn to analyzing the differential impact of the program using the Wikipedia
+
+%%: copyright significantly reduces the reuse of Baseball Digest material digitized by the Google Books project. 
+
+
+%Panel B, suggests that copyright law shaped this process in important ways. 
+
+%This figure tracks the total citations to Baseball Digest issu
+%% The results show that the digitization of \emph{Baseball Digest} had a large positive impact on Wikipedia baseball pages, increasing the number of images by 140\% and text by about 50\% as compared to basketball pages. However, out-of-copyright pages benefit disproportionately compared to in-copyright pages, suggesting that copyright does indeed prevent reuse in this setting. Out-of-copyright pages receive a boost of about 80\% more images, and 140\% more citations in OLS specifications. However, such gains are unevenly distributed. The positive impact on reuse is many orders of magnitude larger for images than for text, suggesting that copyright is more effective in preventing the reuse of rich media like images and video than of text. Further, copyright seems to disproportionately harm players in the bottom 50 percentile of the quality distribution, suggesting that players who have few alternate sources of information benefit most from the release of out-of-copyright archival material. Finally, the difference in the amount of information on Wikipedia pages caused by the 1964 copyright experiment seems to have real impacts on Wikipedia's readership-- out-of-copyright pages receive a boost in monthly page-views of about 30-80\% as compared to in-copyright pages according to fixed-effects and instrumental variables specifications. A back-of-the-envelope calculation (see Appendix \ref{sec:envelope}) suggests losses to Wikipedia to the tune of about \$370,000 annually due to restrictions around the reuse of copyrighted material.
+
+
+
+
+%%ask two additional questions about the data
+
+%% I construct two different samples to understand the impact of copyright on the reuse of Baseball Digest content before and after its digitization. Sample A
+
+%%all baseball players
+
+%%Specifically, the estimation proceeds as follows. First, I identify a set of about five hundred prominent baseball players and a comparable set of basketball players (to act as an additional layer of control) who were active between 1944 and 1984. For this set of over 1000 players, I collect data from 13 different versions of their Wikipedia pages, one each from years 2001 to 2013. For each of these page-year observations, I count the number of images, the words of text, and citations to \emph{Baseball Digest}. I also collect data on internet traffic, which is available from 2007 to 2013. All players who made their debut before 1964 form the \emph{out-of-copyright} group because they could potentially benefit from uncopyrighted issues, while the rest are assigned to the \emph{in-copyright} group for analysis. The research design then estimates the impact of copyright on reuse by comparing the change in content for in-copyright and out-of-copyright baseball pages before and after the Google Books digitization event in a differences-in-differences (DD) framework. In other words, if out-of-copyright baseball pages see a larger increase in information after the digitization event than in-copyright pages after controlling for player and time-dependent fixed effects, we can attribute this difference to be the causal impact of copyright on the reuse of information. An additional level of analysis then uses DD estimates obtained separately from both baseball and basketball players to estimate a ``differences-in-differences-in-differences''(DDD) estimate of the impact of copyright on reuse that is robust to many alternate explanations.
+
+%%The research design then proceeds in a differences-in-differences-in-difference (DDD) framework by constructing three levels of differences that provides me with an estimate of the impact of copyright on reuse in Wikipedia that is robust to a number of different alternative explanations. Specifically, I first construct differences-in-differences estimates that compare the change in content between In-Copyright pages (player debuts after 1964) and Out-of-Copyright pages (player debut before 1964) for both baseball players and basketball players separately, and then compare these two estimates to arrive at a DDD estimate of the impact of copyright on reuse. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Digitization and the Role of Copyright}
+%\label{sec:theory}
+%\subsection{Digitization and Reuse}
+%\subsection{How Copyright could Affect Reuse}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Empirical Context and Data}
+\label{sec:setting}
+
+\subsection{Empirical Context}
+
+%%\subsubsection*{Google Books and the Baseball Digest Copyright Experiment}
+
+\subsubsection{The Digitization of Baseball Digest}
+
+Google Books is a Google initiative that has as its objective the digitization of all books ever published. It currently offers a catalog of about 30 million works \citep{wu_what_2015}. It is perhaps the most prominent of a number of ongoing digitization projects which include US government efforts to make available digitized records from government transactions and the Library of Congress ``National Digital Library'' project. The well-known copyright law academic Pamela Samuelson has called the project ``one of the most significant developments in the history of books, as well perhaps in the history of copyright'' \citep{samuelson_google_2009}. 
+
+In order to understand the role of copyright in influencing the broader impact of the Google Books project, I focus on an event that occurred on 9 December 2008, when Google Books announced that it would make available all of the past issues of \emph{Baseball Digest}, along with a number of other popular magazines. All published issues since the magazine's founding were made available at one time with consent from the publishers \citep{foulser_search_2008}. Furthermore, while it is quite common for Google Books to provide only a few pages of a given book on their website under ``limited preview,'' Baseball Digest was not subject to this restriction. Instead every page of every issue of the magazine printed before December 2008 was made available online. The digitization did not proceed gradually over time--all issues published before December 2008 were simultaneously accessible on the Google Books website as of December 9, 2008. 
+
+\subsubsection{The 1964 Copyright Experiment}
+
+Baseball Digest is the focus of this study because it is one of the few titles that I am aware of that offers variation in both copyright and digitization status. Specifically, while existing work in copyright has mostly considered differences in copyright status between different publications \citep{reimers_effects_2013, heald_how_2013}, the digitization of Baseball Digest is more attractive because some issues of the very same publication are available in the public domain, while others are copyrighted. This subsection describes, in more detail, the specific legal changes that led to this copyright variation. 
+
+While it is generally assumed, both in practice and in the literature, that a work is either completely in copyright or in the public domain, by considering magazines and periodicals, additional variation within a single publication can be obtained. This is because, for periodicals, the copyright term is not defined in terms of the author's life term, but rather the publication date. Specifically, prior to 1964, periodicals were subject to the \emph{copyright renewal} requirement. As per this rule, under the 1909 Copyright Act, two copyright terms were provided:  a 28-year initial term and a 28-year renewal term \citep{landes_indefinitely_2002-1}. However, the renewal term was not automatically granted \citep{kupferman_renewal_1944}, and if the renewal application was not filed on time, the work entered the public domain after the first 28 year term had expired. For issues published after 1964, the 1909 copyright act no longer applies and these works are automatically granted a second 28-year copyright term. This stipulation meant that a magazine issue published in December 1963 would relinquish its copyright in 1963 plus 28 years, i.e. in 1991, if the copyright was not renewed. However, for an issue published in January 1964, copyright would last for 56 years, i.e. till 2020, because renewals were not necessary. In this way, as of 2012, issues of a single publication could have widely varying copyright protection, despite being printed only a few months apart from each other. 
+
+%of over 200,000 periodicals in WorldCat (a knowledge repository), only about 1300 serials had renewed copyrights for a second 28-year copyright term before 1964.
+Although copyrights for some movies and books were renewed successfully, because this requirement was not well-known, it \emph{``tripped up many smaller publishers, and a failure to renew caused many works to lapse into the public domain''} \citep{andrade_copyright_2014}.  According to research by the University of Pennsylvania library system \citep{mark_ockerbloom_next_2006}, a failure to renew copyrights has meant that issues of many periodicals published before 1964, have fallen into the public domain including issues of journals like the \emph{American Economic Review}, \emph{Bell System Technical Journal}, \emph{Biometrika} and periodicals like \emph{The Baltimore Sun}, \emph{The Los Angeles Evening Herald}, \emph{The Kansas City Star} etc.\footnote{While a number of different publications did not renew copyright, I focus on Baseball Digest, because it was one of the few that was also digitized in its entirety by the Google Books project.}
+
+I leverage the The University of Pennsylvania library's ``Copyright Renewals for Periodicals'', which conducted a thorough review of the  Catalog of Copyright Entries for each periodical printed before 1964, to clarify the copyright status of Baseball Digest. According to this source,\footnote{http://onlinebooks.library.upenn.edu/cce/firstperiod.html} no issues of Baseball Digest published before 1964 were ever renewed. In other words, all issues of the magazine published before 1964 could safely be assumed to be in the public domain, while for issues published in or after 1964, copyrights will start to expire starting in 2020 and remain copyrighted until that date.
+%Appendix \ref{sec:enclosure} provides more background on this topic.
+
+While a large number of magazines were under the copyright exemption that I study, only a very small number of publications were digitized by Google Books. Of these, Baseball Digest happens to be the only one that I'm aware of that meets both criteria of being digitized and also falling under the copyright exemption. In addition, given my focus on Wikipedia, baseball as a topic is a good choice because it has a thriving editor community on Wikipedia. Further, the experiment is also likely to be economically meaningful given the widespread interest in both the game of baseball and in \emph{Baseball Digest}. Over 45\% of all Americans identify as baseball fans, and revenues from the sport of baseball in 2010 were estimated to be approximately 7 billion USD. \emph{Baseball Digest} has provided baseball's vast fan-base with information and news about the game for over seven decades since its founding in 1942 (\cite{jones_less_2007}, \cite{brown_mlb_2011}).
+
+The Google Books digitization of \emph{Baseball Digest}, therefore, represents a unique case. The publication date of the periodical (before or after 1964) determines whether a particular issue was under copyright and the date of access (before or after December 2008) determines whether it was digitized. The role of differing copyright status on the reuse of digitized content is the empirical focus of the paper. 
+
+\subsection{Data}
+\label{sec:data}
+
+In order to understand the impact of \emph{Baseball Digest}'s copyright status on reuse, I turn to Wikipedia. There are many reasons why Wikipedia is a natural venue for such analysis. First, Wikipedia is the preeminent source of information on the internet. A total of 56\% of typical Google noun searches point to a Wikipedia page as their first result, and 99\% point to a Wikipedia entry on the first page \citep{silverwood-cope_wikipedia:_2012}. Second, Wikipedia is built explicitly on the ``No Original Research'' rule which requires editors to cite a secondary source for contributions, making citations to magazines like \emph{Baseball Digest} typical on the site. Third, \emph{Baseball Digest} often contains profiles of baseball players and teams, particularly in the form of detailed articles, interviews and player images. Such biographical information forms the foundation of any encyclopedia \citep{greenstein_experts_2014} and is, therefore, particularly likely to be reused on Wikipedia. Finally, each revision of a Wikipedia page is archived and publicly accessible. This allowed me to collect repeated panel data on Wikipedia pages both before and after a digital version of \emph{Baseball Digest} was made available. This, in turn, allowed me to trace the diffusion of information using micro-data, which would be difficult to do in another setting. While one aim of this paper is to show how Wikipedia can be used to study the diffusion of information, others have used similar data to study collaboration and digital knowledge production \citep{zhang_group_2010, greenstein_is_2012, nagaraj_wiki-pages_2009, algan_cooperation_2013, gorbatai_social_2012, aaltonen_cumulative_2013}. Specifically, I use two different strategies to collect Wikipedia data and build two samples, Sample A and Sample B. This section describes these samples, which form the core of my analysis, in greater detail.
+
+ %%Baseball players in the sample have played an average of 1280 games in their career, made their debut around 1966 and played for an average of 14.70 years in their career. 
+
+% In addition to data on prominent baseball players, I also collected similar data on a comparable group of basketball players. While the core of the analysis focuses on analyzing the impact of copyright within the set of baseball players, adding another layer of controls using basketball player data helps strengthen my analysis. This data allows estimation of the baseline impact of digitization, in addition to providing additional controls that can account for overall dynamics on the Wikipedia platform. Basketball is a convenient choice because like baseball, basketball also has an active community of editors on Wikipedia. However, basketball did not experience any digitization event like the availability of \emph{Baseball Digest} through Google Books. For basketball, I obtained data from \url{databasebasketball.com} which provides names, years of debut and other performance data for individual players. To identify a set of players comparable to the baseball players, I used the dataset for the Top 1000 players by career minutes played and choose those who made their debut between 1944 and 1984.\footnote{Basketball Hall of Fame nominations data is not feasible because the voting process does not begin until 1959} 
+%%The 564 Basketball players in the sample played about 716 games, scored 9223 points over their career and made their debut around 1970.
+
+
+\subsubsection{Sample A: Publication-Year Level}
+
+In order to construct the workhorse sample for the main specification (referred to throughout as Sample A), I followed a five-step process. First, I searched the entire Wikipedia repository for pages that contained mentions of the word \texttt{baseball digest} and variants thereof.  Second, for pages that contained references to Baseball Digest, I accessed and downloaded every past version of the page between 2004 and 2012 as it appeared on December 1 of that year.\footnote{I chose December 1 because this is a few days before the digitization event happened on December 9, 2008.} Third, having collected multiple snapshots of thousands of pages, I wrote python scripts to detect citations to Baseball Digest magazine on each of the individual snapshots. I searched for these citations using pattern matching techniques for a variety of different citation formats because Wikipedia does not follow a standard way to cite source material. However, I found that Wikipedia editors most commonly use the format \emph{Baseball Digest (1963)}, rather than referring to a specific issue, or article within the magazine.\footnote{Although, citations to specific articles or issues can also be found on Wikipedia, I rely on citations to the publication-year to get the largest possible sample of reuse for Baseball Digest.} Accordingly I harmonized all citations by the publication-year of the magazine that was included in a particular citation for all publication-years between 1944 and 1984.\footnote{I choose these years because they form a window of 20 years before and after the copyright cutoff year of 1964.} At this step, I also noted whether the citation was made to an image was being reused, or whether the citation was in the main text of the article. As a fourth and final step, I manipulated these raw data to build Sample A which tracks total citations on Wikipedia to every publication-year of Baseball Digest with one observation for every calendar-year between 2004 and 2012. For example, for a given publication-year, say 1963, Sample A tracks citations on Wikipedia as of 2004, 2005 and so on, up to 2012. In this way, Sample A allowed me to detect the exact year when new citations to a publication-year were added to Wikipedia and to analyze the impact of the 1964 copyright experiment on citations to Baseball Digest before and after the Google Books digitization event. 
+
+%% In other words, Sample A tracks citations to publication-year 1963 by track how many times \emph{Baseball Digest (1963)} was cited on 2004 versions of Wikipedia pages, on 2005 versions of Wikipedia pages and so on, till 2012.
+
+%%Using these data, I build Sample A, a panel of citation counts at the publication-year level for 2004-2012.
+
+Table \ref{tab:summary}, Panel (1) lists summary statistics for this sample. The main independent variable of interest is \emph{1(Out-of-Copy)}, which I include in the analysis as $out-of-copy$ and which indicates whether a given publication-year is in the period where no copyrights apply (i.e. all publication-years before 1964). The second independent variable of interest is, \emph{1(Year$>$2008)} which I include in the analysis as $post$ and which indicates that the observation is from a time period after the Google Books digitization event. The main dependent variable is \emph{Total Citations} which counts total citations to any given publication-year in a calendar year. Two related dependent variables are \emph{Image Citations} and \emph{Text Citations} which splits these citations by whether a citation is being made for reusing an image, or in the main text of the article respectively. By construction, almost half of the publication-years are in the out-of-copyright period and the median Wikipedia-year in the study is 2008. As far as outcome variables are concerned, the data show that, on average, a publication-year of Baseball Digest receives about 4.19 citations of which about 3 are for text, while the rest are for images. 
+
+
+%, Images, Text} and \emph{Traffic}. The data show that baseball Wikipedia pages contain an average of 0.15 citations, 0.56 images and 969 words and that they receive on average 105 page views per month. For basketball players, Wikipedia pages have an average of 0 citations to \emph{Baseball Digest}, 0.19 images and 540 words and receive an average of 123 page views per month.
+\subsubsection{Sample B: Player-Page Level}
+
+While Sample A helps to measure citations to Baseball Digest at the publication-year level and helps to provide an accurate assessment of the reuse of Baseball Digest information, it is still inadequate to understand the aggregate impact of the Baseball Digest digitization and copyright restrictions on Wikipedia. For example, if copyright on Baseball Digest issues reduces the reuse of magazine information, but Wikipedians are able to create high-quality pages for a given topic using alternate sources, then the overall impact of copyright on Wikipedia would be less severe. We are unable to assess this overall impact without directly collecting data on the quality of Wikipedia pages that could have been affected by the Baseball Digest digitization and copyright restrictions. To understand the overall impact of the copyright restriction for Wikipedia, I build another sample (referred to throughout as Sample B) at the player-page level, which uses data on the amount of content on a Wikipedia page (i.e. number of words of text or quantity of images) as well as proxies for quality, such as player-page level traffic. A player-page level analysis is also helpful because it helps to directly characterize the differential impact of copyright on different types of content. In particular, by estimating whether Wikipedia pages for well-known players are more affected by copyright as compared to less well-known ones, the heterogeneous effects of copyright on different types of topics can be better understood. Such an analysis would not be possible at the publication-year level.  For these reasons, I rely on a player-page sample (referred to throughout as Sample B) of the Wikipedia data to estimate the impact of copyright on the reuse of digitized information.
+
+To build this sample, I first used the ``Baseball Hall of Fame'' voting dataset by Sean Lahman\footnote{see \url{http://www.seanlahman.com/baseball-archive/statistics/}} to compile a list of 541 players who have been nominated for election to the Baseball Hall of Fame and who made their debut appearances between 1944 and 1984. The Hall of Fame nomination list allowed me to include players who had finished their careers and who had passed a screening committee judgment, but it also ``removes from consideration players of clearly less qualification'' \citep{abbott_future_2011}. Thus, the nomination list can be said to include only those players who merit encyclopedic inclusion. The dataset also provides biographical details of the players including date of debut and performance details like their experience, length of career and number of appearances in all-star games.  
+%and the length of their playing career.
+
+%%\footnote{December 1 is a convenient date, because it provides measurements in yearly intervals from the digitization event which happened on December 9. 2001 was the year when Wikipedia began and 2012 is the final year of analysis.}
+
+Having constructed a list of players who could have possibly benefited from magazine information, I then manually matched the names of players to their respective pages on Wikipedia.\footnote{Manual matching helps to avoid problems where a player with a common name like ``Jackie Robinson'' is matched to the Wikipedia page for Jack Robinson the politician, or worse, Jackie Robinson the basketball player.} After having completed this matching, similar to Sample A, for each player-page I downloaded archival versions of each player's page as it appeared on December 1 for every year between 2001 and 2012. To measure the amount of information on each page, I then built an automated python parsing utility that allowed me to measure citations\footnote{Note that this data does not count citations by year of publication, only the Baseball Digest magazine as a whole.} to \emph{Baseball Digest} (as measured by references to \emph{Baseball Digest} in the text), the number of images\footnote{I detect images by looking for references to the following file extensions: \texttt{jpg,jpeg,gif,svg,tiff,png}} on a page, and the number of words of text (in thousands of words).
+
+For each page, I obtained web traffic data in the form of page-views from \url{stats.grok.se}. I also computed average monthly traffic data for every year from 2012 back to 2007, before which traffic data is not available. Additionally I constructed a \emph{quality} metric for each player. \emph{Quality} is calculated based on percentile rank in the list of all-star appearances within the sample under consideration.\footnote{The All-Star game is an annual event that takes place between the ``best'' players of baseball's two leagues, and, therefore, provides a good indicator of a player's performance in a given year.} \emph{Quality} is a categorical variable with four values, indicating the player's ranking by percentile (top 25 percentile, 25-50 percentile, 50-75 percentile and bottom 25 percentile). Given that all the players in my sample have retired, the quality rankings do not change, and should be considered to be a time-invariant variable at the player-page level. 
+
+%%For basketball players the \emph{quality} rank is assigned based on the number of career minutes played. 
+
+Table \ref{tab:summary} Panel (2) lists summary statistics for Sample B. The main independent variables of interest are \emph{1(Out-of-Copy)} which I include in the analysis as $out-of-copy$, which assigns a player to the out-of-copyright group if they made their debut before 1964. The second is, \emph{1(Year$>$2008)} which I include in the analysis as $post$, defined in a similar way to Sample A, and is set to one if an observation is from a time period after the Google Books digitization event. The main dependent variables are \emph{Citations, Images, Text} and \emph{Traffic}. The summary statistics show that baseball Wikipedia pages contain an average of 0.12 citations, 0.50 images and 890 words (or .89 times a thousand words) and that they receive, on average, 101.49 page views per month. 
+
+%% how did digitization help?
+%% what was the role of copyright?
+%% -- cross section + killer picture
+%% -- DD results
+%% check trends, robustness
+%% differential -- theory
+%% differential: images, text
+%% differential: player quality (B)
+%% traffic (B)
+
+
+%% to discuss: summary
+%% Tables
+%% summary stats (A/B)
+%% reuse outcomes (A/B)
+%% DD (sample A)
+%% DD (sample B)
+%% traffic (B)
+%%
+%% Figures
+%% schematic
+%% digitization / separate
+%% killer (sample A)
+%% DD time (A)
+%% killer + DD (B)
+%% traffic scatter
+%% hetero
+
+\section{Empirical Results}
+\label{sec:baseline}
+
+%% 3.1 simple descriptives
+%% Fig 2
+%% Table 2
+
+%% 3.2 impact of copyright on citations
+
+%% 3.2.1 regression analysis
+% table 3: main DD
+
+%% 3.2.2 pre-trends
+%% graph -- Fig 3 
+%% killer chart -- Fig 3 ??
+
+%% 3.3 impact of copyright on traffic
+% Table Traffic (Table 4)
+
+%% 4 Hetero effects
+%% 4.1 Theory
+%% 4.2 Images vs. Text (Fig 4, Table 5, Fig 5)
+%% 4.3 Player Quality (Fig 6)
+
+%In this section, I investigate the impact of the Google Books copyright experiment on affecting the reuse of magazine material on Wikipedia. 
+
+\subsection{Descriptive Analysis}
+
+In order to estimate the impact of the 1964 copyright experiment on the reuse of the digitized Baseball Digest magazine, it is helpful to begin by exploring some simple descriptive statistics from the data.
+
+\subsubsection{Cross-Sectional Comparison of Out-of-copyright and In-copyright Groups}
+
+Similar in spirit to Figure \ref{fig:cover}, Table \ref{tab:ttest} provides simple descriptives comparing the likelihood of reuse of information in out-of-copyright and in-copyright issues of Baseball Digest. Specifically, Table \ref{tab:ttest} Panel (1) compares citation and reuse outcomes for in-copyright and out-of-copyright publication-years of Baseball Digest using Sample A, while Table \ref{tab:ttest} Panel (2) compares Wikipedia player-pages for in-copyright and out-of-copyright players using Sample B.
+
+As these data make evident, there were important differences in reuse outcomes for in-copyright and out-of-copyright material as of 2012. Specifically, as Panel (1) makes clear, total citations to in-copyright publication-years was about 10.33, while out-of-copyright publication-years received almost double the number, for a total of about 21.05 citations. However, these differences seem to be derived largely by differences in image citations (i.e. citations for the reuse of images) as compared to differences in text citations. Similarly, Panel (2) finds that out-of-copyright players make almost double the number of citations to Baseball Digest (0.60 as compared to 0.33 per page on average) in 2012, have on average about 1.78 images as compared to 0.92 for in-copyright player-pages and attract about 47 more visitors per month on average.
+
+The large cross-sectional differences are a first striking piece of evidence that suggest a large impact of the 1964 copyright experiment on reuse outcomes on Wikipedia.
+
+\subsubsection{Time Series Comparison of Citation Trends between 2004 and 2012}
+
+Having explored some cross-sectional patterns,  I now explore temporal trends in the data. First, using Sample A, I explore whether the digitization event had any impact on the reuse of material from Baseball Digest, setting aside the 1964 copyright experiment. Figure \ref{fig:overview} Panel (1), plots the average citations to each Baseball Digest publication-year for all issues in Sample A, between 2004 and 2012. Average citation counts after the Google Books Digitization event are shown using dark grey bars, while those from before are indicated using light grey bars. As these data indicate, the average Baseball Digest publication-year received a very small number of citations (about 0.125 cites according to my data in 2008) before the Google Books project made this material more accessible. However, after the Google Books digitization project, citations to Baseball Digest issues increased dramatically and discontinuously. In 2009, the average citations to Baseball Digest publication-years increased to 1.7 from 0.125 in 2008 and this number ultimately increased to about an average of 15.4 citations per publication-year by 2012. This dramatic and discontinuous increase in citations to Baseball Digest suggests large potential benefits to Wikipedia from the digital availability of the magazine on Google Books.
+
+While this graph suggests a strong and positive effect of the digitization program on reuse, it does not provide a numerical estimate of its impact. In the Appendix, I include some analysis that helps to provide a causal estimate of the impact of digitization on increasing reuse. For this exercise, I collected data analogous to Sample B for a comparable set of basketball player-pages on Wikipedia. Using this sample, I am able to compare reuse outcomes for baseball player-pages as compared to basketball player-pages while controlling for average time trends on page quality across Wikipedia in a difference-in-difference framework. As Table \ref{tab:basketball} shows, the regression estimates indicate that the digitization program increased citations to Baseball Digest by about 0.34, an almost 300\% increase as compared to the average level of 0.12. 
+
+Having confirmed that there were potential benefits to Wikipedia from Baseball Digest, Table \ref {fig:overview} Panel (2) plots the average number of citations to Baseball Digest separately for out-of-copyright (red dots) and in-copyright (blue crosses) publication-years between 2004 and 2012. As this figure makes clear, while digitization dramatically increased citations to the average publication-year, these gains were heavily concentrated among issues published before 1964, i.e. those in the out-of-copyright regime. In fact, my data suggest that while in 2004, both in-copyright and out-of-copyright issues of Baseball Digest averaged about 0.05 citations, in 2012, this number increased to about 21.1 citations for out-of-copyright issues compared to only 10.3 for in-copyright issues.
+
+When taken together, Table \ref{tab:ttest} and Figure \ref{fig:overview} suggest important cross-sectional and temporal patterns in the data. First, there seem to be important cross-sectional differences in reuse outcomes for out-of-copyright and in-copyright Baseball Digest publication-years (Table \ref{tab:ttest} Panel (1)), and in the amount of material on in-copyright and out-of-copyright player-pages (Table \ref{tab:ttest} Panel (2)). Similarly, Figure \ref{fig:overview} provides extremely striking descriptive data suggesting that while the Google Books digitization event greatly increased the reuse of material from Baseball Digest on Wikipedia, gains from digitization were disproportionately concentrated for issues of Baseball Digest published before 1964 as compared to those published after. 
+
+\subsection{Estimating the Effects of Copyright on Reuse}
+\label{sec:maindd}
+
+A number of different theories could explain both the cross-sectional and temporal trends in the data, and, therefore, it is difficult to conclude from the descriptive analysis that the difference in copyright status of pre- and post-1964 issues of Baseball Digest are the primary drivers of the empirical patterns. For example, if players who played before 1964 ultimately became more well-known, then cross-sectional differences in the amount of content on their pages could be explained by this difference in reader interest rather than the copyright experiment. The cross-sectional evidence from Sample A suggesting that pre-1964 issues have higher citations to Baseball Digest as compared to post-1964 issues is perhaps more convincing. However, even in this instance, it is possible that pre-1964 issues were of higher quality (perhaps because certain well-known writers contributed articles) or because pre-1964 issues contained more material of interest to the general reader. Given these difficulties in interpreting the cross-sectional data, in this section I use a regression framework to directly test the central hypothesis of this paper that differences in copyright status of pre- and post-1964 issues were the primary drivers of differences in the levels of reuse of magazine material on Wikipedia.  
+
+Specifically using both Sample A and Sample B, I estimate versions of: $$Cites_{it} = \alpha + \beta_1 \times post_t \times out-of-copy_i + \gamma_i+ \delta_t + \epsilon_{it}$$ 
+
+where $\gamma_{i}$ and $\delta_{t}$ represents unit-of-observation and time fixed effects respectively for unit $i$ and wikipedia-year $t$, and indicator variable $post_t$ equals one if the observation is from any wikipedia-year after 2008. The coefficient $\beta_1$ on the variable of interest $post_t \times out-of-copy_i$ estimates the differential impact on the out-of-copyright group as compared to the in-copyright group after the baseball digest digitization event. The main outcome variable $Cites_{it}$ measures the total number of citations to a given publication-year $i$ in wikipedia-year $t$ (Sample A), or total citations to any issue of Baseball Digest magazine on a player-page $i$ in wikipedia-year $t$. 
+
+In sample A, the unit-of-observation fixed effect controls for publication-year fixed effects, which flexibly controls for time-invariant differences between publication-years 1944-1984. Further, $out-of-copy_i$ is an indicator variable that equals one for all publication-years before 1964 and zero otherwise. In sample B, the unit-of-observation fixed effect controls for player-page fixed effects, which flexibly controls  for inherent differences in player quality for each of the approximately 500 players in the sample. Further, $out-of-copy_i$ is an indicator variable that equals one if a player makes his debut before 1964. Table \ref{tab:maindd} presents estimates from OLS models for Samples A and B. For both samples, the first two models are estimated using OLS while the third model is estimated using a Log-OLS specification, where the dependent variable is logged.\footnote{Specifically, the dependent variable is $Log(Cites_{it}+1)$.} The first OLS model is estimated without publication-year (Sample A) or player-page (Sample B) fixed effects. All models include wikipedia-year fixed effects.
+
+Consistent with the descriptive analysis, even after flexibly controlling for differences between units of observation and secular time trends, the estimates suggest that out-of-copyright Baseball Digest issues are cited at a significantly higher rate as compared to in-copyright issues across the different specifications. The estimate in Column(2) from the regression using Sample A, which includes both publication-year and wikipedia-year fixed effects suggests that after the digitization event, Baseball Digest issues published before 1964 received about 5.7 more citations as compared to issues published in or after 1964. Compared to the average citation level of about 4.2, this is an increase of almost 135\%. These estimates are somewhat muted although they remain large and significant in the Log specification in Column (3), which suggests that citations to out-of-copyright issues increase by about 34.7\% after the digitization event. The difference between the Log and OLS estimates is important to note,\footnote{One reason for the lower Log-OLS estimates as compared to the OLS estimates could be due to large number of zeros in the outcome variable making the $Log(Cites_{it}+1)$ variable quite consequential.} and the Log estimates should be preferred for a more conservative estimate of the impact of copyright. I will include both OLS and Log specifications in the remaining analysis. 
+
+Sample B provides additional evidence for the negative effect of copyright law on preventing the diffusion of material to Wikipedia.\footnote{While the main outcome variable in this case does not count citations to in-copyright and out-of-copyright issues separately, it is very likely that out-of-copyright player-pages make citations to out-of-copyright issues and vice versa.} Specifically, the estimates from Sample B suggest that after the Google Books digitization event, players who made their debut before 1964 (i.e. out-of-copyright players) are more likely to cite material from Baseball Digest as compared to in-copyright players. The OLS estimate from Sample B, Column (2) suggests about 0.2 additional citations as compared to an average of 0.12, an increase of about 160\%. Similarly, the estimates from the log specification are also positive and significant, but are considerably smaller, suggesting an increase in citations of about 7.5\%. This analysis reveals two findings: first, citations to out-of-copyright issues increased significantly after the digitization project and this impact was mostly concentrated among players who made their debut before 1964, i.e. players who were most likely to be affected by the 1964 copyright experiment.
+
+%Taken together this analysis suggests that within a subset of Wikipedia pages belonging to prominent baseball players, reuse of the Baseball Digest magazine was significantly lower for copyrighted material. 
+Taken together, estimates from both Sample A and Sample B are able to robustly confirm the main hypothesis of this study--the copyright restrictions on digitized, post-1964 Baseball Digest material significantly reduced the likelihood of reuse on Wikipedia.
+
+\subsection{Checking for Pre-Trends and Other Robustness Checks}
+
+When they are combined, the descriptives and the regression analysis help to build confidence that out-of-copyright issues of Baseball Digest were significantly more likely to be reused as compared to in-copyright issues. The regression analysis includes both fixed effects for wikipedia-year, which controls for general time trends in Wikipedia citation patterns to Baseball Digest, and importantly also publication-year or player-page level fixed effects, depending on the sample employed. These fixed effects control for time-invariant differences between publication-years (for example, if certain publication-years had more or higher-quality magazines than others) and between player-pages (for example, if certain players were more well-known as compared to others). 
+
+\subsubsection{Time-Varying Estimates}
+\label{sec:timevary}
+
+However, while this specification controls for time-invariant differences, it is unable to control for time-varying differences between in-copyright and out-of-copyright groups. For example, if older issues of Baseball Digest are coming back into circulation, or if pre-1964 baseball players are coming back into fashion right before the digitization event, then the regression specification is likely to mistake a positive coefficient on $\beta_1$ for a causal effect of the copyright exception on reuse.
+
+A standard way to investigate this concern in the differences-in-difference literature \citep{bertrand_how_2004} is to explore the difference between the treatment and control group separately for each year before and after the causal event. The main identifying assumption for the specification, i.e. similar time-trends, implies that before the digitization event, the difference in citations between the out-of-copyright and in-copyright groups is constant and is not trending upwards. If citations for the out-of-copyright group are increasing relative to the in-copyright group even before 2009, then the validity of main difference-in-difference specification becomes uncertain.
+
+Accordingly, Figure \ref{fig:ddpic} presents graphical versions of the following event study specification separately for Sample A and Sample B: $$Cites_{it} = \alpha + \gamma_i + \delta_t + \Sigma_t \cdot \beta_t \cdot out-of-copy_i \times 1(t) + \epsilon_{it} $$ for unit $i$ in wikipedia-year $t$.
+
+Time-varying coefficients in Figure \ref{fig:ddpic} reveal no discernible evidence in the increase in citations for out-of-copyright groups as compared to in-copyright groups before 2009. Panel (1) that estimates this specification with Sample A, finds virtually zero difference in the level of citations between pre- and post-1964 issues, and a positive and significant difference emerges only after the digitization event in late 2008. Panel (2) paints a similar picture, although the differences by year are less precisely estimated. In particular, there seems to be a negative but insignificant difference between out-of-copyright and in-copyright player-page citations to Baseball Digest before 2009. However this difference is relatively flat and does not seem to be changing before 2009. Further, after 2009, we see a large positive effect, even though none of the coefficients are individually significant. In addition to the graphical analysis, Appendix Table \ref{tab:leads_lags} presents in tabular format, each of the different point estimates from the $\beta_t$ used to construct Figure \ref{fig:ddpic}. Inspecting the different ``pre-trend'' coefficients helps to further justify the similarity of pre-trends across groups. 
+
+Overall, the evidence from this analysis, especially from the precisely estimated coefficients from Sample A, significantly reduces the concern that citations to out-of-copyright and in-copyright groups were evolving at a different rate before the digitization event.
+
+\subsubsection{Exploiting Discontinuity Around the 1964 Copyright Cutoff}
+
+In addition to exploring the pre-trends directly, it is possible to check for robustness of the main result using another feature of the setting that has so far been under-exploited. Specifically, the setting allows for examination of the impact of the intellectual property law using a strategy that exploits the sharp distinction in copyright status between issues published only a few years on either side of the 1964 cutoff. In principle, if the main effects are driven simply by the higher likelihood of older issues to benefit more from the digitization project, then we should see a gradual decline in reuse between issues published before and after 1964. However, if the copyright law is affecting reuse directly, then we should see a discontinuous change in levels of reuse around publication-year 1964. This exercise would provide a robust check of the main specification because it provides a non-parametric method to examine the impact of copyright on reuse that does not rely on the ``pre-trends'' assumption inherent to the difference-in-difference specification.
+
+Accordingly, Figure \ref{fig:killer_cite} plots the net increase in citations to individual publication-years between 1944 and 1984 between 2008 and 2012. Each bar represents the total number of new citations to a given publication-year on Wikipedia before and after the Google digitization project was launched. Observations from the out-of-copyright period are in the darker shade of grey, while those from the in-copyright group are in the lighter shade.
+
+As Figure \ref{fig:killer_cite} indicates, the number of new citations added by publication-year does not display a steady time trend that decreases from 1944 to 1984. Instead, issues published right before 1964 have a significantly higher gain in the number of new citations as compared to issues published right after. For example, issues published in 1963 gained about 51 citations as compared to those published in 1964, which gained only about 17 citations. Similarly, issues published in 1962 gained about 38 citations as compared to only 16 citations for issues published in 1965. This sharp discontinuous difference\footnote{It must be noted that while the increase in citations after 1963 is relatively small and similar between 1964-1984, issues published closer to the copyright cutoff before 1964 are more likely to be cited as compared to issues published closer to 1944. This is likely to be because of Wikipedians focusing on the issues published right before the 1963 cutoff and ``working backwards'', thereby paying less attention to older issues. It is also possible that older issues were of lower quality and were less useful and informative.} in the likelihood of new citations for out-of-copyright publication-years significantly helps to increase confidence in the main hypothesis: the disproportionately large increase in the reuse of pre-1964 issues of Baseball Digest was caused by the difference in copyright status, rather than by other confounding factors such as different pre-trends in citation patterns.
+
+\subsubsection{Additional Falsification Checks}
+
+In addition to examining the pre-trends between in-copyright and out-of-copyright groups directly and exploiting the discontinuity in the cutoff around 1964, in the Appendix, I present a few other robustness checks that help build confidence in the main results. First, I conduct a falsification analysis,\footnote{I would like to thank a referee for this idea.} where I restrict the sample to the ``pre'' period only and assume that the treatment year is 2007, rather than 2009. If out-of-copyright groups are experiencing an increasing rate of citations as compared to in-copyright groups, then we expect the coefficient on $\beta_1$ in this regression to also be positive and significant. However, the estimates from this falsification check (see Table \ref{tab:false}) are close to zero and not-significant when both unit-of-observation fixed effects and time fixed effects are included.
+
+The time-varying estimates, the discontinuity plots and the falsification analysis help to address the concern that differing pre-trends between in-copyright and out-of-copyright groups might be driving the main results. In addition to the pre-trends, it is also important to address the pattern of the time-trend in the estimates after the digitization event. Specifically, Figure \ref{fig:ddpic} suggests that while the digitization happened in late 2008, the positive impact of out-of-copyright status seems to become apparent around 2011. Some qualitative evidence and some robustness checks I conducted help to confirm that this increase around 2011 is not due to an unrelated external event that might have influenced reuse.
+
+Specifically, my qualitative evidence suggests that in 2011 certain Wikipedia ``power'' editors became aware of the digitized Baseball Digest (through other novice users) and were heavily involved in reusing material from the magazine to improve Wikipedia. This pattern, where certain novice users make contributions that help to attract the attention of core users is quite common on Wikipedia \citep{gorbatai_social_2012}. For example, a ``power'' Wikipedian I interviewed told me:
+
+\begin{quote}
+  I found out that the Baseball Digest issues from before 1964 fell into the public domain (PD) as the copyright expired (around 2010). As a result, any images in those issues are free to use. Originally found that out when I saw a Brooks Robinson free pic used from Baseball Digest and knew there would be other images out there. (\emph{Interview, December 2011})
+\end{quote}
+
+This quote helps explains why the positive effects of the program could be concentrated around certain calendar years rather than being evenly distributed. In addition, for robustness, I include two specifications in the Appendix where I shorten the time-frame of the analysis and re-estimate the main specifications excluding later years in my sample. Specifically, in Appendix Table \ref{tab:short_timeline} Panel (1) I estimate the specification using a sample from 2005-2011, and in Panel (2) using a sample from 2006-2010 rather than estimating the panel using years 2004-2012. When I shorten the scope of the analysis to these years, the coefficient on $\beta_1$ remains positive, although in Panel (2), the main estimate from the Sample A specification becomes imprecise given the shorter time-span.
+
+Taken together, the falsification and robustness checks help to build confidence that the main estimates are not driven by different alternative explanations. 
+
+\subsection{The Effect of Copyright on Traffic}
+
+I have so far established that citations to out-of-copyright issues increased at a significantly higher rate as compared to citations to in-copyright issues. While this evidence is important to understanding the impact of copyright law on the diffusion on digitized material, I now turn to traffic information to directly inform the welfare impact of copyright on Wikipedia. Specifically, if Wikipedia contributors are able to supplement copyrighted information not available from the magazine with information from other sources, then we might find that a reduced likelihood of citations to Baseball Digest does not translate into lower quality for Wikipedia pages. However, if a lack of citations to in-copyrighted issues of Baseball Digest also translates into lower traffic for Wikipedia pages, then the overall implications for copyright to impact welfare are magnified.
+
+Table \ref{tab:ttest} presents some simple cross-sectional comparisons for the traffic information, indicating that, on average, $out-of-copy$ player-pages have about one and half times more traffic as compared to $in-copy$  player-pages. While this difference is striking, it could simply be driven by differences in player popularity over time, with the pre-1964 players being significantly more well-known as compared to their post-1964 counterparts. In this section, I utilize traffic data\footnote{Traffic information is calculated as a monthly average for years 2007-2012 (data is not available before this period) and is recorded at the player-page level.} from Sample B in order to shed light on the impact of the 1964 copyright experiment on traffic in a regression framework. The specification follows exactly the estimating equation laid out in Section \ref{sec:maindd} with the main outcome variable being $Traffic_{it}$ for player-page $i$ in year $t$, and with player-page and year fixed effects to account for systematic differences between players and traffic trends over time. 
+
+Table \ref{tab:traf} reports estimates from such an analysis. Models (1) and (2) include year fixed effects, while Model (3) includes separate year-trends for each of the 4 player quality quartiles. Similarly, Models (2) and (3) also include additional player-page level fixed effects. The estimates in Column (2) indicate that on average, out-of-copyright pages receive a boost of about 20 hits per month after controlling for player and year fixed effects. The coefficient reduces slightly when \emph{$quality \times year$} fixed effects are included. Against a mean of about 101 page-views per month, this represents an increase of about 20\%. In the appendix, I examine the robustness of these estimates to log models. Columns (3) and (4) of Table \ref{tab:app_traf_robust} estimate the impact of copyright on traffic to be about 88.8\%, or twice as large as the OLS estimates. However, a conservative estimate of the impact of copyright on traffic to affected pages would be to boost page-views in the order of 20\%, a significant difference.
+
+Overall, my estimates suggest a significant positive impact of the digitization program for out-of-copyright player-pages, implying that Wikipedia editors are unable to substitute copyrighted content with information from other sources. The negative impact of copyright on reuse therefore also has real effects on Wikipedia readers. In other words, pages affected by copyright are unable to fully capture and deliver value to end users, and ultimately copyright seems to harm not only the diffusion of material from Baseball Digest, but also traffic to affected pages on Wikipedia. This impact is important when considering the welfare impact of the 1964 copyright experiment on the social value of Wikipedia. 
+
+\section{Differential Effects of Copyright on Reuse}
+\label{sec:hetero}
+
+%The empirical evidence presented so far, provides support for the positive effects on reuse from digitization, and the negative effects of copyright on the reuse of digital material. 
+
+\subsection{Theoretical Framework}
+
+Existing work has found that one important channel through which digitization affects markets is by reducing costs of access to information \citep{goldfarb_introduction_2014, bakos_reducing_1997}. The digital availability of information has been theorized to make it much easier to locate and build upon relevant knowledge \citep{shapiro_information_1999, chiou_copyright_2011}. Therefore, when information from printed material is digitized, we should expect its reuse to increase. The empirical evidence presented so far, is consistent with this hypothesis as observed in Figure \ref{fig:overview} Panel (1). In parallel, a robust literature in intellectual property has argued that IP might introduce transaction costs that mitigate benefits from the relative reduction in costs of access \citep{waldfogel_copyright_2012, williams_intellectual_2013, murray_formal_2007}. Taken together, this research suggests that, while digitization might encourage access and reuse, transaction costs imposed by copyright might mitigate potential gains from digitization \citep{gans_remix_2015}. These predictions are consistent with Figure \ref{fig:overview} Panel (2) and the regression evidence presented in Section \ref{sec:baseline}.
+
+In this section, I use the logic of transaction and access costs to sketch a brief theoretical framework through which the heterogeneous impact of copyright can be understood. Specifically, I focus on differences in outcomes for different types of information media (notably text vs. images) and different player-pages on Wikipedia. I then proceed to empirically testing these hypotheses. 
+
+%When no IP is asserted and material is in the public domain, the reduction in access costs is the greatest. However, when material is digitally available but IP rights need to be negotiated, the reduction in access costs due to digitization is muted. This is because, IP introduces transaction costs which make it more difficult to reuse digital material. This characterization of IP is consistent with existing work in the innovation literature that finds that when scientific material is patented, transaction costs have a negative effect on follow-on innovation. 
+
+%Therefore, when transaction costs due to IP are considered, the positive effect of digitization due to reduced access costs depends on the copyright status of digitized material. Specifically, the benefits of digitization on reuse are the highest for material that are not protected by copyright because of zero transaction costs, while for in-copyright material, reuse after digitization is substantially lower. These predictions are consistent with Fig \ref{fig:overview} Panel (2). 
+
+%\subsubsection{The Role of Access Costs and Transaction Costs}
+
+\subsubsection{The Differential Impact of Copyright: Images vs. Text}
+
+%%Having clarified the basic channel through which digitization and copyright affect the overall level of reuse, I now hypothesize how these two factors could have distributional consequences as well. I focus on two different margins: first, the differential impact of IP on the reuse of images vs. text, and for Wikipedia topics of different inherent quality. 
+
+Consider the impact of copyright on the reuse of images and textual material. Digitization lowers access costs for both types of media, but transaction costs required to prevent copyright infringement in the case of reuse are significantly different for images vs. text. For work to be reused without copyright infringement, some evidence of ``transformative reuse'' is often necessary. While copyright on text only prohibits verbatim reuse of large sections of text, for images, this rule does not apply. In other words, paraphrasing of text is possible and constitutes ``fair use'' but for images, the standard for ``fair use'' is much higher \citep{leval_toward_1990}. 
+
+%reuse, even with significant modifications could constitute infringement .
+Consequently, in order to prevent infringement, the reuse of textual information with sufficient modifications is typically possible at low costs and relatively simple. However, for images to be legally reused, large modifications need to be made to satisfy the ``transformative reuse'' criteria, making the process more complicated and significantly costly. In practice, even when significant changes are made, copyright infringement is possible (see \emph{Cariou v. Prince, 714 F.3d 694 (2d Cir. 2013)} for an example) and, therefore, end-users often avoid the reuse of copyrighted images without explicit permission from the creators.
+
+I argue that differences in practical and legal difficulties in reuse impose different transaction costs from intellectual property on textual and visual content. For images, transaction costs of reuse are likely to be high, while for textual material they are likely to be low. Therefore while digitization lowers access costs for both types of content, for images, copyright limits some of these gains by imposing greater transaction costs as compared to text. It follows naturally from this argument that the reuse of information from out-of-copyright status is likely to be higher for images rather than for text. This is the first hypothesis that I explore in this section. 
+
+%In light of the theoretical framework, the effects of different levels of transaction costs for images vs. text, will lead to distributional effects of IP by the type of underlying media. Digital images are significantly more likely to be affected by copyright as compared to digitized text. This section will test this hypothesis in greater detail.
+
+% For text, transformation usually occurs through paraphrasing, i.e. rewording the basic facts in different language. Given that factual material is exempt from copyright, such paraphrasing is quite common in practice even when the underlying material is copyright. On the other hand, for images to be reused, there must be significant changes for the image to be reused and not constitute copyright infringement. 
+
+
+\subsubsection{The Differential Impact of Copyright by Player Quality}
+
+%% papers to cite: (Mortimer et. al. 2014), Qian 2014
+%% brynolsffson: long tail, goldfarb papers, bitnet paper, catalini -- crowdfunding, waldfogel paper, 
+%% kevin bryan: open access literature
+%% IP literature: williams, stern and murray on IP
+
+Second, I argue that copyright will also have distributional effects across different types of topics. Specifically, I propose that the effects of copyright on affecting the level of information on Wikipedia pages is most pronounced for pages of lower player quality, as compared to pages of higher player quality.
+
+%%This is very similar to a ``democratization'' effect or ``long tail'' effect hypothesized in the literature.
+In order to understand how copyright affects player-pages, I argue that the optimal level of knowledge on Wikipedia pages depends both on the value of new information to a page and the cost of adding new information. A large literature in media economics finds that the provision of news about events is directly proportional to commercial interest \citep{prat_political_2011, stromberg_natural_2007}. In line with this research, we can expect value of information about players to be directly proportional to player quality, while the costs of sourcing information to be inversely related. Higher quality players attract higher interest from end users and therefore the value of information for these players is greater. On the contrary, there are a number of alternate sources covering higher quality players which makes it cheaper to source information about them. The assumption for lower quality players is exactly the opposite: it is more expensive to source information and the value of such information is also lower. In this framework, given the costs and benefits of adding new information, there are greater incentives to add information for players of higher quality and this information is easier to obtain even before the digitization effort. 
+
+%%(which is increasing in player quality) and the cost of adding new information (which is inversely proportional to player quality).
+Now, consider the reduction in the cost of access to information due to digitization \citep{goldfarb_introduction_2014} and increased transaction costs due to intellectual property \citep{williams_intellectual_2013}. For players of the highest quality, information already exists even before digitization, and the marginal utility of new information is low. For obscure players, even if information exists on \emph{Baseball Digest}, reuse is unlikely given the low value of adding information and the fact that these players are rarely featured on Wikipedia to begin with. In this framework, the value of out-of-copyright information is highest for a middle tier of player quality: players who are good enough to merit encyclopedic inclusion, but information about whom was relatively difficult to source before digitization. Therefore the prediction is that, out-of-copyright digital information is most valuable for player-pages at the middle tier of the quality distribution, rather than for players at the very top. Given that the lowest tier of player quality is unlikely to be covered on Wikipedia, within the sample of about 500 players who have been nominated for the Hall of Fame, the bottom two quartiles are likely to represent this ``middle tier.''
+
+This prediction is consistent with, and contributes to, a number of different papers that investigate the implications of reduced costs of access to information due to digitization. For example, reduced cost of music due to digital distribution most benefited smaller musicians \citep{mortimer_supply_2012}, the digital availability of retail items benefits the sales of products in the ``long tail'' \citep{brynjolfsson_goodbye_2011} and reductions in the cost of communication due the Bitnet ``democratized'' innovation by benefiting lower-ranked university collaboration \citep{agrawal_restructuring_2008}. Similarly, the innovation literature has also found that reduced cost of access to scientific material through the establishment of scientific institutions are most for countries in the developing world, where such access is harder to obtain \citep{furman_climbing_2011}.
+
+
+%% papers to cite: (Mortimer et. al. 2014), Qian 2014
+%% brynolsffson: long tail, goldfarb papers, bitnet paper, catalini -- crowdfunding, waldfogel paper, 
+%% kevin bryan: open access literature
+%% IP literature: williams, stern and murray on IP
+
+
+
+%%In this setup, players for which the digitized information is most useful are players who are ``good enough'' (i.e. the middle tier of player quality). Players of higher quality already have higher levels of information before the digitization event and, therefore, the out-of-copyright information is less valuable. For players at the lowest level of quality, the value of adding out-of-copyright information is lower and, therefore, the digitization event is less valuable. Appendix \ref{sec:model} presents a formal ``toy'' model that formalizes this idea and delivers the basic insight: out-of-copyright digital information is most valuable for player-pages at the middle tier of the quality distribution, rather than for players at the very top. 
+
+%% 
+%% copyright hurts reuse
+%% why? lowers the cost of reuse
+%% 
+\subsection{Comparing the Reuse of Images vs. Text}
+\label{sec:diff1}
+
+The next part of the analysis is to test the predictions emerging from the theoretical framework for the differential effects of copyright on the reuse of images vs. text.
+
+As a first step, I recreate the simple descriptive analysis in Figure \ref{fig:killer_cite} separately for image and text citations using data from Sample A. Image citations are made for the reuse of an image, while text citations are citations made to Baseball Digest in the main text of a page. As before, for each publication-year of Baseball Digest, I measure the total number of new (text or image) citations between 2008 and 2012 on Wikipedia. This chart is displayed as Figure \ref{fig:killer_img}.  
+
+As is evident from this chart, the patterns for text and image citations differ dramatically across the 1964 copyright cutoff. For images, there are hardly any citations from an issue published in or after 1964. In other words, the likelihood that an image will cite material from a post-1964 issue of Baseball Digest after digitization is very close to zero. However, this picture changes dramatically for text citations. In this case, there are a significant number of citations both before and after the 1964 cutoff, and the copyright status seems to have little impact on influencing the level of Wikipedia citations. As hypothesized, the descriptive analysis suggests that copyright law seems to influence the reuse of digitized material mostly by preventing the reuse of images rather than text. 
+
+%% Further, following Table \ref{tab:maindd}, I leverage Sample B to evaluate the impact of the copyright cutoff on the level of information on Wikipedia pages, by looking separately at image and text content. This analysis helps us understand the role of copyright in differentially affecting different margins of information for a single Wikipedia page. 
+
+The basic intuition of the descriptive analysis can also be tested in a regression framework. I, therefore, estimate difference-in-difference specifications similar to the baseline specification used for Table \ref{tab:maindd}. The main outcome variables are citations to images and text, rather than the total number of citations. The estimates from this analysis are presented in Table \ref{tab:imgdd}. The estimates indicate that the 1964 copyright cutoff has a more significant impact on the reuse of images rather than text. For example, the second set of estimates for images, which includes both publication-year fixed effects and wikipedia-year fixed effects, suggests that on average out-of-copyright publication-years experience about 5.4 more image citations as compared to in-copyright publication-years. However, the analogous estimate for text citations indicates only a small and statistically insignificant difference in citations between in-copyright and out-of-copyright publication-years. This conclusion is justified even when Log-OLS models are considered. Image citations experience about a 117\% increase while the corresponding increase for text citations is statistically indistinguishable from zero. 
+
+Finally, similar to Figure \ref{fig:ddpic}, I also test the validity of these estimates by plotting time-varying coefficients separately for image and text citations. These are represented in Figure \ref{fig:ddpic_img}. As Panel (1) indicates, the difference in the reuse of images for in-copyright and out-of-copyright issues is again close to zero before the digitization event. However, after 2008, there was an immediate increase in this difference and by 2012, out-of-copyright publication-years had a significantly higher levels of image reuse. However, as Panel (2) indicates, this pattern does not hold for text citations. The difference in text citations pre-digitization is close to zero and constant, however, this pattern does not change significantly, even after 2008. In-copyright and out-of-copyright text citations track each other pretty closely, suggesting that copyright has very little impact on preventing the reuse of digitized textual material. 
+
+%% fig 4: killer image, table 5: DD images vs. text
+%% 4.2 Images vs. Text (Fig 4, Table 5, Fig 5)
+\subsection{Comparing Differential Effects Across Players}
+\label{sec:diff2}
+
+
+Finally, having tested the prediction that copyright law will have a greater effect for images as compared to text, I now turn to testing the differential impact of copyright law across different player quality categories leveraging data from Sample B. 
+
+In order to examine the heterogeneous impact of the copyright experiment by player quality, I estimate the following specification:
+\begin{align*}
+Y_{it} = \alpha + \beta_1 \times post_t \times out-of-copy_i + \sum\limits_{m=2}^4 \beta_m \times post_t \times 1(quality_i=m) + \\ \sum\limits_{n=2}^4 \hat{\beta}_n \times post_t \times out-of-copy_i \times 1(quality_i=n) + \gamma_i+ \delta_t + \epsilon_{it}
+\end{align*}
+where $\gamma_i$ and $\delta_t$ indicate player-page and time fixed effects respectively. The key indicator variable, $quality_i$ is a categorical variable that indicates the percentile ``quality'' rank of a player as a number between 1 and 4 (top 25 percentile, 25-50 percentile, 50-75 percentile and bottom 25 percentile). The key coefficients of interest $\hat{\beta}_n$ estimate the difference between the $out-of-copy_i \times post_t$ coefficient and $out-of-copy_i \times post_t \times 1(quality=n)$ coefficient for each quality percentile $n$. In other words, $\hat{\beta}_n$ provides estimates of the differences in the impact of copyright on reuse for players of different quality levels.
+
+Figure \ref{fig:quality} plots these coefficients separately for each quality percentile.\footnote{I plot the coefficient on $out-of-copy \times post_t$ for quality=$1$ and add this estimate to coefficients for other quality levels to compute marginal effects.} Panel (1) validates the hypothesis that the impact of copyright on the reuse of images is larger for the players of lower quality than for players of higher quality. The estimate on the $\hat{\beta}_{n=3}$ coefficient is 0.71 and $\hat{\beta}_{n=4}$ is 0.47, although the second of these two estimates is marginally insignificant. In contrast, the coefficients on $\hat{\beta}_{n=1}$ and $\hat{\beta}_{n=2}$ are both statistically indistinguishable and close to zero. Panel (2), which estimates the impact of copyright on traffic to affected pages, also shows a similar pattern, indicating that the impact on copyright on increasing traffic is also most relevant for players in the lower tier of player quality. This analysis suggests that an important channel through which the digitization of \emph{Baseball Digest} proved useful to Wikipedia was through the unlocking of unique material about \emph{famous-but-not-superstar} players on Wikipedia. 
+
+%%the evidence in Figure \ref{fig:quality} is consistent with the theory that out-of-copyright material is most beneficial to players who are notable enough to be included in the encyclopedia, but not famous enough to have substitute information about them available in other sources. 
+
+When combined, both Section \ref{sec:diff1} and \ref{sec:diff2} provide strong evidence for the proposition that copyright restrictions have important distributional implications are especially relevant for images as compared to text, and are particularly harmful for less popular topics for which alternate information is hard to find. 
+
+\section{Discussion}
+\label{sec:discussion}
+
+\begin{quote}
+Copyright is out of control. How, even if it's out of control, how does it stifle invention? Anybody can make a movie, and the fact that that movie has a copyright, how does that hurt the Internet, for God's sake?
+\begin{flushright} \emph{Jack Valenti}\\
+\emph{Motion Picture Association of America (MPAA)}
+\end{flushright}
+\end{quote}
+
+This paper suggests an empirical framework to answer this question and suggests one mechanism through which copyright might influence the benefits from digitization: by prohibiting reuse of digitized material, particularly within open, community-based innovation projects like Wikipedia. 
+
+There are three major sets of findings. First, the digitization of Baseball Digest by Google Books had a positive impact on the reuse of material within Wikipedia, but these gains were much larger for out-of-copyright issues printed before 1964, as compared to in-copyright issues printed in or after 1964. Second, restricted reuse due to copyright had real effects on Wikipedia: affected pages experienced about a 20\% drop in terms of traffic. Finally, the impact of copyright on affecting reuse was uneven--it mostly affected the reuse of images, while textual material was not affected, and out-of-copyright material was most helpful for less well-known player's Wikipedia pages as compared to more well-known ones. 
+
+\subsection{External Validity}
+
+One concern with the results could be the lack of external validity. Specifically, one might be concerned that Wikipedia represents an idiosyncratic setting to analyze the impact of copyright on reuse because Wikipedia is a non-profit and could have lower benefits from reusing copyrighted work, which would cause my estimates to be biased upwards. This is a valid concern, and is certainly an important limitation of this study. However, the following dicussion helps reduce this concern to some extent. 
+
+First, Wikipedia does not seem to be alone in enforcing copyright, since a number of other digital platforms, where one might expect reuse of digitized information, also have extensive programs for copyright enforcement. These include YouTube \citep{seidenberg_copyright_2009}, Amazon, all major mobile application stores and even Google's search engine \citep{dillon_scott_google_2011}. For instance, Apple's AppStore rejected about a thousand applications in August 2009 because they used copyrighted images and books in their applications.\footnote{See \url{bit.ly/1aXpksj}} Apple also hosts an online tool where firms can report copyright violation. Meanwhile, Google removed about 26 million links from its search index in October 2013\footnote{\url{https://www.google.com/transparencyreport/removals/copyright/}} including links that provided access to copyrighted books, music and data. An extensive literature on piracy \citep{bechtold_digital_2004} in the entertainment industry has also shown that copyright-related interventions that limit the availability of digitized content are quite common, and are often very effective \citep{danaher_converting_2010, danaher_gone_2013}. 
+
+Furthermore, Wikipedia's non-profit status also does not seem to completely prohibit it from licensing content similar to other commercial for-profit entities. For example, online volunteers are known to negotiate for licenses by leveraging Wikipedia's General Counsel which acts similar to a company's legal counsel.\footnote{see: \url{https://wikimediafoundation.org/wiki/User:GeoffBrigham_\%28WMF\%29}} In this way, despite being a non-profit, Wikipedia does have some mechanisms for licensing information similar to a firm. In addition, Wikipedia is also a direct input of information to other for-profit organizations. For example, Google's ``Knowledge Engine'' (which provides information on certain individuals and events in response to Google searches) relies heavily on Wikipedia.\footnote{\url{https://www.technologyreview.com/s/520446/the-decline-of-wikipedia/}}
+
+Third, there also seem to be a number of other anecdotal examples where copyright on other types of content is having an impact on Wikipedia that is similar to the case of Baseball Digest. Some preliminary research that I have done seems to indicate that a large portion of the anatomical images on Wikipedia seem to be sourced from a 1918 edition of Gray's Anatomy,\footnote{see this page for a listing of these images: \url{https://commons.wikimedia.org/wiki\/Category:Gray's_Anatomy_plates}} rather than from a modern version, presumably because of copyright restrictions. Similarly, TIME magazine images from before 1964 seem to also have lapsed into the public domain due to copyright non-renewal, and, therefore, a large number of images from TIME magazine from before 1964 find reuse on Wikipedia.\footnote{for example: \url{https://commons.wikimedia.org/wiki/File:Shidehara_Kijuro_on_TIME_magazine_cover.jpg}} Finally, in the context of Amazon, \cite{heald_how_2013} documents how copyright restrictions shape the availability of book reprints on Amazon. He finds that a random sample of new books for sale on Amazon.com shows more books for sale from the 1880's than the 1980's suggesting that out-of-copyright works are more available on digital bookshelves as compared to more recent copyrighted works.
+
+Finally, to further ease concerns about external validity, my study builds on the emerging empirical literature on the effects of copyright, which suggests that copyright has a negative effect on access, a precondition for any reuse to occur. Extant work \citep{heald_property_2007, heald_does_2009, buccafusco_bad_2012} has shown that works produced before 1923, which are generally in the public domain, are much more accessible today than works produced after 1923. For example, books produced before 1923, are more easily accessible on Amazon and Audible.com and are more likely to be digitized \citep{brooks_how_2005} than those produced afterward. A more recent study in the economics literature \citep{reimers_effects_2013} analyzes the market for books in a similar time period and finds that copyright extensions decrease welfare from fiction bestsellers by decreasing variety, thereby causing a decrease in consumer surplus that outweighs the increase in profits. Similarly, a study of the fiction market in the 1820s also shows that an important impact of copyright is likely to be an increase in the price of books and that such an increase may reduce access \citep{li_dead_2012}. 
+
+In light of the anecdotes from the previous section and recent empirical literature, it does seem plausible that the impact of copyright on Wikipedia that is measured in this paper could generalize to a number of other settings where the reuse of digital information is important. Finally, even if external validity is a concern, given Wikipedia's prominence, the estimates presented represent a significant part of the gains due to innovation in the digital economy.
+
+\subsection{Contributions and Managerial Implications}
+
+%% benefits from digitization
+
+Going beyond the question of external validity, this paper makes a number of contributions to the nascent empirical literature at the intersection of intellectual property and digitization. A significant literature has analyzed the implications of digitization for important economic activities like consumer search, pricing and targeting. This literature generally posits that digitization reduces the cost of accessing information, which can often have beneficial implications for consumer welfare. This paper adds to this literature by considering the role of intellectual property in influencing the economic effects of digital information. In particular, I argue that in settings where the ability of intermediaries to reuse information is important, copyright law might have important implications for the economic effects of digitization. 
+
+%% differential effects
+Furthermore, some recent work has suggested that the digitization process could influence the distribution of economic outcomes disproportionately in favor of smaller market participants. Digitization, therefore, is posited to have a ``democratization'' effect in economic markets. For example, it has been found that file-sharing increases live performance revenues for small artists, perhaps through increased awareness, but performance revenues for large, well-known artists are unaffected \citep{mortimer_supply_2012}. Similarly, counterfeiting has been shown to have a larger advertisement effect for the brands that were less well-known at the time of infringement and newer brands \citep{qian_counterfeiters:_2014}.\footnote{I thank a reviewer for pointing us towards this research.} My work adds to this literature by looking at the impact of copyright on inequality in the reuse of information for less and more well-known topics. My findings follow the intuition of the infringement and file-sharing literature--when access costs are reduced through digitization and public domain status, less well-known topics benefit disproportionately but the presence of copyright could prevent this ``democratization.''
+
+
+%% IP literature
+
+The results are also related to another stream of work on the empirical effects of intellectual property on the diffusion of knowledge. Some studies \citep{murray_formal_2007, murray_mice_2009, williams_intellectual_2013, furman_climbing_2011} find a generally negative effect of intellectual property on follow-on use, while more recent evidence seems to be mixed (\cite{sampat_how_2014}, \cite{galasso_patents_2015}). This study provides direct evidence to this literature that the costs of access (i.e. digitization) seem to matter for the impacts of IP on reuse. From a policy point of view, this paper is able to directly address questions that are likely to be important going forward such as: (a) how does the impact of copyright change when works are digitized and access costs are low, and (b) does copyright need to be modified for the digital age?
+
+
+%% managerial implications
+
+Finally, this study also has implications for managers in knowledge-intensive sectors of the economy. For those in-charge of IP and digitization strategy, this study suggests that copyright can be an effective intellectual property tool to manage digital assets. How effective copyright can be seems to depend on access and the medium in which information is expressed. This is useful because there is often a concern that piracy is so rampant on the internet that tools other than traditional intellectual property (like DRM) are often necessary \citep{zhang_intellectual_2014} to supplement toothless copyright law. Second, for managers who are interested in using user communities like Wikipedia to generate innovation (\cite{boudreau_incentives_2011}, \cite{franzoni_crowd_2014}) or open innovation more broadly \citep{fleming_brokerage_2007}, this study suggests that provision of external, uncopyrighted but digitized material can be extremely beneficial. This study finds that knowledge within user communities is often sourced from external sources, and policy measures that affect the availability and legal status of sources can either boost or retard innovative activity within such communities. 
+
+Methodologically, this paper provides a number of suggestions for measuring copyright's effects going forward. First, I show how the internet provides a fertile ground for estimating carefully the impacts of copyright on reuse using micro-data. Not only is the internet an important venue where future copyright battles will be waged, but the digital and quasi-permanent nature of digital content allows for the detailed measurement of the creation of new products and services on the internet. In addition, in light of the finding that copyright impacts images more than it does text, this research points to the importance of the key difference between patents and copyrights, namely that patents typically protect the underlying idea while copyright protects only the ``expression''. In other words, the impacts of copyright are likely to vary not simply by the quality of the data, but also by the medium of expression. This distinction is likely to be important in the future. 
+
+\subsection{Limitations and Welfare Calculation}
+
+%%R1:detailed discussion of the dynamic and static trade-offs associated with copyright and their relevance for management and economic policy.
+
+Finally, this paper does not evaluate the overall welfare consequences of the impact of copyright on digital information, but helps to make progress in that direction. In a static setting, where new digital information does not build upon pre-existing work, stronger copyright law should incentivize the production of digital information \citep{watt_copyright_2006}. However, in the more dynamic setting, where the production of new knowledge depends upon pre-existing information \citep{scotchmer_standing_1991} (for example: the presence of Google Books helps the production of new knowledge on Wikipedia), whether stronger copyright will boost knowledge production is unclear. If transaction costs imposed by copyright prevent the reuse of existing work, then optimal copyright policy should provide for weaker intellectual property than it would without a significant burden from transaction costs. In this framework, it becomes critical that credible empirical measurements of the cost of copyright on preventing follow-on use of digital information be obtained. Without such measurements, we do not know, ``whether copyright protection would need to be strengthened or weakened'' in the digital age \citep{waldfogel_copyright_2012}. This paper helps to fill this gap. 
+
+Despite this contribution, there are other aspects of the welfare calculation that this paper does not address. In particular, if copyrights allow the publishers of Baseball Digest to profit from archival material and help them generate new combinations of pre-existing work, then a weakening of copyright will hurt overall knowledge creation as well. In such as a case, overall welfare gains from the removal of copyright protection for archival \emph{Baseball Digest} issues could be small, especially if licensing archival content is a major source of revenue that is hurt by lost copyright protection.\footnote{I did make a number of reasonable attempts to contact the publishers of \emph{Baseball Digest}, including emailing them, filling out a contact form and calling their office in order to investigate the possibility of licensing content for reuse, but my requests were met with no response. This suggests, that in this case, producer surplus from licensing archival material is fairly low.} However, I am not able to directly estimate the role of lost copyright on hurting incentives for the production of new knowledge by the publisher which is an important limitation of this work. 
+
+Finally, notwithstanding this limitation, this study is especially useful in cases where issues of copyright policy arise for works already created. In these cases, the argument for extending copyright relies on the assumption that copyright on existing works further the diffusion of information. Such an argument was a feature of the ``Mickey Mouse'' law of 1998.\footnote{Sonny Bono Copyright Term Extension Act, Pub. L. No. 105-298, 112 Stat. 2827 (1998).} Further, in the case of archival material, the question of compensating authors does not arise because of the so-called ``orphan works'' problem, when the authors of material cannot be identified or contacted \citep{smith_analysis_2012}. Even under the possibility of copyright creating incentives for creating new material, the estimates help measure welfare losses from retroactive extensions of copyright or from difficulties in locating missing authors. 
+
+
+%%(specifically the impact of copyright on the incentives to create new content is not examined), it is still useful, because it helps estimate what potential incentives copyright needs to provide to creators in order to justify the losses estimated to society. 
+
+%\newpage
+\baselineskip 14.2pt
+\bibliography{baseball}
+\bibliographystyle{chicago}
+
+%\section{Tables and Figures}
+
+%%% INSERT TABLES
+%\input{tables.tex}
+\input{tables.tex}
+%\input{/home/nagaraj/Dropbox/research/copyright/writing/table_include.tex}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+

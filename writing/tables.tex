@@ -1,0 +1,709 @@
+
+\newpage
+
+
+%% Table 1 : SUMMARY STATS
+
+%\begin{landscape}
+\begin{center}
+\begin{table}[!htbp]
+\section{Tables and Figures}
+%\vspace{5mm}
+\caption{Summary Statistics}
+\vspace{2.5mm}
+\caption*{(1) Sample A: Unit of Observation -- Publication-Year (N=360)}
+\vspace{2.5mm}
+\input{../tables/summary_cite.tex}
+\vspace{2.5mm}
+\caption*{(2) Sample B: Unit of Observation -- Player-Page (N=4869)}
+\vspace{2.5mm}
+\input{../tables/summary.tex}
+%%\input{../tables/ttest_1.tex}
+\vspace{5mm}
+\label{tab:summary}
+
+\begin{adjustwidth}{-2cm}{-2cm}
+\begin{quote}
+\emph{Note:} This table presents summary statistics for the two main data samples used in this study. Both samples track citations to Baseball Digest on Wikipedia between 2004 and 2012. In Sample A presented above, the unit of observation is a Publication-Year of Baseball Digest, i.e. all years between 1944 to 1984. For each of the 40 Publication-Years, I track total citations in every Wikipedia-Year between 2004 and 2012, for a sample size of 360 observations (40 issue-years times 9 calendar years). For Sample B, the unit of observation is an individual Wikipedia player-page for 541 notable baseball players. On each player-page, citations to Baseball Digest are tracked (irrespective of the year of publication) between 2004 and 2012, for a total of 4869 observations (541 pages times 9 calendar years). \emph{1(Out-Of-Copy)} is defined as all publication-years (Sample A) or debut-years (Sample B) before 1964. Traffic data is only available for years 2007 to 2013 and data is missing for other observations. See text for detailed data and variable descriptions.
+\end{quote}
+\end{adjustwidth}
+
+\end{table}
+\end{center}
+%\end{landscape}
+
+%%% t-test table
+%% Table 2 : T-Test Table
+%%\begin{landscape}
+\begin{center}
+\begin{table}[!htbp]
+\vspace{15mm}
+\caption{Cross-Sectional Comparison of Reuse Outcomes}
+\vspace{5mm}
+
+\caption*{\small{\textbf{(1) Sample A : Baseball Digest Publication-Years}}}
+\begin{center}
+\input{../tables/ttest_cite.tex}
+\end{center}
+\vspace{10mm}
+
+\caption*{\small{\textbf{(2) Sample B : Wikipedia Player-Pages}}}
+\begin{center}
+\input{../tables/ttest_baseball.tex}
+\end{center}
+\label{tab:ttest}
+
+\begin{quote}
+\vspace{5mm}
+\emph{Note:} This table compares outcomes for out-of-copyright and in-copyright groups using cross-sectional data from Wikipedia data from 2012. $N=40$ for Panel (1) and $N=541$ for Panel (2). In Panel (1), column (1) includes publication-years 1944-1963, while column (2) includes publication-years 1964-1984. In Panel (2), column (1) includes all out-of-copy player-pages (debut before 1964) and column (2) includes all in-copy player-pages (debut after 1964). The $p$-value reported in Column (4) is from a $t$-test for a difference in mean outcomes across Column (1) and (2). See text for more detailed data and variable descriptions. 
+\end{quote}
+
+\end{table}
+\end{center}
+%%\end{landscape}
+
+%%%%%%%%%
+%% Table 3 DD Table
+%%%%%%%%%
+
+\begin{center}
+\begin{table}[!htbp]
+%\caption{Impact of Copyright on Baseball Digest Reuse }
+\caption{Impact of 1964 Copyright Experiment on Total Citations}
+%\caption{Difference-in-Difference Regressions Estimating Impact of Google Books Digitization Event on Baseball Wikipedia Pages}
+\vspace{5mm}
+\input{../tables/reg_dd_combined_2004_2012_2009.tex}
+\begin{quote}
+\vspace{5mm}
+
+\emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
+\newline
+Clustered standard errors shown in parentheses.}
+
+\vspace{5mm}
+
+\emph{Note:} This regression estimates the impact of the 1964 copyright exception on affecting citations to Baseball Digest before and after digitization in a differences-in-differences framework using OLS. The estimates presented use both Sample A (columns 1-3) and Sample B (columns 4-6). \emph{post} refers to all Wikipedia-years after 2008, and \emph{out-of-copy} refers either to $publication-year < 1964$ (Sample A) or $debut-year < 1964$ (Sample B). See text for specification, detailed data and variable descriptions.
+
+\end{quote}
+\label{tab:maindd}
+\end{table}
+\end{center}
+
+%% TABLE 4 : Traffic
+%%%%%%%% TRAFFIC TABLE
+
+%%% IVREG
+\begin{center}
+\begin{table}[!htbp]
+\caption{Impact of 1964 Copyright Experiment on Wikipedia Traffic (Sample B)}
+
+\vspace{5mm}
+\input{../tables/traf.tex}
+\begin{quote}
+\vspace{5mm}
+\emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
+\newline
+Standard errors clustered at player-level shown in parentheses.}
+\vspace{5mm}
+
+\emph{Note:} This regression estimates the impact of the 1964 copyright exception on traffic to Wikipedia player-pages before and after digitization in a differences-in-differences framework using OLS. The estimates presented use data from Sample B. \emph{post} refers to all Wikipedia-years after 2008, and \emph{out-of-copy} refers to $debut-year < 1964$. See text for specification, detailed data and variable descriptions. In Column (3) $Quality\ X\ Year\ FE$ controls for separate time-trends by each of the four quartiles of player quality.
+
+\end{quote}
+\label{tab:traf}
+\end{table}
+\end{center}
+
+
+%% TABLE 5 : DD Images vs. Text
+%%%%%%%%%%%%%%%%%%%
+
+\begin{center}
+\begin{table}[!htbp]
+%\caption{Impact of Copyright on Baseball Digest Reuse }
+\caption{Differential Impact of 1964 Copyright Experiment on \\ Image vs. Text Citations (Sample A)}
+%\caption{Difference-in-Difference Regressions Estimating Impact of Google Books Digitization Event on Baseball Wikipedia Pages}
+\vspace{5mm}
+%\input{../tables/cite_reg.tex}
+%\input{../tables/combined.tex}
+\input{../tables/reg_dd_compare.tex}
+%\vspace{5mm}
+%\caption*{Panel B}
+%\input{../tables/copy.tex}
+
+
+\begin{quote}
+\vspace{5mm}
+
+\emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
+\newline
+Clustered standard errors shown in parentheses.}
+
+\vspace{5mm}
+
+\emph{Note:} This regression estimates the impact of the 1964 copyright exception on affecting the reuse of images and text from Baseball Digest before and after digitization in a differences-in-differences framework. The estimates presented use data from Sample A. \emph{post} refers to all Wikipedia-years after 2008, and \emph{out-of-copy} refers to $publication-year < 1964$. See text for specification, detailed data and variable descriptions.
+\end{quote}
+\label{tab:imgdd}
+\end{table}
+\end{center}
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% FIGURE  %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+
+%% Fig 1 : Schematic
+\begin{figure}[!htbp]
+\begin{center}
+\caption{An Illustration of How Copyright Might Affect the Reuse of Information}
+\label{fig:cover}
+\vspace{5mm}
+\caption*{(1) Felipe Alou's image in December 1963 (out-of-copyright) issue of Baseball Digest, reused on Wikipedia)}
+\includegraphics[scale=1]{../tables/cover_bottom.png}
+\vspace{2mm}
+\caption*{(2) Johnny Callison's image in January 1964 (in-copyright) issue of Baseball Digest, not reused on Wikipedia}
+\includegraphics[scale=1]{../tables/cover_top.png}
+
+\end{center}
+\begin{quote}
+\vspace{5mm}
+\end{quote}
+\end{figure}
+
+%%% Fig 2: mean charts, digitization
+\begin{figure}[!htbp]
+\begin{center}
+\caption{Citations to Baseball Digest on Wikipedia (Sample A)}
+\label{fig:overview}
+\caption*{(1) Citations to Baseball Digest before and after Digitization}
+\includegraphics[scale=0.75]{../tables/mean_digit.pdf}
+\vspace{5mm}
+\caption*{(2) Citations to Baseball Digest for issues published before and after 1964}
+\includegraphics[scale=0.75]{../tables/mean_connected_cites.pdf}
+%\includegraphics[scale=0.25]{../tables/mean_connected_text.pdf}
+%\includegraphics[scale=0.25]{../tables/mean_connected_img.pdf}
+\end{center}
+
+\begin{quote}
+\emph{Note:} This plot presents some simple descriptive data on citations to Baseball Digest issues. Panel (1) presents average citations per publication-year of Baseball Digest on Wikipedia before and after the Google Books digitization event in 2008. Panel (2) presents similar information, but data are presented separately for all publication-years before 1964 (out-of-copyright) and those in or after 1964 (in-copyright). See text for more detailed data and variable descriptions. 
+\end{quote}
+\end{figure}
+
+%% Fig 3. DD picture
+%\begin{landscape}
+
+\begin{figure}[!htbp]
+\begin{center}
+\caption{Time-Varying Estimates of the Impact of Copyright\\ on Citations to Baseball Digest}
+\label{fig:ddpic}
+\caption*{(1) Sample A : Total Citations}
+\includegraphics[scale=0.7]{../tables/cite_timeline_cites.pdf}
+\vspace{2mm}
+\caption*{(2) Sample B : Total Citations}
+%\includegraphics[scale=0.6]{../tables/cite_timeline_cites.pdf}
+\includegraphics[scale=0.7]{../tables/timeline_bd_1.pdf}
+
+%\includegraphics[scale=0.6]{../tables/cite_timeline_img.pdf}
+%\vspace{5mm}
+%\caption*{Panel B : Basketball Players}
+%\includegraphics[scale=0.6]{../tables/cite_timeline_text.pdf}
+\end{center}
+
+\begin{quote}
+%\begin{adjustwidth}{-2cm}{-2cm}
+\emph{Note:} This figure plots coefficients (and 95 percent confidence intervals) from the event study specifications described in Section \ref{sec:timevary}. On the $x$ axis is the Wikipedia-year and the reference year is 2008, the year of the digitization event. This specification is based on Sample A for Panel (1) and Sample B for Panel (2), the coefficients are estimates from ordinary-least-squares (OLS) models, and standard errors are clustered. The dependent variable in both panels is the total number of citations in a calendar year. See text for more detailed data and variable descriptions. 
+%\end{adjustwidth}
+
+\end{quote}
+\end{figure}
+%\end{landscape}
+
+
+%Fig 4. Killer Pic Sample A
+%\begin{landscape}
+
+\begin{figure}[!htbp]
+\begin{center}
+\caption{Citations to Baseball Digest Published Before and After the 1964 Copyright Cutoff (Sample A)}
+\label{fig:killer_cite}
+%\caption*{Panel A : Citation Gains at the Issue-Year Level between 2012 and 2008}
+\vspace{1cm}
+
+\includegraphics[scale=1]{../tables/cite_killer_cite.pdf}
+%\includegraphics[scale=1]{../tables/cite_scatter_cite.pdf}
+
+
+%\vspace{2mm}
+%\caption*{Panel B : Comparing Citation Gains For Image Reuse and In-Text Citations}
+%\includegraphics[scale=0.75]{../tables/killerpic2_1_bd.pdf}
+
+%\includegraphics[scale=0.65]{../tables/cite_killer_img.pdf}
+%\vspace{5mm}
+%\caption*{Panel B : Basketball Players}
+%\includegraphics[scale=0.65]{../tables/cite_killer_text.pdf}
+\end{center}
+\vspace{1cm}
+\begin{quote}
+%\begin{adjustwidth}{-2cm}{-2cm}
+\emph{Note:} This figure plots the growth in citations to Baseball Digest publication-years in 2012 as compared to 2008. Out-of-copyright publication-years (1944-1963) are shown in dark grey, while in-copyright publication-years (1964-1984) are shown in light grey. See text for more detailed data and variable descriptions. 
+%\end{adjustwidth}
+
+\end{quote}
+\end{figure}
+%\end{landscape}
+
+\newpage
+
+
+%\newpage
+%%\begin{landscape}
+%%%%% Fig 5. Killer Pic for Images and Text
+
+\newpage
+%\begin{landscape}
+
+\begin{figure}[!htbp]
+\begin{center}
+\caption{Impact of Copyright on Image and Text Citations (Sample A)}
+\label{fig:killer_img}
+\caption*{(1) Image Citations}
+
+\includegraphics[scale=0.7]{../tables/cite_killer_img.pdf}
+
+\vspace{0.2cm}
+\caption*{(2) Text Citations}
+\includegraphics[scale=0.75]{../tables/cite_killer_text.pdf}
+
+%\includegraphics[scale=0.25]{../tables/mean_connected_text.pdf}
+%\includegraphics[scale=0.25]{../tables/mean_connected_img.pdf}
+\vspace{5mm}
+
+%\caption*{Panel B : Time Varying Estimates of the Impact of Copyright on Wikipedia Pages}
+%\includegraphics[scale=0.65]{../tables/killerpic2_1_img.pdf}
+%\includegraphics[scale=0.65]{../tables/killerpic2_1_text.pdf}
+%\includegraphics[scale=0.75]{../tables/timeline_img_1.pdf}
+%\includegraphics[scale=0.25]{../tables/mean_connected_text.pdf}
+%\includegraphics[scale=0.25]{../tables/mean_connected_img.pdf}
+\end{center}
+
+\begin{quote}
+%\begin{adjustwidth}{-2cm}{-2cm}
+%\emph{Note:} This chart documents the impact of the 1964 copyright cutoff for Baseball Digest on the reuse of images and text
+
+\emph{Note:} This figure plots the growth in citations to Baseball Digest publication-years in 2012 as compared to 2008. Panel (1) plots the growth in Image citations, while Panel (2) plots the growth in Text citations. Out-of-copyright publication-years (1944-1963) are shown in dark grey, while in-copyright publication-years (1964-1984) are shown in light grey. See text for more detailed data and variable descriptions. 
+
+
+%number of images added to baseball Wikipedia pages. Panel A documents the variation in the number of images added between 2008 and 2013 for out-of-copyright (debut before 1964) players and in-copyright (debut after 1964) players. The raw mean is adjusted to account for each player's differing exposure to the copyright rule. Panel B plots coefficients (and 95 percent confidence intervals) from the event study specifications described in Section \ref{sec:timevary}. On the $x$ axis is the calendar year and the reference year is 2008, the year of the digitization event. This specification is based on page-year level observations, the coefficients are estimates from ordinary-least-squares (OLS) models, and standard errors are clustered at the page level. See text for more detailed data and variable descriptions. 
+%\end{adjustwidth}
+\end{quote}
+\end{figure}
+
+%\end{landscape}
+
+%%%%%%%%%%%
+%%%%% Fig 6. DD Pic 2 for Images and Text
+%%%%%%%%%%%
+
+\begin{figure}[!htbp]
+\begin{center}
+\caption{Time-Varying Estimates for Image and Text Citations (Sample A)}
+\label{fig:ddpic_img}
+\caption*{\small{(1) Image Citations}}
+%\includegraphics[scale=0.75]{../tables/cite_timeline_cites.pdf}
+\includegraphics[scale=0.75]{../tables/cite_timeline_img.pdf}
+
+\caption*{\small{(2) Text Citations}}
+\includegraphics[scale=0.75]{../tables/cite_timeline_text.pdf}
+\vspace{2mm}
+
+%\caption*{Sample B : }
+%\includegraphics[scale=0.6]{../tables/timeline_img_1.pdf}
+%\includegraphics[scale=0.6]{../tables/timeline_text_1.pdf}
+
+%\includegraphics[scale=0.6]{../tables/cite_timeline_cites.pdf}
+
+%\includegraphics[scale=0.6]{../tables/cite_timeline_img.pdf}
+%\vspace{5mm}
+%\caption*{Panel B : Basketball Players}
+%\includegraphics[scale=0.6]{../tables/cite_timeline_text.pdf}
+\end{center}
+
+\begin{quote}
+\emph{Note:} This figure plots coefficients (and 95 percent confidence intervals) from the event study specifications described in Section \ref{sec:timevary} separately for image (Panel 1) and text citations (Panel 2). On the $x$ axis is the Wikipedia-year and the reference year is 2008, the year of the digitization event. This specification is based on Sample A for Panel (1) and (2). The coefficients are estimated from ordinary-least-squares (OLS) models, and standard errors are clustered. The dependent variable in both panels is the total number of citations in a calendar year. See text for more detailed data and variable descriptions. 
+
+\end{quote}
+\end{figure}
+
+
+
+%%%%%%%%%%%
+%%% Fig 7: HETERO EFFECTS
+%%%%%%%%%%%
+
+\begin{figure}[!htbp]
+\begin{center}
+\caption{Heterogeneous Impacts of Copyright on Wikipedia Pages by Player Quality (Sample B)}
+\label{fig:quality}
+\vspace{5mm}
+\caption*{\small{(1) Images}}
+\includegraphics[scale=0.70]{../tables/quality_img.pdf}\\
+\vspace{5mm}
+\caption*{\small{(2) Traffic}}
+\includegraphics[scale=0.70]{../tables/quality_traf.pdf}
+
+\end{center}
+\begin{quote}
+%\begin{adjustwidth}{-2cm}{-2cm}
+\emph{Note:} This plot documents the differential impact of the Baseball Digest copyright cutoff on baseball player pages of different \emph{quality} as described in Section \ref{sec:diff2}. For this analysis, players are split into 4 different levels of quality based on their percentile rank within the sample of baseball players and the main difference-in-difference estimates are calculated separately for each of the four quality percentiles. Panel (1) plots these estimates for Image Citations, while Panel (2) plots estimates for Traffic. See text for detailed data and variable descriptions.
+
+%%Coefficients ($\beta_3$) are derived from the specification: 
+
+%%$Y_{it} = \alpha + \beta_1 \times post_t \times out-of-copy_i + \beta_2 \times post_t \times quality_i + \beta_3 \times post_t \times out-of-copy_i \times quality_i + \gamma_i+ \delta_t + \epsilon_{it}$ 
+
+%%where $\gamma_{i}$ and $\delta_{t}$ represents player and time fixed effects respectively for player $i$ and year $t$.  All estimates are from ordinary-least-squares (OLS) models. 
+
+%\end{adjustwidth}
+\end{quote}
+\end{figure}
+
+%%\end{landscape}
+
+%%%%%%%%%%%%%%%% APPENDIX %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%blank
+%\newpage
+%\newpage
+
+\appendix
+
+\setcounter{table}{0}\renewcommand{\thetable}{A.\arabic{table}}
+\setcounter{figure}{0}\renewcommand{\thefigure}{A.\arabic{figure}}
+
+%%%%% DD Table %%%%
+\begin{center}
+\begin{table}[!htbp]
+\section{Appendices}
+
+\subsection{Appendix A1 : Robustness Checks}
+\label{sec:envelope}
+
+%% BASKETBALL DATA Added
+
+\caption{Estimating the Causal Impact of Digitization}
+\vspace{5mm}
+\input{../tables/appendix_dd.tex}
+\begin{quote}
+\vspace{5mm}
+
+\emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
+\newline
+Standard errors clustered at player-level shown in parentheses.}
+
+\vspace{5mm}
+
+\emph{Note:} This table provides estimates that help to determine the causal impact of the Google Books digitization event on reuse. I supplement data in Sample B, with similar data from Wikipedia player-pages for a comparable set of 564 basketball players. The estimates are provided from a difference-in-difference specification where the treatment group is the set of baseball player-pages and the post-period are the years 2009-2012 after the digitization event. All estimates are from ordinary-least-squares (OLS) models. See text for detailed data and variable descriptions.
+\end{quote}
+\label{tab:basketball}
+\end{table}
+\end{center}
+
+
+
+%%% LEADS - LAGS
+\begin{center}
+\begin{table}[!htbp]
+
+\caption{Robustness: Exploring pre-trends between in-copyright and out-of-copyright Issues}
+%\vspace{5mm}
+{\small
+\input{../tables/leads-lags.tex}
+}
+\begin{quote}
+\vspace{5mm}
+
+\emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
+\newline
+Standard errors clustered at player-level shown in parentheses.}
+
+\vspace{5mm}
+
+%\emph{Note:} This table presents XXX
+\end{quote}
+\label{tab:leads_lags}
+\end{table}
+\end{center}
+
+%%% Falsitifction
+\begin{center}
+\begin{table}[!htbp]
+
+\caption{Falsification Check -- Alternate Treatment Years}
+\vspace{5mm}
+%\input{../tables/appendix_alternate_2009_2004_2007.tex}
+\input{../tables/reg_dd_combined_2004_2009_2007.tex}
+\begin{quote}
+\vspace{5mm}
+
+\emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
+\newline
+Standard errors clustered at player-level shown in parentheses.}
+
+\vspace{5mm}
+
+\emph{Note:} This table presents a falsification check of the baseline specification. In this regression, the panel is restricted to years 2004 to 2009, and the treatment year is assumed to be 2007 rather than 2009. The $out-of-copy$ variable is defined as before, and unit-of-observation fixed effects and time fixed effects are included as indicated. Please see text for detailed data and variable descriptions. 
+\end{quote}
+\label{tab:false}
+\end{table}
+\end{center}
+
+%%%%% alternate years
+
+%%% Falsitifction
+\begin{center}
+\begin{table}[!htbp]
+
+\caption{Robustness Check : Adding Panel Restrictions}
+\vspace{5mm}
+\caption*{(1) Wikipedia-Years 2005-2011}
+%\input{../tables/appendix_alternate_2011_2005_2009.tex}
+\input{../tables/reg_dd_combined_2005_2011_2009.tex}
+\vspace{5mm}
+\caption*{(2) Wikipedia-Years 2006-2010}
+\input{../tables/reg_dd_combined_2006_2010_2009.tex}
+%\input{../tables/appendix_alternate_2010_2006_2009.tex}
+\begin{quote}
+\vspace{5mm}
+
+\emph{p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
+\newline
+Standard errors clustered at player-level shown in parentheses.}
+
+\vspace{5mm}
+
+\emph{Note:} This table presents robustness checks for the baseline specification to alternate panel restrictions. The specification is similar to the baseline specification and is estimated using OLS. However, instead of using the complete panel from 2004-2012, Panel (1) only includes data from years 2005-2011, and Panel (2) includes data from year 2006-2010. The $out-of-copy$ and $post$ variables are defined as before, and unit-of-observation fixed effects and time fixed effects are included as indicated. Please see text for detailed data and variable descriptions. 
+\end{quote}
+\label{tab:short_timeline}
+\end{table}
+\end{center}
+
+
+%%%%%%%%%%%%%% ALT SPEC
+
+\begin{center}
+\begin{table}[!htbp]
+
+\caption{Robustness to Sample Restrictions, Alternate Variables \\ and Treatment Definition (Sample B)}
+\vspace{5mm}
+\begin{adjustwidth}{.2cm}{.2cm}
+\input{../tables/copy_robust.tex}
+%\input{../tables/cite_reg_robust.tex}
+\end{adjustwidth}
+
+\begin{quote}
+\vspace{5mm}
+
+\emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
+\newline
+Standard errors clustered at player-level shown in parentheses.}
+\vspace{5mm}
+
+\emph{Note:} This table evaluates the robustness of the impact of copyright on reuse result to different modeling and data assumptions. Column (1) drops all players whose careers span before and after the copyright-cutoff year of 1964 and estimates the model using players who retired before 1964 and those who made their debut after 1964. Column (2) uses an alternate definition of $out-of-copy$ using the year of a player's first all star game instead of the debut year for classification. Column (3) drops very well-known players (those who have played 15 all star games or more) before estimating the model. Column (4) uses alternate dependent variables: Citations and Images are replaced by indicator variables if variable is greater that 0, and text is measured by the size of the page in kilobytes. See text for more detailed data and variable descriptions. All estimates are from ordinary-least-squares (OLS) models. 
+\end{quote}
+\label{tab:app_robust}
+\end{table}
+\end{center}
+
+%%% ROBUST TRAF
+
+\begin{center}
+\begin{table}[!htbp]
+
+%%\subsubsection*{Impact of Copyright on Traffic -- Alternate Specification}
+\caption{Impact of Copyright on Images and Traffic: Robustness with ``Out-of-copyright'' Exposure Index}
+
+\vspace{5mm}
+\input{../tables/robust_traf.tex}
+\begin{quote}
+\vspace{5mm}
+\emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
+\newline
+Robust standard errors shown in parentheses.}
+\vspace{5mm}
+
+\emph{Note:} This table provides a robustness check to log models for Table \ref{tab:traf}. Simple log versions of the models in Table \ref{tab:traf} were tried, however a lack of sufficient ``pre'' data (before 2008) means that the main coefficients were imprecisely estimated, and were not significant at conventional levels. As an alternative, the following table estimates cross sectional regressions that utilize the variance in \emph{copyright exposure} to estimate log models. For each player, \emph{copyright exposure} is defined as amount of their career that they played in the out-of-copyright period, i.e. before 1964. For players who retired before 1964, this index is set to one, for players who made their debuts after 1964 this index is set to zero, while for other players it is calculated as $\frac{1964 - DebutYear}{FinalYear - DebutYear}$. Because player debut and retirement years are unlikely to be related to the 1964 copyright cutoff date, this variation provides an additional source of quasi-random variation that can then be used in the cross-section to estimate the impact of copyright on internet traffic, and that helps alleviate the problem of missing traffic data for years before 2007. Columns (1) and (2) show the impact of the Copyright Exposure variable on Images, while Columns (3) and (4) estimate the effect for traffic. Coefficients are roughly the same order of magnitude as with the difference-in-difference specifications. 
+
+Page-year level observations. Sample includes all baseball pages in 2012. The specification is $Y_i = \alpha + \beta \times out-of-copy index + \epsilon_i$. All estimates are from ordinary-least-squares (OLS) models, and columns (2) and (4) use $Log(1+Y)$ as the dependent variable.
+
+%%\emph{Out-of-copy Exposure} is 0 for all players who made debuts in or after 1964, 1 for all players who retired before 1964 and $\frac{1964-Debut}{Career Length}$ for all other players. 
+
+\end{quote}
+\label{tab:app_traf_robust}
+\end{table}
+\end{center}
+
+
+%% SCATTER
+%%%%%%%% Fig A.1 Traffic
+
+%% \newpage
+%% \begin{figure}[!htbp]
+%% \begin{center}
+%% \caption{Change in Traffic vs. Images (Sample B)}
+%% \label{fig:scatterimgtraf}
+
+%% \vspace{5mm}
+%% \includegraphics[scale=0.80]{../tables/traf_scatter_1.pdf}\\
+%% \vspace{5mm}
+%% \includegraphics[scale=0.80]{../tables/traf_scatter_2.pdf}
+
+%% \end{center}
+%% \begin{quote}
+%% \begin{adjustwidth}{-2cm}{-2cm}
+%% \emph{Note:} This plot documents the relationship between the change in images for a given page before and after the digitization of Baseball Digest and associated change in traffic. Panel A, plots the data for all Hall-of-Fame players in the out-of-copyright group and each point is labeled with the player's last name. Panel B is a similar plot for all out-of-copyright baseball players. The correlation coefficient is about 0.659 for Hall of Fame players and 0.459 for the full sample. See text for more detailed data and variable descriptions.
+%% \end{adjustwidth}
+%% \end{quote}
+%% \end{figure}
+
+%%%%% NEXT APPENDIX
+
+\newpage
+\FloatBarrier
+
+\subsection{Appendix A2 : Simple Theoretical Framework}
+\label{sec:theory}
+
+\input{theory.tex}
+
+
+\end{document}
+
+
+%%% backup stuff
+
+
+%% %%%%% COPY Table %%%%
+
+%% \begin{center}
+%% \begin{table}[!htbp]
+%% %\caption{Impact of Copyright on Baseball Digest Reuse }
+%% \caption{Difference-in-Difference Regressions Estimating Impact of 1964 Copyright Experiment on Wikipedia Pages (Sample B)}
+%% %\caption{Difference-in-Difference Regressions Estimating Impact of Google Books Digitization Event on Baseball Wikipedia Pages}
+%% \vspace{5mm}
+%% \input{../tables/copy.tex}
+%% \begin{quote}
+%% \vspace{5mm}
+
+%% \emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
+%% \newline
+%% Standard errors clustered at player-page-level shown in parentheses.}
+
+%% \vspace{5mm}
+
+%% \emph{Note:} This regression estimates the likelihood of citation on baseball player Wikipedia pages to Baseball Digest magazine for out-of-copyright players (debut before 1964) as compared to in-copyright players (debut on or after 1964), before and after the digitization of the magazine by Google Books.
+%% \vspace{5mm}
+
+%% Specification: $Y_{it} = \alpha + \beta_1 \times post_t \times out-of-copy_i + \gamma_i+ \delta_t + \epsilon_{it}$ where $\gamma_{i}$ and $\delta_{t}$ represents player-page and calendar-year fixed effects respectively for player-page $i$  and calendar-year $t$.  \emph{post}:0/1,=1 if year is greater than 2008 and \emph{out-of-copy}:0/1,=1 if player debut before 1964. All models include calendar year fixed effects. Columns (1) and (2) estimate OLS models, with column (2) also including player-page level fixed effects. Column (3) estimates Log-OLS models (i.e. the dependent variable is Log(Y+1)) with player-page and calendar-year fixed effects. See text for detailed data and variable descriptions.
+
+%% %\emph{Decade}, indicator variables for decade of player debut. \emph{Quality}, indicator variables for percentile rank of player in cohort based on sport-specific covariates.
+
+%% %%Column (1) includes \emph{controls}, proxying for a player's \emph{quality} rank based on sport-specific covariates.
+
+%% \end{quote}
+%% \label{tab:copy_b}
+%% \end{table}
+%% \end{center}
+
+
+%% %%%%% DDD Table %%%%
+
+%% \begin{center}
+%% \begin{table}[!htbp]
+%% \caption{DDD Regressions Estimating Impact of 1964 Copyright Experiment on Baseball Wikipedia Pages using Basketball Pages as 2nd set of Controls}
+%% \vspace{5mm}
+%% \input{../tables/ddd.tex}
+%% \begin{quote}
+%% \vspace{5mm}
+%% \emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
+%% \newline
+%% Standard errors clustered at player-level shown in parentheses.}
+%% \vspace{5mm}
+
+
+%% \emph{Note:} Page-year level observations for full sample. \emph{out-of-copy}: 0/1, =1 for players making debut before 1964. \emph{baseball}:0/1,  =1 for baseball players and =0 for basketball players. \emph{post}:0/1,=1 if year is greater than 2008. 
+
+%% Specification: $Y_{itg} = \alpha + \beta_1 \times out-of-copy_i \times post_t \times baseball_g + \beta_2 \times out-of-copy_i \times post_t + \beta_3 \times baseball_g \times post_t + \gamma_i + \delta_t + \epsilon_{igt}$
+
+%% for player $i$ in year $t$ and in sport $g$ where $\gamma_{i}$ and $\delta_t$ represents player and time fixed effects respectively.  All estimates are from ordinary-least-squares (OLS) models. See text for detailed data and variable descriptions.
+
+%% \end{quote}
+%% \label{tab:ddd}
+%% \end{table}
+%% \end{center}
+
+
+%% %%%%%%%%%%%%% IVREG
+%% \newpage
+%% \begin{center}
+%% \begin{table}[!htbp]
+
+%% \caption{Is an Increase in Images Associated With an Increase in Traffic?}
+%% \vspace{5mm}
+%% \begin{adjustwidth}{0.5cm}{}
+%% \input{../tables/mechanism.tex}
+%% \end{adjustwidth}
+
+%% \begin{quote}
+%% \emph{+:p$<$0.15; *:p$<$0.10; **:p$<$0.05; ***:p$<$0.01 
+%% \newline
+%% Standard errors clustered at player-level shown in parentheses.}
+%% \vspace{5mm}
+
+%% \emph{Note:} Page-year level observations for sample of baseball players. \emph{Images} measures number of images on player-page in a given year. 
+%% All estimates are from ordinary-least-squares (OLS) models. Specification for Columns (1) is $Y_{i} = \alpha + \beta_1 \cdot Images_{it} +\delta_t + \epsilon_{it}$, while Column (2) adds individual player dummies. 
+
+%% Columns (3-6) present results from IV estimation, with and without player fixed effects. See text for detailed data and variable descriptions.
+
+%% \end{quote}
+%% \label{tab:ivreg}
+%% \end{table}
+%% \end{center}
+
+
+%% OLD APPENDIXES
+
+%% \subsection{Appendix A1 : The 1964 Copyright Experiment}
+%% \label{sec:enclosure}
+
+%% Legal opinion about copyright law concerning periodicals (under the Copyright Act of 1909) from University of Pennsylvania Libraries is reproduced below for reference. See \url{http://onlinebooks.library.upenn.edu/cce/firstperiod.html} for more details.
+
+%% \begin{quotation}
+%% For works that received their copyright before 1978, a renewal had to be filed in the work's 28th year with the Library of Congress Copyright Office for its term of protection to be extended. The need for renewal was eliminated by the Copyright Renewal Act of 1992, but works that had already entered the public domain by non-renewal did not regain copyright protection. Therefore, works published before 1964 that were not renewed are in the public domain. With rare exception (such as very old works first published after 2002) no additional copyrights will expire (thus entering the public domain) until at least 2019 due to changes in the applicable laws.
+%% \end{quotation}
+
+%% The following screenshot is from a Wikipedia banner explaining the legal use of an image sourced from Baseball Digest.
+
+%% \begin{figure}[!htbp]
+%% \centering
+%% \includegraphics[scale = 0.3]{../tables/bd_copyrightcaption.png}
+%% \caption*{A screenshot from Wikipedia explaining copyright law pertaining to reuse of material from Baseball Digest}
+%% \label{fig:copyrightcaption}
+%% \end{figure}
+
+%% \newpage
+
+%% \subsection{Appendix A2 : Back-of-the-Envelope Welfare Calculation}
+%% \label{sec:envelope}
+
+%% This section outlines the methodology through which I arrive at my estimate of about \$372,920 annually for a lower bound on the loss to social welfare from copyright.
+
+%% In order to arrive at this estimate two pieces of data are needed: (a) the approximate value of a page-view to society and (b) estimated page-views lost due to copyright. For piece (a) I used \url{webindetail.com} which provides the estimated daily earnings of Wikipedia from potential advertising which would equal to \$2.2 million dollars daily for about 400 million daily page-views.\footnote{While Wikipedia does not accept advertising, \url{webindetail.com} arrives at this estimate based on a comparables analysis based on other similar websites with a comparable user base.} This translates into a value to Wikipedia of about \$0.0055 per page-view from advertising. For piece (b) results from this study suggest that for every missing image, a Wikipedia page receives about 88 fewer page-views per month (Table \ref{tab:ivreg}) and that pages have 0.315 fewer images on average (Table \ref{tab:ddd}) due to copyright. Therefore, a page affected by copyright is expected to lose about \$0.152 per month. For the set of 335 pages affected by copyright in this study. This translates into an annual loss of about \$612 or a net present value of about \$30,600.\footnote{discounted at a rate of 2\% per year over a perpetual life term} Assuming that about 5\% of all 4.1 million articles on Wikipedia are affected in a similar way, this translates into an annual loss of about \$372,920 or a net present value of about \$18.69 million. These estimates are economically significant for Wikipedia in the light of estimates of the economic value of Wikipedia itself which is about \$43.5 million per year \citep{greenstein_technology:_2013}. Further, these estimates represent only a lower bound on lost surplus because advertising rates capture only the valuation advertisers place on readers and do not calculate value to readers including value of derivative works of Wikipedia pages.
+
+%% \newpage
+
+
