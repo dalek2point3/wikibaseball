@@ -109,3 +109,8 @@ reg_robust copy
 // 6. Out of copyright exposure index
 robust_traf
 
+// 7. differential effects images vs. test using Sample B
+reg_dd_compare_sampleb img text
+
+// 8. table for chart quality
+reg_chart_qual
