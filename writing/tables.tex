@@ -353,10 +353,10 @@ Clustered standard errors shown in parentheses.}
 \label{fig:quality}
 \vspace{5mm}
 \caption*{\small{(1) Images}}
-\includegraphics[scale=0.70]{../tables/quality_img.pdf}\\
+\includegraphics[scale=0.70]{../tables/quality_img_numallstar.pdf}\\
 \vspace{5mm}
 \caption*{\small{(2) Traffic}}
-\includegraphics[scale=0.70]{../tables/quality_traf.pdf}
+\includegraphics[scale=0.70]{../tables/quality_traf_numallstar.pdf}
 
 \end{center}
 \begin{quote}
@@ -588,7 +588,7 @@ Page-year level observations. Sample includes all baseball pages in 2012. The sp
 \newpage
 \begin{center}
 \begin{table}[!htbp]
-\caption{}
+\caption{Heterogeneous Impacts of Copyright on Wikipedia Pages by Player Quality (Sample B)}
 \vspace{5mm}
 \input{../tables/reg_chart_qual.tex}
 
@@ -601,11 +601,41 @@ Clustered standard errors shown in parentheses.}
 
 \vspace{5mm}
 
-\emph{Note:} 
+\emph{Note:} This table presents estimates from the regression used to calculate the marginal effects presented in Figure \ref{fig:quality}. The estimates presented use data from Sample B.  The $out-of-copy$ and $post$ variables are defined as before, and unit-of-observation fixed effects and time fixed effects are included as indicated. Players are split into 4 different levels of quality based on their percentile rank within the sample of baseball players and the number of all-star games that they appeared in, and the main difference-in-difference estimates are calculated separately for each of the four quality percentiles. Column (1) plots these estimates for Images, while Column (2) plots estimates for Traffic. See text for detailed data and variable descriptions.
 \end{quote}
 \label{tab:reg_chart_qual}
 \end{table}
 \end{center}
+
+%%%%%%%%%%%
+%%% Fig: HETERO EFFECTS WITH GAMES PLAYED AS ALTERNATE VARIABLE
+%%%%%%%%%%%
+
+\begin{figure}[!htbp]
+\begin{center}
+\caption{Heterogeneous Impacts of Copyright on Wikipedia Pages by Player Quality (Sample B)}
+\label{fig:quality_alternate}
+\vspace{5mm}
+\caption*{\small{(1) Images}}
+\includegraphics[scale=0.70]{../tables/quality_img_gp.pdf}\\
+\vspace{5mm}
+\caption*{\small{(2) Traffic}}
+\includegraphics[scale=0.70]{../tables/quality_traf_gp.pdf}
+
+\end{center}
+\begin{quote}
+%\begin{adjustwidth}{-2cm}{-2cm}
+\emph{Note:} This plot documents the differential impact of the Baseball Digest copyright cutoff on baseball player pages of different \emph{quality} quartiles based on the number of games they have played in their career (as an additional robustness check). For this analysis, players are split into 4 different levels of quality based on their percentile rank within the sample of baseball players and the main difference-in-difference estimates are calculated separately for each of the four quality percentiles. Panel (1) plots these estimates for Image Citations, while Panel (2) plots estimates for Traffic. See text for detailed data and variable descriptions.
+
+%%Coefficients ($\beta_3$) are derived from the specification: 
+
+%%$Y_{it} = \alpha + \beta_1 \times post_t \times out-of-copy_i + \beta_2 \times post_t \times quality_i + \beta_3 \times post_t \times out-of-copy_i \times quality_i + \gamma_i+ \delta_t + \epsilon_{it}$ 
+
+%%where $\gamma_{i}$ and $\delta_{t}$ represents player and time fixed effects respectively for player $i$ and year $t$.  All estimates are from ordinary-least-squares (OLS) models. 
+
+%\end{adjustwidth}
+\end{quote}
+\end{figure}
 
 
 
