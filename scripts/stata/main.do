@@ -84,8 +84,8 @@ cite_ddpic img
 cite_ddpic text
 
 // 7. Quality-wise impacts
-chart_qual img
-chart_qual traf 
+chart_qual img numallstar
+chart_qual traf numallstar
 
 /////////////////////////////////
 // APPENDIX
@@ -114,3 +114,7 @@ reg_dd_compare_sampleb img text
 
 // 8. table for chart quality
 reg_chart_qual
+
+// 9. robustness figure with alternate quality measure
+chart_qual img gp
+chart_qual traf gp
