@@ -46,7 +46,7 @@ drop tmp
 
 gen age = year - page_create_yr
 
-keep wikihandle text img bd playerid ln* post treat quality qy debut traf year isbaseball id finalyear final firstall numa size playername everinducted age
+keep wikihandle text img bd playerid ln* post treat quality qy debut traf year isbaseball id finalyear final firstall numa size playername everinducted age gp
 
 save ${stash}master, replace
 
