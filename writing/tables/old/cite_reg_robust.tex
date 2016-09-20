@@ -1,0 +1,32 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{2}{c}}
+\toprule
+                                                  &\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{OLS}\\
+\midrule \makebox[13em][l]{\underline{\textbf{Panel A: Citations}} \vspace{5mm}}\\
+\emph{out-of-copy X post}                         &      0.0965         &       3.924         \\
+                                                  &    (0.0447)\sym{**} &     (1.207)\sym{***}\\
+
+\end{tabular*} }
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{2}{c}}
+\midrule \vspace{5mm} \makebox[13em][l]{\underline{\textbf{Panel B : Images}}\vspace{5mm} ($\bar{y}$=4.19)}\\
+\emph{out-of-copy X post}                         &           0         &       3.647         \\
+                                                  &         (.)         &     (0.729)\sym{***}\\
+
+\end{tabular*} }
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{2}{c}}
+\midrule \vspace{5mm} \makebox[13em][l]{\underline{\textbf{Panel C : Text}}\vspace{5mm} ($\bar{y}$=4.19)}\\
+\emph{out-of-copy X post}                         &      0.0965         &       0.277         \\
+                                                  &    (0.0447)\sym{**} &     (0.681)         \\
+\midrule
+Issue-Year FE                                     &         Yes         &         Yes         \\
+Time FE                                           &        Year         &        Year         \\
+N                                                 &         200         &         360         \\
+Adj R-square                                      &      0.0837         &       0.812         \\
+\bottomrule
+\end{tabular*}
+}

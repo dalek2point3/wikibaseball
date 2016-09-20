@@ -1,0 +1,38 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\toprule
+                                                  &\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{Log-OLS}\\
+\midrule \makebox[13em][l]{\underline{\textbf{Sample A : Images}} \vspace{5mm} ($\bar{y}$=1.20)}\\
+\emph{out-of-copy X post}                         &       5.471         &       5.471         &       1.178         \\
+                                                  &     (1.093)\sym{***}&     (1.093)\sym{***}&     (0.152)\sym{***}\\
+
+\end{tabular*} }
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\midrule \vspace{5mm} \makebox[13em][l]{\underline{\textbf{Sample A : Text}}\vspace{5mm} ($\bar{y}$=2.99)}\\
+\emph{out-of-copy X post}                         &       0.354         &       0.328         &     0.00783         \\
+                                                  &     (1.023)         &     (1.009)         &     (0.141)         \\
+
+\end{tabular*} }
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\midrule \vspace{5mm} \makebox[13em][l]{\underline{\textbf{Sample B : Images}}\vspace{5mm} ($\bar{y}$=0.50)}\\
+\emph{out-of-copy X post}                         &       0.549         &       0.381         &       0.113         \\
+                                                  &     (0.147)\sym{***}&     (0.119)\sym{***}&    (0.0389)\sym{***}\\
+
+\end{tabular*} }
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\midrule \vspace{5mm} \makebox[13em][l]{\underline{\textbf{Sample B : Text}}\vspace{5mm} ($\bar{y}$=0.89)}\\
+\emph{out-of-copy X post}                         &       0.441         &       0.311         &      0.0593         \\
+                                                  &     (0.156)\sym{***}&     (0.114)\sym{***}&    (0.0247)\sym{**} \\
+\midrule
+Unit of Obs. FE                                   &          No         &         Yes         &         Yes         \\
+Time FE                                           &        Year         &        Year         &        Year         \\
+\bottomrule
+\end{tabular*}
+}

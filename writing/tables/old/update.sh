@@ -1,0 +1,1 @@
+scp equity.mit.edu:/mnt/nfs6/wikipedia.proj/wikibaseball/scripts/stata/tables/* .

@@ -1,0 +1,17 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{6}{c}}
+\toprule
+            &\multicolumn{3}{c}{Sample A}                                     &\multicolumn{3}{c}{Sample B}                                     \\\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+            &\multicolumn{1}{c}{Citations}&\multicolumn{1}{c}{Images}&\multicolumn{1}{c}{Text}&\multicolumn{1}{c}{Citations}&\multicolumn{1}{c}{Images}&\multicolumn{1}{c}{Text}\\
+\midrule
+\emph{out-of-copy X post}&       3.924         &       3.647         &       0.277         &       0.150         &       0.150         &       0.150         \\
+            &     (1.207)\sym{***}&     (0.729)\sym{***}&     (0.681)         &    (0.0782)\sym{*}  &    (0.0782)\sym{*}  &    (0.0782)\sym{*}  \\
+\midrule
+Player FE   &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+Time FE     &        Year         &        Year         &        Year         &        Year         &        Year         &        Year         \\
+adj. $R^2$  &       0.686         &       0.328         &       0.812         &      0.0731         &      0.0731         &      0.0731         \\
+N           &         360         &         360         &         360         &        4869         &        4869         &        4869         \\
+\bottomrule
+\end{tabular*}
+}

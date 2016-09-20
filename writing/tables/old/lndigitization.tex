@@ -1,0 +1,18 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{4}{c}}
+\toprule
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+            &\multicolumn{1}{c}{Images}&\multicolumn{1}{c}{Text}&\multicolumn{1}{c}{Citations}&\multicolumn{1}{c}{Traffic}\\
+\midrule
+Baseball X Post&       0.208\sym{***}&      -0.696\sym{***}&       0.146\sym{***}&       0.314\sym{***}\\
+            &    (0.0227)         &    (0.0578)         &    (0.0175)         &    (0.0486)         \\
+\midrule
+Player FE   &         Yes         &         Yes         &         Yes         &         Yes         \\
+Decade X Year FEs&         Yes         &         Yes         &         Yes         &         Yes         \\
+adj. $R^2$  &       0.242         &       0.844         &      0.0954         &       0.857         \\
+N           &       14365         &       14365         &       14365         &        9945         \\
+Clusters    &        1105         &        1105         &        1105         &        1105         \\
+\bottomrule
+\end{tabular*}
+}

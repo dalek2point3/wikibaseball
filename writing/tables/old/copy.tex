@@ -1,0 +1,24 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\toprule
+                                                  &\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{Log-OLS}\\
+\midrule \vspace{5mm} \makebox[13em][l]{\underline{\textbf{Panel A : Images}}\vspace{5mm} ($\bar{y}$=0.66)}\\
+\emph{out-of-copy X post}                         &       0.280         &       0.226         &      0.0646         \\
+                                                  &     (0.106)\sym{***}&     (0.105)\sym{**} &    (0.0352)\sym{*}  \\
+
+\end{tabular*} }
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\midrule \vspace{5mm} \makebox[13em][l]{\underline{\textbf{Panel B : Text}}\vspace{5mm} ($\bar{y}$=1179.96)}\\
+\emph{out-of-copy X post}                         &       234.9         &       205.9         &     -0.0466         \\
+                                                  &     (96.06)\sym{**} &     (98.08)\sym{**} &    (0.0955)         \\
+\midrule
+Player-Page FE                                    &         Yes         &         Yes         &         Yes         \\
+Time FE                                           &        Year         &Quality X Year         &        Year         \\
+N                                                 &        4869         &        4869         &        4869         \\
+Adj R-square                                      &       0.397         &       0.404         &       0.613         \\
+\bottomrule
+\end{tabular*}
+}

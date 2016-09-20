@@ -1,0 +1,37 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{2}{c}}
+\toprule
+            &\multicolumn{1}{c}{Images}&\multicolumn{1}{c}{Traffic}\\
+\midrule
+\emph{post} &       0.851         &       49.39         \\
+            &    (0.0758)\sym{***}&     (5.556)\sym{***}\\
+\addlinespace
+\emph{out-of-copy X post}&      0.0489         &      -10.22         \\
+            &     (0.112)         &     (7.493)         \\
+\addlinespace
+\emph{post X quality=2}&    -0.00848         &       2.811         \\
+            &     (0.105)         &     (5.879)         \\
+\addlinespace
+\emph{post X quality=3}&       0.255         &       14.69         \\
+            &     (0.128)\sym{**} &     (8.212)\sym{*}  \\
+\addlinespace
+\emph{post X quality=4}&       0.423         &       20.39         \\
+            &     (0.130)\sym{***}&     (15.81)         \\
+\addlinespace
+\emph{out-of-copy X post X quality=2}&      -0.272         &       22.13         \\
+            &     (0.234)         &     (11.84)\sym{*}  \\
+\addlinespace
+\emph{out-of-copy X post X quality=3}&       0.514         &       31.40         \\
+            &     (0.397)         &     (29.01)         \\
+\addlinespace
+\emph{out-of-copy X post X quality=4}&       0.311         &       45.73         \\
+            &     (0.209)         &     (22.15)\sym{**} \\
+\midrule
+Unit of Obs. FE&         Yes         &         Yes         \\
+Year FE     &         Yes         &         Yes         \\
+adj. $R^2$  &       0.213         &      0.0918         \\
+N           &        4869         &        3246         \\
+\bottomrule
+\end{tabular*}
+}

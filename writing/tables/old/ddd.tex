@@ -1,0 +1,24 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\toprule
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+            &\multicolumn{1}{c}{Citations}&\multicolumn{1}{c}{Images}&\multicolumn{1}{c}{Text}\\
+\midrule
+\emph{out-of-copy X post X baseball}&       0.215         &       0.375         &       191.8         \\
+            &     (0.112)\sym{*}  &     (0.156)\sym{**} &     (180.8)         \\
+\addlinespace
+\emph{out-of-copy X post}&   -1.74e-14         &      0.0667         &       126.0         \\
+            &  (5.94e-09)         &    (0.0915)         &     (137.9)         \\
+\addlinespace
+\emph{baseball X post}&       0.275         &       0.361         &       298.0         \\
+            &    (0.0562)\sym{***}&    (0.0664)\sym{***}&     (66.68)\sym{***}\\
+\midrule
+Player FE   &         Yes         &         Yes         &         Yes         \\
+Time FE     &        Year         &        Year         &        Year         \\
+adj. $R^2$  &      0.0775         &       0.197         &       0.410         \\
+N           &       14365         &       14365         &       14365         \\
+Clusters    &        1105         &        1105         &        1105         \\
+\bottomrule
+\end{tabular*}
+}

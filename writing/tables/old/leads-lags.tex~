@@ -1,0 +1,56 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\toprule
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+            &\multicolumn{1}{c}{Citations}&\multicolumn{1}{c}{Images}&\multicolumn{1}{c}{Text}\\
+\midrule
+Digitization-3&      -0.000         &      -0.000         &       0.000         \\
+            &     (0.000)         &     (0.000)         &     (0.000)         \\
+\addlinespace
+Digitization-2&      -0.000         &      -0.000         &       0.000         \\
+            &         (.)         &     (0.000)         &         (.)         \\
+\addlinespace
+Digitization-1&      -0.000         &      -0.000         &      -0.000         \\
+            &         (.)         &     (0.000)         &         (.)         \\
+\addlinespace
+Digitization+1&       1.762         &       0.095         &       1.667         \\
+            &     (0.424)\sym{***}&     (0.066)         &     (0.421)\sym{***}\\
+\addlinespace
+Digitization+2&       4.667         &       0.095         &       4.571         \\
+            &     (0.637)\sym{***}&     (0.066)         &     (0.642)\sym{***}\\
+\addlinespace
+Digitization+3&       9.429         &       0.095         &       9.333         \\
+            &     (1.084)\sym{***}&     (0.066)         &     (1.082)\sym{***}\\
+\addlinespace
+Digitization+4&      10.286         &       0.095         &      10.190         \\
+            &     (1.172)\sym{***}&     (0.066)         &     (1.167)\sym{***}\\
+\addlinespace
+Digitization-3 x out-of-copy&      -0.158         &       0.000         &      -0.158         \\
+            &     (0.087)\sym{*}  &     (0.000)         &     (0.087)\sym{*}  \\
+\addlinespace
+Digitization-2 x out-of-copy&      -0.158         &       0.000         &      -0.158         \\
+            &     (0.087)\sym{*}  &     (0.000)         &     (0.087)\sym{*}  \\
+\addlinespace
+Digitization-1 x out-of-copy&      -0.158         &       0.000         &      -0.158         \\
+            &     (0.087)\sym{*}  &     (0.000)         &     (0.087)\sym{*}  \\
+\addlinespace
+Digitization+1 x out-of-copy&      -0.393         &       0.273         &      -0.667         \\
+            &     (0.753)         &     (0.327)         &     (0.538)         \\
+\addlinespace
+Digitization+2 x out-of-copy&       2.018         &       2.168         &      -0.150         \\
+            &     (1.416)         &     (1.103)\sym{*}  &     (0.814)         \\
+\addlinespace
+Digitization+3 x out-of-copy&      10.466         &       9.536         &       0.930         \\
+            &     (2.765)\sym{***}&     (1.745)\sym{***}&     (1.452)         \\
+\addlinespace
+Digitization+4 x out-of-copy&      10.556         &       9.905         &       0.652         \\
+            &     (2.886)\sym{***}&     (1.826)\sym{***}&     (1.510)         \\
+\midrule
+Player FE   &         Yes         &         Yes         &         Yes         \\
+Time FE     &        Year         &        Year         &        Year         \\
+adj. $R^2$  &       0.756         &       0.574         &       0.810         \\
+N           &     360.000         &     360.000         &     360.000         \\
+\bottomrule
+\end{tabular*}
+}

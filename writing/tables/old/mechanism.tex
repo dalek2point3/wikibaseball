@@ -1,0 +1,24 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{6}{c}}
+\toprule
+                    &\multicolumn{2}{c}{OLS}                    &\multicolumn{2}{c}{First Stage}            &\multicolumn{2}{c}{IV Estimates}           \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}\\
+                    &\multicolumn{1}{c}{Traffic}&\multicolumn{1}{c}{Traffic}&\multicolumn{1}{c}{Images}&\multicolumn{1}{c}{Images}&\multicolumn{1}{c}{Traffic}&\multicolumn{1}{c}{Traffic}\\
+\midrule
+Images              &       122.0\sym{***}&       44.38\sym{*}  &                     &                     &       88.55\sym{***}&       113.8\sym{**} \\
+                    &     (34.91)         &     (23.73)         &                     &                     &     (31.62)         &     (45.21)         \\
+\addlinespace
+Out-Of-Copy. X Post &                     &                     &       0.609\sym{***}&       0.274\sym{***}&                     &                     \\
+                    &                     &                     &     (0.154)         &    (0.0964)         &                     &                     \\
+\midrule
+Controls            &         Yes         &   Player FE         &         Yes         &   Player FE         &         Yes         &   Player FE         \\
+Year FE             &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+N                   &        3787         &        3787         &        3787         &        3787         &        3787         &        3787         \\
+adj. $R^2$          &       0.446         &      0.0737         &      0.0644         &       0.190         &       0.415         &     -0.0366         \\
+F-Stat              &                     &                     &       15.62         &        8.07         &                     &                     \\
+\bottomrule
+\multicolumn{7}{l}{\footnotesize }\\
+\multicolumn{7}{l}{\footnotesize }\\
+\end{tabular}
+}

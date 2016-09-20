@@ -1,0 +1,17 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\toprule
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+            &\multicolumn{1}{c}{Traffic}&\multicolumn{1}{c}{Traffic}&\multicolumn{1}{c}{Traffic}\\
+\midrule
+\emph{out-of-copy X post}&       43.22         &       20.42         &       16.54         \\
+            &     (12.09)\sym{***}&     (9.883)\sym{**} &     (10.13)\sym{+}  \\
+\midrule
+Player-Page FE&          No         &         Yes         &         Yes         \\
+Time FE     &     Year FE         &     Year FE         &Quality X Year FE         \\
+adj. $R^2$  &      0.0137         &      0.0810         &      0.0899         \\
+N           &        3246         &        3246         &        3246         \\
+\bottomrule
+\end{tabular*}
+}

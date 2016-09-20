@@ -1,0 +1,18 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\toprule
+            &\multicolumn{3}{c}{Digitization DD}                              \\\cmidrule(lr){2-4}
+            &\multicolumn{1}{c}{Citations}&\multicolumn{1}{c}{Images}&\multicolumn{1}{c}{Text}\\
+\midrule
+\emph{baseball X post}&       0.340         &       0.459         &       0.391         \\
+            &    (0.0494)\sym{***}&    (0.0610)\sym{***}&    (0.0650)\sym{***}\\
+\midrule
+Player FE   &         Yes         &         Yes         &         Yes         \\
+Time FE     &        Year         &        Year         &        Year         \\
+adj. $R^2$  &      0.0687         &       0.172         &       0.399         \\
+N           &       13260         &       13260         &       13260         \\
+Clusters    &        1105         &        1105         &        1105         \\
+\bottomrule
+\end{tabular*}
+}

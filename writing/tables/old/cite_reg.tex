@@ -1,0 +1,24 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\toprule
+                                                  &\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{Log-OLS}\\
+\midrule \vspace{5mm} \makebox[13em][l]{\underline{\textbf{Panel A : Images}}\vspace{5mm} ($\bar{y}$=1.20)}\\
+\emph{out-of-copy X post}                         &       5.471         &       5.471         &       1.178         \\
+                                                  &     (1.093)\sym{***}&     (1.093)\sym{***}&     (0.152)\sym{***}\\
+
+\end{tabular*} }
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\midrule \vspace{5mm} \makebox[13em][l]{\underline{\textbf{Panel B : Text}}\vspace{5mm} ($\bar{y}$=2.99)}\\
+\emph{out-of-copy X post}                         &       0.354         &       0.328         &     0.00783         \\
+                                                  &     (1.023)         &     (1.009)         &     (0.141)         \\
+\midrule
+Issue-Year FE                                     &          No         &         Yes         &         Yes         \\
+Time FE                                           &        Year         &        Year         &        Year         \\
+N                                                 &         360         &         360         &         360         \\
+Adj R-square                                      &       0.737         &       0.812         &       0.918         \\
+\bottomrule
+\end{tabular*}
+}

@@ -1,0 +1,32 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\toprule
+                         &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         \\
+\midrule \vspace{5mm} \underline{\textbf{Panel A: Citations }}\\
+TREAT X POST             &       0.357\sym{***}&       0.357\sym{***}&       0.388\sym{***}\\
+                         &    (0.0510)         &    (0.0510)         &    (0.0566)         \\
+
+\end{tabular*} }
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\midrule \vspace{5mm} \underline{\textbf{Panel B : Images}}\\
+TREAT X POST&       0.780\sym{***}&       0.515\sym{***}&       0.574\sym{***}\\
+            &    (0.0568)         &    (0.0643)         &    (0.0645)         \\
+
+\end{tabular*} }
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{3}{c}}
+\midrule \vspace{5mm} \underline{\textbf{Panel C : Text}}\\
+TREAT X POST&      9378.8\sym{***}&      3123.2\sym{***}&      1321.2\sym{***}\\
+            &     (403.4)         &     (523.0)         &     (394.6)         \\
+\midrule
+Player FE   &         Yes         &         Yes         &         Yes         \\
+Year FE     &          No         &         Yes         &         Yes         \\
+N           &       14365         &       14365         &        2210         \\
+Clusters    &        1105         &        1105         &        1105         \\
+\bottomrule
+\end{tabular*}
+}

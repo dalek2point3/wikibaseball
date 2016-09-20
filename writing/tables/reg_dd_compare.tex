@@ -1,0 +1,17 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{6}{c}}
+\toprule
+            &\multicolumn{3}{c}{Images}                                       &\multicolumn{3}{c}{Text}                                         \\\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+            &\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{Log-OLS}&\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{Log-OLS}\\
+\midrule
+\emph{out-of-copy X post}&       5.444         &       5.444         &       1.173         &       0.222         &       0.165         &     -0.0275         \\
+            &     (1.094)\sym{***}&     (1.094)\sym{***}&     (0.151)\sym{***}&     (1.041)         &     (1.026)         &     (0.142)         \\
+\midrule
+Publication-Year FE&          No         &         Yes         &         Yes         &          No         &         Yes         &         Yes         \\
+Year FE     &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+adj. $R^2$  &       0.413         &       0.416         &       0.574         &       0.723         &       0.801         &       0.913         \\
+N           &         360         &         360         &         360         &         360         &         360         &         360         \\
+\bottomrule
+\end{tabular*}
+}

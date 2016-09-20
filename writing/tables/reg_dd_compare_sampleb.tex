@@ -1,0 +1,17 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{6}{c}}
+\toprule
+            &\multicolumn{3}{c}{Images}                                       &\multicolumn{3}{c}{Text}                                         \\\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+            &\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{Log-OLS}&\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{OLS}&\multicolumn{1}{c}{Log-OLS}\\
+\midrule
+\emph{out-of-copy X post}&       0.477         &       0.337         &       0.109         &       0.466         &       0.314         &      -0.113         \\
+            &     (0.102)\sym{***}&    (0.0819)\sym{***}&    (0.0272)\sym{***}&     (0.120)\sym{***}&    (0.0877)\sym{***}&    (0.0490)\sym{**} \\
+\midrule
+Player-Page FE&          No         &         Yes         &         Yes         &          No         &         Yes         &         Yes         \\
+Year FE     &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+adj. $R^2$  &      0.0992         &       0.159         &       0.205         &       0.218         &       0.394         &       0.844         \\
+N           &       13260         &       13260         &       13260         &       13260         &       13260         &       13260         \\
+\bottomrule
+\end{tabular*}
+}

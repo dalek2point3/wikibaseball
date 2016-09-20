@@ -1,0 +1,17 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{6}{c}}
+\toprule
+            &\multicolumn{3}{c}{Sample A}                                     &\multicolumn{3}{c}{Sample B}                                     \\\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+            &\multicolumn{1}{c}{Cites}&\multicolumn{1}{c}{Cites}&\multicolumn{1}{c}{Log-Cites}&\multicolumn{1}{c}{Cites}&\multicolumn{1}{c}{Cites}&\multicolumn{1}{c}{Log-Cites}\\
+\midrule
+\emph{out-of-copy X post}&       4.193         &       4.148         &       0.235         &       0.199         &       0.180         &      0.0655         \\
+            &     (1.485)\sym{***}&     (1.455)\sym{***}&     (0.149)         &    (0.0657)\sym{***}&     (0.102)\sym{*}  &    (0.0345)\sym{*}  \\
+\midrule
+Unit of Obs. FE&          No         &         Yes         &         Yes         &          No         &         Yes         &         Yes         \\
+Year FE     &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+adj. $R^2$  &       0.627         &       0.685         &       0.894         &      0.0444         &      0.0695         &      0.0898         \\
+N           &         280         &         280         &         280         &        3787         &        3787         &        3787         \\
+\bottomrule
+\end{tabular*}
+}

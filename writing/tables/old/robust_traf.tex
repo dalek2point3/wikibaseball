@@ -1,0 +1,18 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular*}{\hsize}{@{\hskip\tabcolsep\extracolsep\fill}l*{4}{c}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                    &\multicolumn{1}{c}{Diff. Img}&\multicolumn{1}{c}{Log Diff. Img.}&\multicolumn{1}{c}{Diff. Traf}&\multicolumn{1}{c}{Log Diff. Traf}\\
+\midrule
+Out-of-copy Exposure&       1.313         &       0.555         &       133.8         &       0.888         \\
+                    &     (0.238)\sym{***}&    (0.0706)\sym{***}&     (93.48)         &     (0.223)\sym{***}\\
+\addlinespace
+Constant            &       0.556         &       0.319         &       23.14         &       2.298         \\
+                    &    (0.0484)\sym{***}&    (0.0236)\sym{***}&     (6.671)\sym{***}&    (0.0693)\sym{***}\\
+\midrule
+Observations        &         541         &         541         &         541         &         541         \\
+Adjusted \(R^{2}\)  &       0.112         &       0.121         &       0.018         &       0.038         \\
+\bottomrule
+\end{tabular*}
+}
