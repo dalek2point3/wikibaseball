@@ -10,7 +10,7 @@ local home "/home/nagaraj/Dropbox/research/wikibaseball/"
 
 qui adopath + "`home'scripts/stata/ado"
 declare_global `home'
-cd ${path}
+cd ${wikibaseball}
 
 /////////// DATA CREATION //////////////////
 
@@ -118,3 +118,5 @@ reg_chart_qual
 // 9. robustness figure with alternate quality measure
 chart_qual img gp
 chart_qual traf gp
+
+stata -b main.do
