@@ -10,7 +10,7 @@ local home "/home/nagaraj/Dropbox/research/wikibaseball/"
 
 qui adopath + "`home'scripts/stata/ado"
 declare_global `home'
-cd ${path}
+cd ${wikibaseball}
 
 /////////// DATA CREATION //////////////////
 
